@@ -15,48 +15,59 @@ function getCookie(cookieName) {
   return false;
 }
 
-// Add CSS styles for the modal (inline styles)
+// Add CSS styles for the modal
+// Add CSS styles for the modal
 var modalStyles = `
-  #modal-container {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-      display: flex;
-  }
+    #modal-container {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(5px); /* Apply background blur effect */
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
 
-  #modal-content {
-      background-color: #fff;
-      width: 80%;
-      max-width: 400px;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      text-align: center;
-  }
+    #modal-content {
+        background-color: rgba(255, 255, 255, 0.9); /* Add a semi-transparent white background */
+        width: 80%;
+        max-width: 400px;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        font-family: sans-serif; /* Use sans-serif font */
+    }
 
-  h2 {
-      font-size: 24px;
-      margin-bottom: 10px;
-  }
+    .verification-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        justify-items: center;
+        align-items: center;
+    }
 
-  p {
-      font-size: 16px;
-      margin-bottom: 20px;
-  }
+    .verification-option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-  button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-right: 10px;
-  }
+    .verification-option img {
+        width: 100px; /* Adjust the image size as needed */
+        height: 100px; /* Adjust the image size as needed */
+        margin-bottom: 10px;
+    }
+
+    .verification-option button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
 `;
 
 // Create a <style> element and append the CSS rules to it
@@ -66,54 +77,96 @@ document.head.appendChild(styleElement);
 
 // Fonction pour créer et afficher le modal
 function createModal() {
-  var modalContainer = document.createElement("div");
-  modalContainer.id = "modal-container";
+    var modalContainer = document.createElement("div");
+    modalContainer.id = "modal-container";
 
-  var modalContent = document.createElement("div");
-  modalContent.id = "modal-content";
-  modalContent.innerHTML = `
-      <h2>PROHIBITED TO PERSONS UNDER 18 YEARS OLD</h2>
-      <p>Contenu du modal</p>
-      <button id="modal-ok-button">I'm over 18</button>
-      <button id="modal-close-button">Close</button>
-  `;
+    var modalContent = document.createElement("div");
+    modalContent.id = "modal-content";
+    modalContent.innerHTML = `
+        <h2>Are You Over 18?</h2>
+        <button id="over-18-button">I'm Over 18</button>
+    `;
 
-  modalContainer.appendChild(modalContent);
-  document.body.appendChild(modalContainer);
+    modalContainer.appendChild(modalContent);
+    document.body.appendChild(modalContainer);
 
-  // Ajouter un écouteur d'événements au bouton OK
-  var modalOkButton = document.getElementById("modal-ok-button");
-  modalOkButton.addEventListener("click", function() {
-      // Définir un cookie pour se rappeler que le modal a été affiché
-      document.cookie = "modalDisplayed=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
-      closeModal();
-  });
+    // Ajouter un écouteur d'événements au bouton "I'm Over 18"
+    var over18Button = document.getElementById("over-18-button");
+    over18Button.addEventListener("click", function() {
+        closeModal();
+        showVerificationOptions();
+    });
+}
 
-  // Ajouter un écouteur d'événements au bouton Fermer
-  var modalCloseButton = document.getElementById("modal-close-button");
-  modalCloseButton.addEventListener("click", function() {
-      closeModal();
-      // Rediriger vers google.com
-      window.location.href = "https://www.google.com";
-  });
+// Fonction pour afficher les options de vérification
+function showVerificationOptions() {
+    var modalContent = document.getElementById("modal-content");
+    modalContent.innerHTML = `
+        <h2>Verification Options</h2>
+        <div class="verification-options">
+            <div class="verification-option">
+                <img src="placeholder_image_1.jpg" alt="Face age verification">
+                <button id="face-verification-button">Face Age Verification</button>
+            </div>
+            <div class="verification-option">
+                <img src="placeholder_image_2.jpg" alt="ID verification">
+                <button id="id-verification-button">ID Verification</button>
+            </div>
+            <div class="verification-option">
+                <img src="placeholder_image_3.jpg" alt="France Connect">
+                <button id="france-connect-button">France Connect</button>
+            </div>
+            <div class="verification-option">
+                <img src="placeholder_image_4.jpg" alt="Credit card verification">
+                <button id="credit-card-verification-button">Credit Card Verification</button>
+            </div>
+        </div>
+    `;
+
+    // Ajouter un écouteur d'événements aux boutons de vérification
+    var faceVerificationButton = document.getElementById("face-verification-button");
+    faceVerificationButton.addEventListener("click", function() {
+        // Handle face age verification logic here
+        alert("Face Age Verification Placeholder");
+    });
+
+    var idVerificationButton = document.getElementById("id-verification-button");
+    idVerificationButton.addEventListener("click", function() {
+        // Handle ID verification logic here
+        alert("ID Verification Placeholder");
+    });
+
+    var franceConnectButton = document.getElementById("france-connect-button");
+    franceConnectButton.addEventListener("click", function() {
+        // Handle France Connect logic here
+        alert("France Connect Placeholder");
+    });
+
+    var creditCardVerificationButton = document.getElementById("credit-card-verification-button");
+    creditCardVerificationButton.addEventListener("click", function() {
+        // Handle credit card verification logic here
+        alert("Credit Card Verification Placeholder");
+    });
+
+    openModal();
 }
 
 // Fonction pour ouvrir le modal
 function openModal() {
-  var modal = document.getElementById("modal-container");
-  modal.style.display = "flex"; // Use flex to center the modal
+    var modal = document.getElementById("modal-container");
+    modal.style.display = "flex"; // Use flex to center the modal
 }
 
 // Fonction pour fermer le modal
 function closeModal() {
-  var modal = document.getElementById("modal-container");
-  modal.style.display = "none";
+    var modal = document.getElementById("modal-container");
+    modal.style.display = "none";
 }
 
-// Vérifier si le cookie existe, sinon créer et afficher le modal
+// Vérifier si le cookie existe, sinon créer et afficher le modal initial
 window.onload = function () {
-  if (!getCookie("modalDisplayed")) {
-      createModal();
-      openModal();
-  }
+    if (!getCookie("modalDisplayed")) {
+        createModal();
+        openModal();
+    }
 };
