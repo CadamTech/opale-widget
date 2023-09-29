@@ -1,0 +1,14 @@
+{
+  "name": "modal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "start": "webpack --config webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mini-css-extract-plugin": "^2.7.6"
+  }
+}

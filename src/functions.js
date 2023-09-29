@@ -1,5 +1,5 @@
 // Fonction pour vérifier si un cookie existe
-function getCookie(cookieName) {
+export function getCookie(cookieName) {
   var name = cookieName + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
   var cookieArray = decodedCookie.split(';');
@@ -16,9 +16,8 @@ function getCookie(cookieName) {
 }
 
 // Add CSS styles for the modal
-// Add CSS styles for the modal
 var modalStyles = `
-    #modal-container {
+    #opale-modal-container {
         display: none;
         position: fixed;
         top: 0;
@@ -76,19 +75,26 @@ styleElement.textContent = modalStyles;
 document.head.appendChild(styleElement);
 
 // Fonction pour créer et afficher le modal
-function createModal() {
+export function createModal() {
     var modalContainer = document.createElement("div");
-    modalContainer.id = "modal-container";
+    modalContainer.id = "opale-modal-container";
 
     var modalContent = document.createElement("div");
     modalContent.id = "modal-content";
     modalContent.innerHTML = `
-        <h2>Are You Over 18?</h2>
+        <h2>Are You Over 18 ?</h2>
         <button id="over-18-button">I'm Over 18</button>
+        <button id="not-over-18-button">Exit</button>
     `;
 
     modalContainer.appendChild(modalContent);
     document.body.appendChild(modalContainer);
+
+    // Create a link element for the CSS file
+    var cssLink = document.createElement("link");
+    cssLink.rel = "stylesheet";
+    cssLink.href = "path/to/your/modal.css"; // Adjust the path to your CSS file
+    document.head.appendChild(cssLink);
 
     // Ajouter un écouteur d'événements au bouton "I'm Over 18"
     var over18Button = document.getElementById("over-18-button");
@@ -99,7 +105,7 @@ function createModal() {
 }
 
 // Fonction pour afficher les options de vérification
-function showVerificationOptions() {
+export function showVerificationOptions() {
     var modalContent = document.getElementById("modal-content");
     modalContent.innerHTML = `
         <h2>Verification Options</h2>
@@ -152,21 +158,13 @@ function showVerificationOptions() {
 }
 
 // Fonction pour ouvrir le modal
-function openModal() {
+export function openModal() {
     var modal = document.getElementById("modal-container");
     modal.style.display = "flex"; // Use flex to center the modal
 }
 
 // Fonction pour fermer le modal
-function closeModal() {
+export function closeModal() {
     var modal = document.getElementById("modal-container");
     modal.style.display = "none";
 }
-
-// Vérifier si le cookie existe, sinon créer et afficher le modal initial
-window.onload = function () {
-    if (!getCookie("modalDisplayed")) {
-        createModal();
-        openModal();
-    }
-};
