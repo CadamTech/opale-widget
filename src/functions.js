@@ -82,7 +82,7 @@ export function createModal() {
     var modalContent = document.createElement("div");
     modalContent.id = "modal-content";
     modalContent.innerHTML = `
-        <h2>Are You Over 18 ?</h2>
+        <h2>Are You Over 18?</h2>
         <button id="over-18-button">I'm Over 18</button>
         <button id="not-over-18-button">Exit</button>
     `;

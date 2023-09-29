@@ -10,5 +10,5 @@ module.exports = {
     minimizer: [new TerserPlugin()], // Minimize output using Terser
   },
   watch: true,
-  mode: 'development', // Set mode to production
+  mode: 'production', // Set mode to production
 };
