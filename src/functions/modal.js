@@ -1,3 +1,5 @@
+import { getIdentityProviders } from './api';
+
 // Fonction pour vérifier si un cookie existe
 export function getCookie(cookieName) {
   var name = cookieName + "=";
@@ -17,24 +19,51 @@ export function getCookie(cookieName) {
 
 // Add CSS styles for the modal
 var modalStyles = `
-    #opale-modal-container {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        backdrop-filter: blur(5px); /* Apply background blur effect */
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-    }
+
+  .button { 
+    border-radius: 50px  !important;
+  }
+
+  .button-pink {
+    background-color: #d0006f !important;
+    border-color: #d0006f  !important;
+  }
+
+  .button-white {
+    color: #ffffff !important;
+    border-color: #ffffff  !important;
+  }
+
+  #opale-modal-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  #opale-modal-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* 80% darker with transparency */
+    backdrop-filter: blur(5px); /* Apply background blur effect */
+    z-index: -1; /* Place it behind the modal content */
+  }
 
     #modal-content {
-        background-color: rgba(255, 255, 255, 0.9); /* Add a semi-transparent white background */
+        background-color: #000000;
+        color: #dddddd;
         width: 80%;
-        max-width: 400px;
+        max-width: 600px;
         padding: 20px;
         border-radius: 5px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -45,7 +74,7 @@ var modalStyles = `
     .verification-options {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 20px;
+        // gap: 20px;
         justify-items: center;
         align-items: center;
     }
@@ -57,15 +86,9 @@ var modalStyles = `
     }
 
     .verification-option img {
-        width: 100px; /* Adjust the image size as needed */
-        height: 100px; /* Adjust the image size as needed */
+        max-width: 250px; /* Adjust the image size as needed */
+        height: 60px; /* Adjust the image size as needed */
         margin-bottom: 10px;
-    }
-
-    .verification-option button {
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
     }
 `;
 
@@ -82,50 +105,50 @@ export function createModal() {
     var modalContent = document.createElement("div");
     modalContent.id = "modal-content";
     modalContent.innerHTML = `
+        <img src="https://ga.dorcel.com/resources/d-header-logo-vision-strait/1638278048.png" alt="Dorcel Logo">
         <h2>Are You Over 18?</h2>
-        <button id="over-18-button">I'm Over 18</button>
-        <button id="not-over-18-button">Exit</button>
+        <button id="over-18-button" class="button button-pink">I'm Over 18</button>
+        <button id="not-over-18-button" class="button button-outline button-white">Exit</button>
     `;
 
     modalContainer.appendChild(modalContent);
     document.body.appendChild(modalContainer);
 
-    // Create a link element for the CSS file
-    var cssLink = document.createElement("link");
-    cssLink.rel = "stylesheet";
-    cssLink.href = "path/to/your/modal.css"; // Adjust the path to your CSS file
-    document.head.appendChild(cssLink);
+    // // Create a link element for the CSS file
+    // var cssLink = document.createElement("link");
+    // cssLink.rel = "stylesheet";
+    // cssLink.href = "path/to/your/modal.css"; // Adjust the path to your CSS file
+    // document.head.appendChild(cssLink);
 
     // Ajouter un écouteur d'événements au bouton "I'm Over 18"
     var over18Button = document.getElementById("over-18-button");
     over18Button.addEventListener("click", function() {
-        closeModal();
         showVerificationOptions();
     });
+
+    // Warm identity providers
+    getIdentityProviders();
 }
 
 // Fonction pour afficher les options de vérification
-export function showVerificationOptions() {
+export async function showVerificationOptions() {
+
+    const identityProviders = await getIdentityProviders();
+
+    console.log('IDENTITY PROVIDERS FROM MODAL.JS');
+    console.log(identityProviders);
+
     var modalContent = document.getElementById("modal-content");
     modalContent.innerHTML = `
-        <h2>Verification Options</h2>
+        <h2>Age verification needed</h2>
+        <h6>Use one of the methods below to verify your age</h6>
         <div class="verification-options">
-            <div class="verification-option">
-                <img src="placeholder_image_1.jpg" alt="Face age verification">
-                <button id="face-verification-button">Face Age Verification</button>
-            </div>
-            <div class="verification-option">
-                <img src="placeholder_image_2.jpg" alt="ID verification">
-                <button id="id-verification-button">ID Verification</button>
-            </div>
-            <div class="verification-option">
-                <img src="placeholder_image_3.jpg" alt="France Connect">
-                <button id="france-connect-button">France Connect</button>
-            </div>
-            <div class="verification-option">
-                <img src="placeholder_image_4.jpg" alt="Credit card verification">
-                <button id="credit-card-verification-button">Credit Card Verification</button>
-            </div>
+            ${identityProviders.map(identityProvider => `
+                <div class="verification-option ">
+                    <img src="${identityProvider.logo}" alt="${identityProvider.name}">
+                    <a href="${identityProvider.redirect_url}" id="${identityProvider.name}-button" class="button button-pink">${identityProvider.description}</a>
+                </div>
+            `).join('')}
         </div>
     `;
 
@@ -159,12 +182,12 @@ export function showVerificationOptions() {
 
 // Fonction pour ouvrir le modal
 export function openModal() {
-    var modal = document.getElementById("modal-container");
+    var modal = document.getElementById("opale-modal-container");
     modal.style.display = "flex"; // Use flex to center the modal
 }
 
 // Fonction pour fermer le modal
 export function closeModal() {
-    var modal = document.getElementById("modal-container");
+    var modal = document.getElementById("opale-modal-container");
     modal.style.display = "none";
 }
