@@ -1,4 +1,4 @@
-import { getIdentityProviders } from './api';
+import { getIdentityProviders, pickIdentityProvider } from './api';
 
 // Fonction pour vérifier si un cookie existe
 export function getCookie(cookieName) {
@@ -90,6 +90,10 @@ var modalStyles = `
         height: 60px; /* Adjust the image size as needed */
         margin-bottom: 10px;
     }
+
+    #verification-iframe {
+      display: none;
+    }
 `;
 
 // Create a <style> element and append the CSS rules to it
@@ -146,36 +150,37 @@ export async function showVerificationOptions() {
             ${identityProviders.map(identityProvider => `
                 <div class="verification-option ">
                     <img src="${identityProvider.logo}" alt="${identityProvider.name}">
-                    <a href="${identityProvider.redirect_url}" id="${identityProvider.name}-button" class="button button-pink">${identityProvider.description}</a>
+                    <a id="${identityProvider.name}-button" class="button pick-provider-button">${identityProvider.description}</a>
                 </div>
             `).join('')}
         </div>
+        <iframe id="verification-iframe" src="https://lpgdtgx5l5.execute-api.eu-west-3.amazonaws.com/prod/start-verification/vialink/123" width="100%" height="300px"></iframe>
     `;
 
-    // Ajouter un écouteur d'événements aux boutons de vérification
-    var faceVerificationButton = document.getElementById("face-verification-button");
-    faceVerificationButton.addEventListener("click", function() {
-        // Handle face age verification logic here
-        alert("Face Age Verification Placeholder");
+    // add evenet listener to .pick-button elements
+    document.querySelectorAll('.pick-provider-button').forEach(button => {
+        button.addEventListener('click', function() {
+            pickIdentityProvider(identityProviders.find(identityProvider => identityProvider.name === button.id.replace('-button', '')));
+        });
     });
 
-    var idVerificationButton = document.getElementById("id-verification-button");
-    idVerificationButton.addEventListener("click", function() {
-        // Handle ID verification logic here
-        alert("ID Verification Placeholder");
-    });
+    // var idVerificationButton = document.getElementById("id-verification-button");
+    // idVerificationButton.addEventListener("click", function() {
+    //     // Handle ID verification logic here
+    //     alert("ID Verification Placeholder");
+    // });
 
-    var franceConnectButton = document.getElementById("france-connect-button");
-    franceConnectButton.addEventListener("click", function() {
-        // Handle France Connect logic here
-        alert("France Connect Placeholder");
-    });
+    // var franceConnectButton = document.getElementById("france-connect-button");
+    // franceConnectButton.addEventListener("click", function() {
+    //     // Handle France Connect logic here
+    //     alert("France Connect Placeholder");
+    // });
 
-    var creditCardVerificationButton = document.getElementById("credit-card-verification-button");
-    creditCardVerificationButton.addEventListener("click", function() {
-        // Handle credit card verification logic here
-        alert("Credit Card Verification Placeholder");
-    });
+    // var creditCardVerificationButton = document.getElementById("credit-card-verification-button");
+    // creditCardVerificationButton.addEventListener("click", function() {
+    //     // Handle credit card verification logic here
+    //     alert("Credit Card Verification Placeholder");
+    // });
 
     openModal();
 }
