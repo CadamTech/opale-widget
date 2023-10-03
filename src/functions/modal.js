@@ -62,7 +62,7 @@ export async function showVerificationOptions() {
                     </div>
                 `).join('')}
             </div>
-            <small>Les vérifications sont anonymes sécurisées et anonymisées par Opale</small>
+            <small>Les vérifications sont sécurisées et anonymisées par Opale</small>
           </div>
           <span class="loader" style="display:none"></span>
         </div>
