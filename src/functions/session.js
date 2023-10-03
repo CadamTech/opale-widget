@@ -21,9 +21,11 @@ function generateUUID() {
 
 export async function getSessionUUID() {
   var sessionUUID = localStorage.getItem('sessionUUID');
+  console.log('SESSION UUID is ' + sessionUUID);
   if (!sessionUUID) {
     sessionUUID = generateUUID();
     localStorage.setItem('sessionUUID', sessionUUID);
+    console.log('SETTING SESSION UUID TO ' + sessionUUID);
   }
   return sessionUUID;
 }
