@@ -51,10 +51,9 @@ export async function showVerificationOptions() {
 
     var modalContent = document.getElementById("modal-content");
     modalContent.innerHTML = `
-        <h2>Vérification de l'âge nécessaire</h2>
         <div class="verification-options-container">
           <div class="verification-options-content">
-            <h6>Choisissez l'une des options suivantes pour vérifier votre âge.</h6>
+            <h5>Choisissez l'une des options suivantes pour vérifier votre âge.</h5>
             <div class="verification-options">
                 ${identityProviders.map(identityProvider => `
                     <div class="verification-option ">

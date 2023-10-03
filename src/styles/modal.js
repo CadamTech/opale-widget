@@ -64,6 +64,11 @@ export const modalStyles = `
         align-items: center;
     }
 
+    .verification-option {
+      margin-top: 10%;
+      margin-bottom: 10%;
+    }
+
     .verification-options-container {
       display: flex;
       flex-direction: column;
@@ -78,7 +83,8 @@ export const modalStyles = `
             grid-template-columns: 1fr; /* Display as a single column */
         }
         .verification-option {
-          margin-top: 10%;
+          margin-top: 5%;
+          margin-bottom: 5%;
         }
         #modal-content {
           width: 100%;
