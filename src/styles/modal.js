@@ -47,7 +47,7 @@ export const modalStyles = `
         padding: 20px;
         border-radius: 5px;
         min-height: 600px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
         text-align: center;
         font-family: sans-serif; /* Use sans-serif font */
         display: flex;
