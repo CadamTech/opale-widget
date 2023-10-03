@@ -94,6 +94,15 @@ var modalStyles = `
     #verification-iframe {
       display: none;
     }
+
+
+    iframe {
+      width: 100%;
+      min-height: 400px;
+      border: none;
+      border-radius: 15px;
+    }
+    
 `;
 
 // Create a <style> element and append the CSS rules to it
@@ -154,7 +163,7 @@ export async function showVerificationOptions() {
                 </div>
             `).join('')}
         </div>
-        <iframe id="verification-iframe" src="https://lpgdtgx5l5.execute-api.eu-west-3.amazonaws.com/prod/start-verification/vialink/123" width="100%" height="300px"></iframe>
+        <iframe id="verification-iframe" allow="camera;microphone" src="https://lpgdtgx5l5.execute-api.eu-west-3.amazonaws.com/prod/start-verification/vialink/123" width="100%" height="300px"></iframe>
     `;
 
     // add evenet listener to .pick-button elements
