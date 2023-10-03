@@ -1,22 +1,5 @@
 import { getIdentityProviders, pickIdentityProvider } from './api';
 
-// Fonction pour vérifier si un cookie existe
-export function getCookie(cookieName) {
-  var name = cookieName + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var cookieArray = decodedCookie.split(';');
-  for (var i = 0; i < cookieArray.length; i++) {
-      var cookie = cookieArray[i];
-      while (cookie.charAt(0) == ' ') {
-          cookie = cookie.substring(1);
-      }
-      if (cookie.indexOf(name) == 0) {
-          return true;
-      }
-  }
-  return false;
-}
-
 // Add CSS styles for the modal
 var modalStyles = `
 
@@ -165,6 +148,7 @@ document.head.appendChild(styleElement);
 
 // Fonction pour créer et afficher le modal
 export function createModal() {
+
     var modalContainer = document.createElement("div");
     modalContainer.id = "opale-modal-container";
 
@@ -202,9 +186,6 @@ export function createModal() {
 export async function showVerificationOptions() {
 
     const identityProviders = await getIdentityProviders();
-
-    console.log('IDENTITY PROVIDERS FROM MODAL.JS');
-    console.log(identityProviders);
 
     var modalContent = document.getElementById("modal-content");
     modalContent.innerHTML = `
