@@ -4,11 +4,13 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack --config webpack.config.js"
+    "dev": "webpack --config webpack.dev.js",
+    "prod": "webpack --config webpack.prod.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "mini-css-extract-plugin": "^2.7.6"
+    "mini-css-extract-plugin": "^2.7.6",
+    "webpack-obfuscator": "^3.5.1"
   }
 }
