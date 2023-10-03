@@ -83,6 +83,14 @@ var modalStyles = `
         justify-items: center;
         align-items: center;
     }
+
+    .verification-options-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
     
     /* Styles for mobile devices (screen width less than 768px) */
     @media screen and (max-width: 767px) {
@@ -122,10 +130,31 @@ var modalStyles = `
 
     iframe {
       width: 100%;
+      height: 80%;
       min-height: 400px;
       border: none;
       border-radius: 15px;
     }
+
+    .loader {
+      width: 48px;
+      height: 48px;
+      border: 5px solid #FFF;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      animation: rotation 1s linear infinite;
+      }
+  
+      @keyframes rotation {
+      0% {
+          transform: rotate(0deg);
+      }
+      100% {
+          transform: rotate(360deg);
+      }
+      } 
 
 `;
 
@@ -179,19 +208,23 @@ export async function showVerificationOptions() {
 
     var modalContent = document.getElementById("modal-content");
     modalContent.innerHTML = `
-        <h2>Age verification needed</h2>
+        <h2>Vérification de l'âge nécessaire</h2>
         <div class="verification-options-container">
-          <h6>Use one of the methods below to verify your age</h6>
-          <div class="verification-options">
-              ${identityProviders.map(identityProvider => `
-                  <div class="verification-option ">
-                      <img src="${identityProvider.logo}" alt="${identityProvider.name}">
-                      <a id="${identityProvider.name}-button" class="button pick-provider-button">${identityProvider.description}</a>
-                  </div>
-              `).join('')}
+          <div class="verification-options-content">
+            <h6>Choisissez l'une des options suivantes pour vérifier votre âge.</h6>
+            <div class="verification-options">
+                ${identityProviders.map(identityProvider => `
+                    <div class="verification-option ">
+                        <img src="${identityProvider.logo}" alt="${identityProvider.name}">
+                        <a id="${identityProvider.name}-button" class="button pick-provider-button">${identityProvider.description}</a>
+                    </div>
+                `).join('')}
+            </div>
+            <small>Les vérifications sont anonymes sécurisées et anonymisées par Opale</small>
           </div>
+          <span class="loader" style="display:none"></span>
         </div>
-        <iframe id="verification-iframe" allow="camera;microphone" src="https://lpgdtgx5l5.execute-api.eu-west-3.amazonaws.com/prod/start-verification/vialink/123" width="100%" height="300px"></iframe>
+        <iframe id="verification-iframe" allow="camera;microphone" width="100%" height="300px"></iframe>
     `;
 
     // add evenet listener to .pick-button elements
