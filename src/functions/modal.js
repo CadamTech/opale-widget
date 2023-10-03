@@ -66,18 +66,42 @@ var modalStyles = `
         max-width: 600px;
         padding: 20px;
         border-radius: 5px;
+        min-height: 600px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         text-align: center;
         font-family: sans-serif; /* Use sans-serif font */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
+    /* Default styles for larger screens (e.g., computers) */
     .verification-options {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        // gap: 20px;
         justify-items: center;
         align-items: center;
     }
+    
+    /* Styles for mobile devices (screen width less than 768px) */
+    @media screen and (max-width: 767px) {
+        .verification-options {
+            grid-template-columns: 1fr; /* Display as a single column */
+        }
+        .verification-option {
+          margin-top: 10%;
+        }
+        #modal-content {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: around;
+        }
+    }
+    
 
     .verification-option {
         display: flex;
@@ -102,7 +126,7 @@ var modalStyles = `
       border: none;
       border-radius: 15px;
     }
-    
+
 `;
 
 // Create a <style> element and append the CSS rules to it
@@ -120,8 +144,10 @@ export function createModal() {
     modalContent.innerHTML = `
         <img src="https://ga.dorcel.com/resources/d-header-logo-vision-strait/1638278048.png" alt="Dorcel Logo">
         <h2>Are You Over 18?</h2>
-        <button id="over-18-button" class="button button-pink">I'm Over 18</button>
-        <button id="not-over-18-button" class="button button-outline button-white">Exit</button>
+        <div>
+          <button id="over-18-button" class="button button-pink">I'm Over 18</button>
+          <a href="https://google.com" id="not-over-18-button" class="button button-outline button-white">Exit</a>
+        </div>
     `;
 
     modalContainer.appendChild(modalContent);
@@ -154,14 +180,16 @@ export async function showVerificationOptions() {
     var modalContent = document.getElementById("modal-content");
     modalContent.innerHTML = `
         <h2>Age verification needed</h2>
-        <h6>Use one of the methods below to verify your age</h6>
-        <div class="verification-options">
-            ${identityProviders.map(identityProvider => `
-                <div class="verification-option ">
-                    <img src="${identityProvider.logo}" alt="${identityProvider.name}">
-                    <a id="${identityProvider.name}-button" class="button pick-provider-button">${identityProvider.description}</a>
-                </div>
-            `).join('')}
+        <div class="verification-options-container">
+          <h6>Use one of the methods below to verify your age</h6>
+          <div class="verification-options">
+              ${identityProviders.map(identityProvider => `
+                  <div class="verification-option ">
+                      <img src="${identityProvider.logo}" alt="${identityProvider.name}">
+                      <a id="${identityProvider.name}-button" class="button pick-provider-button">${identityProvider.description}</a>
+                  </div>
+              `).join('')}
+          </div>
         </div>
         <iframe id="verification-iframe" allow="camera;microphone" src="https://lpgdtgx5l5.execute-api.eu-west-3.amazonaws.com/prod/start-verification/vialink/123" width="100%" height="300px"></iframe>
     `;

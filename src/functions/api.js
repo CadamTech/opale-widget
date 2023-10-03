@@ -31,7 +31,7 @@ export function pickIdentityProvider(provider, uuid = '123') {
     .then(response => response.json())
     .then(data => {    
       // Hide the verification providers
-      document.querySelector('.verification-options').style.display = 'none';
+      document.querySelector('.verification-options-container').style.display = 'none';
 
       // Change the verification iframe src to the provider's redirect_url
       document.querySelector('#verification-iframe').setAttribute('src', data.redirect_url);
