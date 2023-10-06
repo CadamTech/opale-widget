@@ -3,7 +3,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = {
   entry: './src/modal.js', // Update with your entry file name
   output: {
-    filename: 'agecheck.js', // Output file name
+    filename: '1.js', // Output file name
     path: __dirname + '/dist', // Output directory path
   },
   optimization: {

@@ -4,7 +4,7 @@ const WebpackObfuscator = require('webpack-obfuscator'); // Import webpack-obfus
 module.exports = {
   entry: './src/modal.js',
   output: {
-    filename: 'agecheck.js',
+    filename: '1.js',
     path: __dirname + '/dist',
   },
   optimization: {
