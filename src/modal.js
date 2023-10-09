@@ -7,7 +7,7 @@ import { isOver18, setIsOver18 } from './functions/session.js';
 window.onload = function () {
 
     // If param has ?over18=true, set the cookie 
-    if (window.location.search.includes('over18=true')) {
+    if (window.location.search.includes('over_18=true')) {
       setIsOver18();
     } else {
       if (!isOver18()) {
