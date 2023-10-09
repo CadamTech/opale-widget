@@ -4,7 +4,7 @@ import { getSessionUUID } from './session.js';
 export async function getIdentityProviders() {
   const sessionUid = await getSessionUUID();
   // Fetch identity providers for the user
-  return fetch(`${env.opaleIdentityProvidersEndpoint}?userUid=${sessionUid}`)
+  return fetch(`${env.opaleIdentityProvidersEndpoint}/${sessionUid}`)
     .then(response => response.json())
     .then(data => {
       // Return the fetched data
