@@ -14,13 +14,13 @@ window.onload = async function () {
       console.log('OVER 18 PARAM');
       console.log(over18Param);
       if(await checkSignature(over18Param)) {
-        setIsOver18();
+        await setIsOver18();
       }
-    } else {
-      if (!isOver18()) {
-        createModal(); 
-        openModal();
-      }
+    }
+
+    if (!isOver18()) {
+      createModal(); 
+      openModal();
     }
     // Load Milligram CSS
     loadCSS(env.cssFrameWorkUrl);

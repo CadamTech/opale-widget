@@ -14,7 +14,7 @@ export  function isOver18() {
   return false; // The "over_18" cookie is not set
 }
 
-export function setIsOver18() {
+export async function setIsOver18() {
   console.log('SETTING COOKIE');
   // set cookie for 1 week
   document.cookie = 'over_18=true;path=/;max-age=604800;Secure';
