@@ -64,9 +64,14 @@ export async function showVerificationOptions() {
             </div>
             <small>Les vérifications sont sécurisées et anonymisées par Opale</small>
           </div>
-          <span class="loader" style="display:none"></span>
         </div>
-        <iframe id="verification-iframe" allow="camera;microphone" width="100%" height="300px"></iframe>
+        <div id="verification-iframe-container" style="display:none">
+          <div class="loader-container" style="display:none !important;justify-content:center !important;align-items:center !important;padding: 30%">
+            <span class="loader"></span>
+          </div>
+          <iframe id="verification-iframe" allow="camera;microphone" width="100%" height="300px"></iframe>
+          <button id="back-button" class="button button-outline button-white">Back</button>
+        </div>
     `;
 
     // add evenet listener to .pick-button elements
@@ -74,6 +79,11 @@ export async function showVerificationOptions() {
         button.addEventListener('click', function() {
             pickIdentityProvider(identityProviders.find(identityProvider => identityProvider.name === button.id.replace('-button', '')));
         });
+    });
+
+    // add event listener to back button
+    document.getElementById('back-button').addEventListener('click', function() {
+        showVerificationOptions();
     });
 
     openModal();

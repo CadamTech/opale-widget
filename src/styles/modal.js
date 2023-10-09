@@ -118,6 +118,11 @@ export const modalStyles = `
       display: none;
     }
 
+    #verification-iframe-container {
+      width: 100%;
+      height: 100%;
+    }
+
 
     iframe {
       width: 100%;

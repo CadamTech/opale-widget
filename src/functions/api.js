@@ -27,15 +27,12 @@ export function pickIdentityProvider(provider, uuid = '123') {
   // }, false);
 
   // display loader
-  document.querySelector('.loader').style.display = 'block';
+  document.querySelector('.loader-container').style.display = 'flex';
   // Hide the verification providers
   document.querySelector('.verification-options-content').style.display = 'none';
 
   // replace {uuid} by uuid in provider.redirect_url
   provider.redirect_url = provider.redirect_url.replace('{uuid}', uuid);
-
-  console.log('FETCHING PROVIDER REDIRECT URL');
-  console.log(provider.redirect_url);
 
   return fetch(provider.redirect_url)
     .then(response => response.json())
@@ -44,12 +41,13 @@ export function pickIdentityProvider(provider, uuid = '123') {
       console.log(data.redirect_url);
       document.querySelector('.verification-options-container').style.display = 'none';
       document.querySelector('.verification-options-content').style.display = 'block';
+      document.querySelector('#verification-iframe-container').style.display = 'block';
 
       // Change the verification iframe src to the provider's redirect_url
       document.querySelector('#verification-iframe').setAttribute('src', data.redirect_url);
 
       // Show the verification iframe
-      document.querySelector('.loader').style.display = 'none';
+      document.querySelector('.loader-container').style.display = 'none';
       document.querySelector('#verification-iframe').style.display = 'block';
     });
 }
