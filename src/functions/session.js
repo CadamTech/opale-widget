@@ -41,7 +41,8 @@ export async function getSessionUUID() {
 
 export function checkSignature(hash) {
     const sessionUUID = getSessionUUID();
-    const dataToHash = OPALE_WEBSITE_ID + sessionUUID;
+    // CALCULATING HASH FOR "TRUE" ANSWER ONLY
+    const dataToHash = "true" + OPALE_WEBSITE_ID + sessionUUID;
     const hashedData = SHA256(dataToHash).toString();
 
     console.log('CHECKING SIGNATURE');
