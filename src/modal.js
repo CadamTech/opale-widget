@@ -7,7 +7,7 @@ import { isOver18, setIsOver18, checkSignature } from './functions/session.js';
 window.onload = function () {
 
     // If param has ?over18=true, set the cookie 
-    if (window.location.search.includes('over_18=true')) {
+    if (window.location.search.includes('over_18=')) {
       // get value of over_18 param
       const urlParams = new URLSearchParams(window.location.search);
       const over18Param = urlParams.get('over_18');
