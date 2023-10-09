@@ -42,7 +42,7 @@ export const modalStyles = `
     #modal-content {
         background-color: #000000;
         color: #dddddd;
-        width: 80%;
+        width: 100%;
         max-width: 600px;
         padding: 20px;
         border-radius: 5px;
@@ -74,6 +74,11 @@ export const modalStyles = `
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      height: 100%;
+      overflow: auto;
+    }
+
+    .verification-options-content {
       height: 100%;
     }
     
