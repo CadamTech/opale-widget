@@ -45,6 +45,10 @@ export function checkSignature(hash) {
     const sessionUUID = getSessionUUID();
     // CALCULATING HASH FOR "TRUE" ANSWER ONLY
     const dataToHash = "true" + OPALE_WEBSITE_ID + sessionUUID;
+
+    console.log('DATA TO HASH');
+    console.log(dataToHash);
+
     const hashedData = SHA256(dataToHash).toString();
 
     console.log('CHECKING SIGNATURE');
