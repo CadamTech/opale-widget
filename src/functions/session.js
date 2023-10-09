@@ -1,3 +1,5 @@
+import { SHA256 } from 'crypto-js';
+
 export  function isOver18() {
   console.log('CHECKING COOKIE');
   var cookies = document.cookie.split(';');
@@ -35,4 +37,23 @@ export async function getSessionUUID() {
     localStorage.setItem('sessionUUID', sessionUUID);
   }
   return sessionUUID;
+}
+
+export function checkSignature(hash) {
+    const sessionUUID = getSessionUUID();
+    const dataToHash = OPALE_WEBSITE_ID + sessionUUID;
+    const hashedData = SHA256(dataToHash).toString();
+
+    console.log('CHECKING SIGNATURE');
+    console.log('HASH');
+    console.log(hash);
+    console.log('HASHED DATA');
+    console.log(hashedData);
+  
+    if (hash === hashedData) {
+      console.log('SIGNATURE VALID');
+      return true;
+    }
+    console.log('SIGNATURE NOT VALID');
+    return false;
 }

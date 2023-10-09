@@ -12,5 +12,8 @@
   "devDependencies": {
     "mini-css-extract-plugin": "^2.7.6",
     "webpack-obfuscator": "^3.5.1"
+  },
+  "dependencies": {
+    "crypto-js": "^4.1.1"
   }
 }
