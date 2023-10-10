@@ -70,7 +70,7 @@ export async function showVerificationOptions() {
             <span class="loader"></span>
           </div>
           <iframe id="verification-iframe" allow="camera;microphone" width="100%" height="300px"></iframe>
-          <button id="back-button" class="button button-outline button-white">Back</button>
+          <button id="back-button" class="button button-outline button-white">Retour</button>
         </div>
     `;
 
