@@ -14,6 +14,10 @@ export const modalStyles = `
     border-color: #ffffff  !important;
   }
 
+  #not-over-18-button {
+    text-transform: none;
+  }
+
   #opale-modal-container {
     display: none;
     position: fixed;
