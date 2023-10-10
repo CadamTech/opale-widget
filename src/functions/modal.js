@@ -21,7 +21,7 @@ export function createModal() {
         <h4 style="margin:10%">Ce site est accessible uniquement aux personnes âgées de 18 ans et plus</h4>
         <div>
           <button id="over-18-button" class="button button-pink" style="width:100%;margin-bottom:5%">J'ai 18 ans ou plus</button>
-          <a href="https://google.com" id="not-over-18-button" class="button button-outline button-white">Exit</a>
+          <a href="https://google.com" id="not-over-18-button" class="button button-outline button-white">Sortir</a>
         </div>
     `;
 
