@@ -36,8 +36,6 @@ export async function getSessionUUID() {
     sessionUUID = generateUUID();
     localStorage.setItem('sessionUUID', sessionUUID);
   }
-  // debug cuz PJ is late af
-  return '123'; 
   return sessionUUID;
 }
 
