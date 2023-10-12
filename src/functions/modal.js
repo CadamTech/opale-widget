@@ -9,7 +9,7 @@ styleElement.textContent = modalStyles;
 document.head.appendChild(styleElement);
 
 // Fonction pour créer et afficher le modal
-export function createModal() {
+export async function createModal() {
 
     var modalContainer = document.createElement("div");
     modalContainer.id = "opale-modal-container";
@@ -36,18 +36,17 @@ export function createModal() {
 
     // Ajouter un écouteur d'événements au bouton "I'm Over 18"
     var over18Button = document.getElementById("over-18-button");
-    over18Button.addEventListener("click", function() {
-        showVerificationOptions();
-    });
 
     // Warm identity providers
-    getIdentityProviders();
+    const identityProviders = await getIdentityProviders();
+    over18Button.addEventListener("click", function() {
+      showVerificationOptions(identityProviders);
+  });
 }
 
 // Fonction pour afficher les options de vérification
-export async function showVerificationOptions() {
+export async function showVerificationOptions(identityProviders) {
 
-    const identityProviders = await getIdentityProviders();
 
     var modalContent = document.getElementById("modal-content");
     modalContent.innerHTML = `
@@ -83,7 +82,7 @@ export async function showVerificationOptions() {
 
     // add event listener to back button
     document.getElementById('back-button').addEventListener('click', function() {
-        showVerificationOptions();
+        showVerificationOptions(identityProviders);
     });
 
     openModal();
