@@ -8,15 +8,16 @@ window.onload = async function () {
 
     // If param has ?over18=true, set the cookie 
     var over18CheckPassed = false;
-    if (window.location.search.includes('over_18=')) {
-      // get value of over_18 param
+    if (window.location.search.includes('opaleverif=')) {
+      // get value of opaleverif param
       const urlParams = new URLSearchParams(window.location.search);
-      const over18Param = urlParams.get('over_18');
-      console.log('OVER 18 PARAM');
-      console.log(over18Param);
+      const over18Param = urlParams.get('opaleverif');
       if(await checkSignature(over18Param)) {
         setIsOver18();
         over18CheckPassed = true;
+        // Remove opaleverif param from url
+        window.history.replaceState({}, document.title, "/" + window.location.href.split('/').pop().replace('?opaleverif='+over18Param, ''));
+        
       }
     }
 

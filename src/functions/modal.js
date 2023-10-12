@@ -52,6 +52,7 @@ export async function showVerificationOptions(identityProviders) {
     modalContent.innerHTML = `
         <div class="verification-options-container">
           <div class="verification-options-content">
+          <img src="https://ga.dorcel.com/resources/d-header-logo-vision-strait/1638278048.png" alt="Dorcel Logo">
             <h5>Choisissez l'une des options suivantes pour vérifier votre âge</h5>
             <div class="verification-options">
                 ${identityProviders.map(identityProvider => `
