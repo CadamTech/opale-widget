@@ -1,4 +1,4 @@
-const API_URL = "https://lpgdtgx5l5.execute-api.eu-west-3.amazonaws.com/prod";
+const API_URL = "https://verifier.opale.io";
 
 export const env = {
   "opaleIdentityProvidersEndpoint": `${API_URL}/identity-providers`,
