@@ -62,7 +62,10 @@ export async function showVerificationOptions(identityProviders) {
                     </div>
                 `).join('')}
             </div>
-            <small>Les vérifications sont sécurisées et anonymisées par Opale</small>
+            <p>
+              <small>Les vérifications sont sécurisées et anonymisées par Opale</small>
+            </p>
+            <button id="back-button-openmodal" class="button button-outline button-white">Retour</button>
           </div>
         </div>
         <div id="verification-iframe-container" style="display:none">
@@ -83,9 +86,21 @@ export async function showVerificationOptions(identityProviders) {
 
     // add event listener to back button
     document.getElementById('back-button').addEventListener('click', function() {
+        console.log('back button click')
         showVerificationOptions(identityProviders);
     });
 
+    document.getElementById('back-button-openmodal').addEventListener('click', function() {
+      console.log('click')
+      // delete "opale-modal-container" element
+      var modalContainer = document.getElementById("opale-modal-container");
+      modalContainer.remove();
+      // create and display the modal
+      createModal();
+      openModal();
+    });
+
+    
     openModal();
 }
 
