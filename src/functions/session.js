@@ -29,10 +29,23 @@ function generateUUID() {
 }
 
 export async function getSessionUUID() {
-  var sessionUUID = localStorage.getItem('sessionUUID');
+  // get the opaleuuid cookie value
+  var cookies = document.cookie.split(';');
+  var sessionUUID = null;
+
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i].trim();
+    if (cookie.startsWith('opaleuuid=')) {
+      sessionUUID = cookie.substring('opaleuuid='.length, cookie.length);
+      break;
+    }
+  }
+
   if (!sessionUUID) {
     sessionUUID = generateUUID();
-    localStorage.setItem('sessionUUID', sessionUUID);
+    // set a session cookie
+    document.cookie = 'opaleuuid='+sessionUUID+';path=/;expires=0;Secure';
+    console.log('SETTING SESSION UUID COOKIE');
   }
   return sessionUUID;
 }

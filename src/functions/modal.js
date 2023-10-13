@@ -15,7 +15,7 @@ export async function createModal() {
     var modalContainer = document.getElementById("opale-modal-container");
 
     var modalContent = document.createElement("div");
-    modalContent.id = "modal-content";
+    modalContent.id = "opale-modal-content";
     modalContent.innerHTML = `
         <img src="https://ga.dorcel.com/resources/d-header-logo-vision-strait/1638278048.png" alt="Dorcel Logo">
         <h4 style="margin:10%">Ce site est accessible uniquement aux personnes âgées de 18 ans et plus</h4>
@@ -61,7 +61,7 @@ export async function createModal() {
 export async function showVerificationOptions(identityProviders) {
 
 
-    var modalContent = document.getElementById("modal-content");
+    var modalContent = document.getElementById("opale-modal-content");
     modalContent.innerHTML = `
         <div class="verification-options-container">
           <div class="verification-options-content">
@@ -71,7 +71,7 @@ export async function showVerificationOptions(identityProviders) {
                 ${identityProviders.map(identityProvider => `
                     <div class="verification-option ">
                         <img src="${identityProvider.logo}" alt="${identityProvider.name}">
-                        <a id="${identityProvider.name}-button" class="button pick-provider-button">${identityProvider.description}</a>
+                        <a id="${identityProvider.name}-button" class="button button-pink pick-provider-button">${identityProvider.description}</a>
                     </div>
                 `).join('')}
             </div>
@@ -107,7 +107,8 @@ export async function showVerificationOptions(identityProviders) {
       console.log('click')
       // delete "opale-modal-container" element
       var modalContainer = document.getElementById("opale-modal-container");
-      modalContainer.remove();
+      // empty modalContainer
+      modalContainer.innerHTML = '';
       // create and display the modal
       createModal();
       openModal();
