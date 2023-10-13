@@ -37,12 +37,13 @@ export async function createModal() {
     var over18Button = document.getElementById("over-18-button");
 
     // Warm identity providers
-    const identityProviders = await getIdentityProviders();
-    const sessionUID = await getSessionUUID();
-    over18Button.addEventListener("click", function() {
+    const sessionUUID = await getSessionUUID();
+    const identityProviders = await getIdentityProviders(sessionUUID);
 
+    // CLICK ON OVER 18 BUTTON
+    over18Button.addEventListener("click", function() {
       // Log to https://verifier.opale.io/log/ if the user is over 18
-      fetch("https://verifier.opale.io/log/"+sessionUID+"?key="+OPALE_WEBSITE_ID,
+      fetch("https://verifier.opale.io/log/"+sessionUUID+"?key="+OPALE_WEBSITE_ID,
       { 
           method: 'POST',
           body: JSON.stringify({
@@ -54,7 +55,13 @@ export async function createModal() {
       .catch(error => console.log('error', error));
 
       showVerificationOptions(identityProviders);
-  });
+    });
+
+    // BEFORE UNLOAD : MONITOR DROP
+    window.addEventListener('beforeunload', function () {
+      // Generate and store a new sessionUID before the tab is closed
+      localStorage.setItem('sessionUID', generateSessionUID());
+    });
 }
 
 // Fonction pour afficher les options de vérification

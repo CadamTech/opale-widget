@@ -28,6 +28,14 @@ function generateUUID() {
   });
 }
 
+export function generateSessionUUID() {
+  const sessionUUID = generateUUID();
+  // set a session cookie
+  document.cookie = 'opaleuuid='+sessionUUID+';path=/;expires=0;Secure';
+  console.log('SETTING SESSION UUID COOKIE to '+sessionUUID);
+  return sessionUUID;
+}
+
 export async function getSessionUUID() {
   // get the opaleuuid cookie value
   var cookies = document.cookie.split(';');
@@ -37,16 +45,13 @@ export async function getSessionUUID() {
     var cookie = cookies[i].trim();
     if (cookie.startsWith('opaleuuid=')) {
       sessionUUID = cookie.substring('opaleuuid='.length, cookie.length);
+      console.log('SESSION UUID COOKIE FOUND: '+sessionUUID);
       break;
     }
   }
 
-  if (!sessionUUID) {
-    sessionUUID = generateUUID();
-    // set a session cookie
-    document.cookie = 'opaleuuid='+sessionUUID+';path=/;expires=0;Secure';
-    console.log('SETTING SESSION UUID COOKIE');
-  }
+  if (!sessionUUID) sessionUUID = generateSessionUUID()
+
   return sessionUUID;
 }
 
