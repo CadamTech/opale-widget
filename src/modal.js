@@ -13,7 +13,7 @@ window.onload = async function () {
       const urlParams = new URLSearchParams(window.location.search);
       const over18Param = urlParams.get('opaleverif');
       if(await checkSignature(over18Param)) {
-        setIsOver18();
+        setIsOver18(over18Param);
         over18CheckPassed = true;
         // Remove opaleverif param from url
         window.history.replaceState({}, document.title, "/" + window.location.href.split('/').pop().replace('?opaleverif='+over18Param, ''));
