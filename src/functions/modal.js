@@ -1,5 +1,6 @@
 import { getIdentityProviders, pickIdentityProvider } from './api';
 import { modalStyles } from '../styles/modal';
+import { getSessionUUID } from './session.js';
 // Add CSS styles for the modal
 
 
@@ -37,7 +38,21 @@ export async function createModal() {
 
     // Warm identity providers
     const identityProviders = await getIdentityProviders();
+    const sessionUID = await getSessionUUID();
     over18Button.addEventListener("click", function() {
+
+      // Log to https://verifier.opale.io/log/ if the user is over 18
+      fetch("https://verifier.opale.io/log/"+sessionUID+"?key="+OPALE_WEBSITE_ID,
+      { 
+          method: 'POST',
+          body: JSON.stringify({
+            "log_type": "is_over_18",
+            "value": ""
+          }),
+          redirect: 'follow'
+      })
+      .catch(error => console.log('error', error));
+
       showVerificationOptions(identityProviders);
   });
 }
