@@ -27,18 +27,6 @@ export const modalStyles = `
     display: flex;
   }
 
-  #opale-modal-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* 80% darker with transparency */
-    backdrop-filter: blur(5px); /* Apply background blur effect */
-    z-index: -1; /* Place it behind the modal content */
-  }
-
     #modal-content {
         background-color: #000000;
         color: #dddddd;

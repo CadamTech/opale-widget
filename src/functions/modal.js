@@ -11,8 +11,7 @@ document.head.appendChild(styleElement);
 // Fonction pour créer et afficher le modal
 export async function createModal() {
 
-    var modalContainer = document.createElement("div");
-    modalContainer.id = "opale-modal-container";
+    var modalContainer = document.getElementById("opale-modal-container");
 
     var modalContent = document.createElement("div");
     modalContent.id = "modal-content";
@@ -26,7 +25,6 @@ export async function createModal() {
     `;
 
     modalContainer.appendChild(modalContent);
-    document.body.appendChild(modalContainer);
 
     // // Create a link element for the CSS file
     // var cssLink = document.createElement("link");
