@@ -25,6 +25,7 @@ window.onload = async function () {
       createModal(); 
       openModal();
     } else {
+      console.log('Opale: session valid');
       closeModal();
     }
     // Load Milligram CSS
