@@ -15,7 +15,7 @@ export  function isOver18() {
 }
 
 export function setIsOver18() {
-  document.cookie = 'opaleverif=true;path=/;max-age=604800;Secure';
+  document.cookie = 'opaleverif=true;path=/;expires=0;Secure';
 }
 
 // uuid management
