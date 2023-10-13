@@ -15,8 +15,6 @@ export  function isOver18() {
 }
 
 export function setIsOver18() {
-  console.log('SETTING COOKIE');
-  // set cookie for 1 week
   document.cookie = 'opaleverif=true;path=/;max-age=604800;Secure';
 }
 

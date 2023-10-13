@@ -1,4 +1,4 @@
-import { createModal, openModal } from './functions/modal.js';
+import { createModal, openModal, closeModal } from './functions/modal.js';
 import { loadCSS } from './functions/css.js';
 import { env } from './env.js';
 import { isOver18, setIsOver18, checkSignature } from './functions/session.js';
@@ -24,6 +24,8 @@ window.onload = async function () {
     if (!isOver18() && !over18CheckPassed) {
       createModal(); 
       openModal();
+    } else {
+      closeModal();
     }
     // Load Milligram CSS
     loadCSS(env.cssFrameWorkUrl);
