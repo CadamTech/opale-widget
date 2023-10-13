@@ -42,6 +42,10 @@ export async function createModal() {
 
     // CLICK ON OVER 18 BUTTON
     over18Button.addEventListener("click", function() {
+
+      // Replace button content by a loader
+      over18Button.innerHTML = '<span class="loader"></span>';
+
       // Log to https://verifier.opale.io/log/ if the user is over 18
       fetch("https://verifier.opale.io/log/"+sessionUUID+"?key="+OPALE_WEBSITE_ID,
       { 

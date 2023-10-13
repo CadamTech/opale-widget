@@ -16,11 +16,12 @@ export const modalStyles = `
 
   #opale-modal-container .button { 
     border-radius: 50px  !important;
+    overflow: hidden;
   }
 
   #opale-modal-container .button-pink {
     background-color: #d0006f !important;
-    border-color: #d0006f  !important;
+    border-color: #d0006f  !important; 
   }
 
   #opale-modal-container .button-pink:hover {
@@ -33,24 +34,47 @@ export const modalStyles = `
   }
 
   #opale-modal-container .loader {
-    width: 48px;
-    height: 48px;
-    border: 5px solid #FFF;
-    border-bottom-color: transparent;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    display: inline-block;
+    display: block;
+    margin:15px auto;
+    position: relative;
+    color: #FFF;
+    left: -100px;
     box-sizing: border-box;
-    animation: rotation 1s linear infinite;
-    }
-
-    @keyframes rotation {
+    animation: shadowRolling 2s linear infinite;
+  }
+  
+  @keyframes shadowRolling {
     0% {
-        transform: rotate(0deg);
+      box-shadow: 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+    }
+    12% {
+      box-shadow: 100px 0 white, 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+    }
+    25% {
+      box-shadow: 110px 0 white, 100px 0 white, 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+    }
+    36% {
+      box-shadow: 120px 0 white, 110px 0 white, 100px 0 white, 0px 0 rgba(255, 255, 255, 0);
+    }
+    50% {
+      box-shadow: 130px 0 white, 120px 0 white, 110px 0 white, 100px 0 white;
+    }
+    62% {
+      box-shadow: 200px 0 rgba(255, 255, 255, 0), 130px 0 white, 120px 0 white, 110px 0 white;
+    }
+    75% {
+      box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 130px 0 white, 120px 0 white;
+    }
+    87% {
+      box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 130px 0 white;
     }
     100% {
-        transform: rotate(360deg);
+      box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0);
     }
-    } 
+  }
 
     #opale-modal-content {
         background-color: #000000;
@@ -115,55 +139,34 @@ export const modalStyles = `
     }
     
 
-    .verification-option {
+    #opale-modal-container .verification-option {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
-    .verification-option img {
+    #opale-modal-container .verification-option img {
         max-width: 250px; /* Adjust the image size as needed */
         height: 60px; /* Adjust the image size as needed */
         margin-bottom: 10px;
     }
 
-    #verification-iframe {
+    #opale-modal-container #verification-iframe {
       display: none;
       height: 80vh;
     }
 
-    #verification-iframe-container {
+    #opale-modal-container #verification-iframe-container {
       width: 100%;
       height: 100%;
     }
 
-
-    iframe {
+    #opale-modal-container iframe {
       width: 100%;
       height: 80%;
       min-height: 400px;
       border: none;
       border-radius: 15px;
     }
-
-    .loader {
-      width: 48px;
-      height: 48px;
-      border: 5px solid #FFF;
-      border-bottom-color: transparent;
-      border-radius: 50%;
-      display: inline-block;
-      box-sizing: border-box;
-      animation: rotation 1s linear infinite;
-      }
-  
-      @keyframes rotation {
-      0% {
-          transform: rotate(0deg);
-      }
-      100% {
-          transform: rotate(360deg);
-      }
-      } 
 
 `;
