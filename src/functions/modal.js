@@ -87,7 +87,7 @@ export async function showVerificationOptions(identityProviders) {
                 `).join('')}
             </div>
             <p>
-              <small>Les vérifications sont sécurisées et anonymisées par Opale</small>
+              <small>Les vérifications sont sécurisées et anonymisées par <a href="https://opale.io" target="_blank">Opale.io</a>.</small>
             </p>
             <button id="back-button-openmodal" class="button button-outline button-white">Retour</button>
           </div>

@@ -169,4 +169,8 @@ export const modalStyles = `
       border-radius: 15px;
     }
 
+    #opale-modal-container a {
+      color: #b558ed!important;
+    }
+
 `;
