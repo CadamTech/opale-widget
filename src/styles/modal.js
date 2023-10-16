@@ -169,7 +169,7 @@ export const modalStyles = `
       border-radius: 15px;
     }
 
-    #opale-modal-container a {
+    #opale-modal-container small a {
       color: #b558ed!important;
     }
 
