@@ -80,9 +80,9 @@ export async function showVerificationOptions(identityProviders) {
             <h5>Choisissez l'une des options suivantes pour vérifier votre âge</h5>
             <div class="verification-options">
                 ${identityProviders.map(identityProvider => `
-                    <div class="verification-option ">
+                    <div class="verification-option" id="${identityProvider.name}-button">
                         <img src="${identityProvider.logo}" alt="${identityProvider.name}">
-                        <a id="${identityProvider.name}-button" class="button button-pink pick-provider-button">${identityProvider.description}</a>
+                        <a class="button button-pink">${identityProvider.description}</a>
                     </div>
                 `).join('')}
             </div>
@@ -102,7 +102,7 @@ export async function showVerificationOptions(identityProviders) {
     `;
 
     // add evenet listener to .pick-button elements
-    document.querySelectorAll('.pick-provider-button').forEach(button => {
+    document.querySelectorAll('.verification-option').forEach(button => {
         button.addEventListener('click', function() {
             pickIdentityProvider(identityProviders.find(identityProvider => identityProvider.name === button.id.replace('-button', '')));
         });

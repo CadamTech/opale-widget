@@ -104,6 +104,7 @@ export const modalStyles = `
     #opale-modal-content .verification-option {
       margin-top: 10%;
       margin-bottom: 10%;
+      cursor: pointer;
     }
 
     #opale-modal-content .verification-options-container {
