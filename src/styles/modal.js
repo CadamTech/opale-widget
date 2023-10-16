@@ -154,6 +154,9 @@ export const modalStyles = `
 
     #opale-modal-container #verification-iframe {
       display: none;
+    }
+
+    #opale-modal-container .verification-iframe-lg { 
       height: 80vh;
     }
 
@@ -164,8 +167,7 @@ export const modalStyles = `
 
     #opale-modal-container iframe {
       width: 100%;
-      height: 80%;
-      min-height: 400px;
+      min-height: 500px;
       border: none;
       border-radius: 15px;
     }

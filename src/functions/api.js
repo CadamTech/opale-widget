@@ -32,20 +32,28 @@ export function pickIdentityProvider(provider, uuid = '123') {
   // replace {uuid} by uuid in provider.redirect_url
   provider.redirect_url = provider.redirect_url.replace('{uuid}', uuid);
 
+  const verificationIframe = document.querySelector('#verification-iframe');
+
+  if (provider.iframe_height == 'lg') {
+    verificationIframe.classList.add('verification-iframe-lg');
+  } else {
+    verificationIframe.classList.remove('verification-iframe-lg');
+  }
+
+
+
   return fetch(provider.redirect_url)
     .then(response => response.json())
     .then(data => {    
-      console.log('GOT DATA SETTING IFRAME SRC TO');
-      console.log(data.redirect_url);
       document.querySelector('.verification-options-container').style.display = 'none';
       document.querySelector('.verification-options-content').style.display = 'block';
       document.querySelector('#verification-iframe-container').style.display = 'block';
 
       // Change the verification iframe src to the provider's redirect_url
-      document.querySelector('#verification-iframe').setAttribute('src', data.redirect_url);
+      verificationIframe.setAttribute('src', data.redirect_url);
 
       // Show the verification iframe
       document.querySelector('.loader-container').style.display = 'none';
-      document.querySelector('#verification-iframe').style.display = 'block';
+      verificationIframe.style.display = 'block';
     });
 }
