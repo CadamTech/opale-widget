@@ -11,11 +11,11 @@ module.exports = {
     minimizer: [new TerserPlugin()],
   },
   plugins: [
-    // Add the WebpackObfuscator plugin to obfuscate your code
-    new WebpackObfuscator({
-      rotateStringArray: true,
-      stringArrayThreshold: 0.75,
-    }),
+    // // Add the WebpackObfuscator plugin to obfuscate your code
+    // new WebpackObfuscator({
+    //   rotateStringArray: true,
+    //   stringArrayThreshold: 0.75,
+    // }),
   ],
   watch: true,
   mode: 'production',
