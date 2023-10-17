@@ -9,6 +9,12 @@ var styleElement = document.createElement("style");
 styleElement.textContent = modalStyles;
 document.head.appendChild(styleElement);
 
+async function waitForIdentityProviders(sessionUUID) {
+  const identityProviders = await getIdentityProviders(sessionUUID);
+  showVerificationOptions(identityProviders);
+}
+
+
 // Fonction pour créer et afficher le modal
 export async function createModal() {
 
@@ -38,7 +44,6 @@ export async function createModal() {
 
     // Warm identity providers
     const sessionUUID = await getSessionUUID();
-    const identityProviders = await getIdentityProviders(sessionUUID);
 
     // CLICK ON OVER 18 BUTTON
     over18Button.addEventListener("click", function() {
@@ -57,8 +62,9 @@ export async function createModal() {
           redirect: 'follow'
       })
       .catch(error => console.log('error', error));
-
-      showVerificationOptions(identityProviders);
+      
+      waitForIdentityProviders(sessionUUID);
+      
     });
 
     // BEFORE UNLOAD : MONITOR DROP
