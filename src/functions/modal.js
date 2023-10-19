@@ -97,13 +97,14 @@ export async function showVerificationOptions(identityProviders) {
 
 
     var modalContent = document.getElementById("opale-modal-content");
-    modalContent.innerHTML = `
+
+    var html = `
         <div class="verification-options-container">
           <div class="verification-options-content">`
 
-    if (typeof OPALE_LOGO !== 'undefined') modalContent.innerHTML += `<img src="${OPALE_LOGO}">`;
+    if (typeof OPALE_LOGO !== 'undefined') html += `<img src="${OPALE_LOGO}">`;
           
-    modalContent.innerHTML += `<h5>Choisissez l'une des options suivantes pour vérifier votre âge</h5>
+    html += `<h5>Choisissez l'une des options suivantes pour vérifier votre âge</h5>
             <div class="verification-options">
                 ${identityProviders.map(identityProvider => `
                     <div class="verification-option" id="${identityProvider.name}-button">
@@ -126,6 +127,8 @@ export async function showVerificationOptions(identityProviders) {
           <button id="back-button" class="button button-outline button-white">Retour</button>
         </div>
     `;
+
+    modalContent.innerHTML = html;
 
     // add evenet listener to .pick-button elements
     document.querySelectorAll('.verification-option').forEach(button => {
