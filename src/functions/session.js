@@ -37,6 +37,11 @@ export function generateSessionUUID() {
 }
 
 export async function getSessionUUID() {
+  // IF USER ID WAS PROVIDED, JUST USE THAT
+  if (OPALE_USER_ID) return OPALE_USER_ID;
+
+  // ELSE SET A UID IN A SESSION COOKIE
+
   // get the opaleuuid cookie value
   var cookies = document.cookie.split(';');
   var sessionUUID = null;
