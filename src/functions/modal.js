@@ -42,7 +42,7 @@ export async function createModal() {
 
       modalContent.innerHTML = '';
 
-      if (typeof OPALE_LOGO_URL !== 'undefined') modalContent.innerHTML = `<img src="${OPALE_LOGO}">`;
+      if (typeof OPALE_LOGO !== 'undefined') modalContent.innerHTML += `<img src="${OPALE_LOGO}">`;
 
       modalContent.innerHTML += `
           <h4 style="margin:10%">Ce site est accessible uniquement aux personnes âgées de 18 ans et plus</h4>
@@ -101,7 +101,7 @@ export async function showVerificationOptions(identityProviders) {
         <div class="verification-options-container">
           <div class="verification-options-content">`
 
-    if (typeof OPALE_LOGO_URL !== 'undefined') modalContent.innerHTML += `<img src="${OPALE_LOGO}">`;
+    if (typeof OPALE_LOGO !== 'undefined') modalContent.innerHTML += `<img src="${OPALE_LOGO}">`;
           
     modalContent.innerHTML += `<h5>Choisissez l'une des options suivantes pour vérifier votre âge</h5>
             <div class="verification-options">
