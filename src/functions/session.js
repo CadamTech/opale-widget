@@ -1,9 +1,9 @@
 import { SHA256 } from 'crypto-js';
 
 export  function isOver18() {
-  console.log('CHECKING COOKIE');
+
   var cookies = document.cookie.split(';');
-  console.log(cookies)
+
   for (var i = 0; i < cookies.length; i++) {
     var cookie = cookies[i].trim();
     if (cookie.startsWith('opaleverif=')) {

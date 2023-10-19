@@ -1,12 +1,23 @@
 import { getIdentityProviders, pickIdentityProvider } from './api';
 import { modalStyles } from '../styles/modal';
+import { modalContentDarkStyles } from '../styles/content-dark';
+import { modalContentLightStyles } from '../styles/content-light';
 import { getSessionUUID } from './session.js';
 // Add CSS styles for the modal
 
 
 // Create a <style> element and append the CSS rules to it
 var styleElement = document.createElement("style");
-styleElement.textContent = modalStyles;
+
+if (OPALE_THEME == "dark") {
+  styleElement.textContent = modalContentDarkStyles;
+} else {
+  styleElement.textContent = modalContentLightStyles;
+}
+
+// add modal styles to current styles
+if (OPALE_FORMAT == "modal") styleElement.textContent += modalStyles;
+
 document.head.appendChild(styleElement);
 
 async function waitForIdentityProviders(sessionUUID) {
@@ -17,61 +28,68 @@ async function waitForIdentityProviders(sessionUUID) {
 
 // Fonction pour créer et afficher le modal
 export async function createModal() {
-
-    var modalContainer = document.getElementById("opale-modal-container");
-
-    var modalContent = document.createElement("div");
-    modalContent.id = "opale-modal-content";
-    modalContent.innerHTML = `
-        <img src="https://ga.dorcel.com/resources/d-header-logo-vision-strait/1638278048.png" alt="Dorcel Logo">
-        <h4 style="margin:10%">Ce site est accessible uniquement aux personnes âgées de 18 ans et plus</h4>
-        <div>
-          <button id="over-18-button" class="button button-pink" style="width:100%;margin-bottom:5%">J'ai 18 ans ou plus</button>
-          <a href="https://google.com" id="not-over-18-button" class="button button-outline button-white">Sortir</a>
-        </div>
-    `;
-
-    modalContainer.appendChild(modalContent);
-
-    // // Create a link element for the CSS file
-    // var cssLink = document.createElement("link");
-    // cssLink.rel = "stylesheet";
-    // cssLink.href = "path/to/your/modal.css"; // Adjust the path to your CSS file
-    // document.head.appendChild(cssLink);
-
-    // Ajouter un écouteur d'événements au bouton "I'm Over 18"
-    var over18Button = document.getElementById("over-18-button");
-
-    // Warm identity providers
+  // Warm identity providers
     const sessionUUID = await getSessionUUID();
 
-    // CLICK ON OVER 18 BUTTON
-    over18Button.addEventListener("click", function() {
+    var modalContainer = document.getElementById("opale-modal-container");
+    var modalContent = document.createElement("div");
+    modalContent.id = "opale-modal-content";
 
-      // Replace button content by a loader
-      over18Button.innerHTML = '<span class="loader"></span>';
-
-      // Log to https://verifier.opale.io/log/ if the user is over 18
-      fetch("https://verifier.opale.io/log/"+sessionUUID+"?key="+OPALE_WEBSITE_ID,
-      { 
-          method: 'POST',
-          body: JSON.stringify({
-            "log_type": "is_over_18",
-            "value": ""
-          }),
-          redirect: 'follow'
-      })
-      .catch(error => console.log('error', error));
-      
+    if (OPALE_FORMAT == "inline") {
       waitForIdentityProviders(sessionUUID);
-      
-    });
+      modalContainer.appendChild(modalContent);
+    } else {
 
-    // BEFORE UNLOAD : MONITOR DROP
-    window.addEventListener('beforeunload', function () {
-      // Generate and store a new sessionUID before the tab is closed
-      localStorage.setItem('sessionUID', generateSessionUID());
-    });
+      modalContent.innerHTML = '';
+
+      if (typeof OPALE_LOGO_URL !== 'undefined') modalContent.innerHTML = `<img src="${OPALE_LOGO}">`;
+
+      modalContent.innerHTML += `
+          <h4 style="margin:10%">Ce site est accessible uniquement aux personnes âgées de 18 ans et plus</h4>
+          <div>
+            <button id="over-18-button" class="button button-pink" style="width:100%;margin-bottom:5%">J'ai 18 ans ou plus</button>
+            <a href="https://google.com" id="not-over-18-button" class="button button-outline button-white">Sortir</a>
+          </div>
+      `;
+      modalContainer.appendChild(modalContent);
+
+      // // Create a link element for the CSS file
+      // var cssLink = document.createElement("link");
+      // cssLink.rel = "stylesheet";
+      // cssLink.href = "path/to/your/modal.css"; // Adjust the path to your CSS file
+      // document.head.appendChild(cssLink);
+
+      // Ajouter un écouteur d'événements au bouton "I'm Over 18"
+      var over18Button = document.getElementById("over-18-button");
+
+      // CLICK ON OVER 18 BUTTON
+      over18Button.addEventListener("click", function() {
+
+        // Replace button content by a loader
+        over18Button.innerHTML = '<span class="loader"></span>';
+
+        // Log to https://verifier.opale.io/log/ if the user is over 18
+        fetch("https://verifier.opale.io/log/"+sessionUUID+"?key="+OPALE_WEBSITE_ID,
+        { 
+            method: 'POST',
+            body: JSON.stringify({
+              "log_type": "is_over_18",
+              "value": ""
+            }),
+            redirect: 'follow'
+        })
+        .catch(error => console.log('error', error));
+        
+        waitForIdentityProviders(sessionUUID);
+        
+      });
+
+      // BEFORE UNLOAD : MONITOR DROP
+      window.addEventListener('beforeunload', function () {
+        // Generate and store a new sessionUID before the tab is closed
+        localStorage.setItem('sessionUID', generateSessionUID());
+      });
+    }
 }
 
 // Fonction pour afficher les options de vérification
@@ -81,9 +99,11 @@ export async function showVerificationOptions(identityProviders) {
     var modalContent = document.getElementById("opale-modal-content");
     modalContent.innerHTML = `
         <div class="verification-options-container">
-          <div class="verification-options-content">
-          <img src="https://ga.dorcel.com/resources/d-header-logo-vision-strait/1638278048.png" alt="Dorcel Logo">
-            <h5>Choisissez l'une des options suivantes pour vérifier votre âge</h5>
+          <div class="verification-options-content">`
+
+    if (typeof OPALE_LOGO_URL !== 'undefined') modalContent.innerHTML += `<img src="${OPALE_LOGO}">`;
+          
+    modalContent.innerHTML += `<h5>Choisissez l'une des options suivantes pour vérifier votre âge</h5>
             <div class="verification-options">
                 ${identityProviders.map(identityProvider => `
                     <div class="verification-option" id="${identityProvider.name}-button">
