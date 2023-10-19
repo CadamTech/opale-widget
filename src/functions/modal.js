@@ -3,6 +3,7 @@ import { modalStyles } from '../styles/modal';
 import { modalContentDarkStyles } from '../styles/content-dark';
 import { modalContentLightStyles } from '../styles/content-light';
 import { getSessionUUID } from './session.js';
+import { generateSessionUUID } from './session.js';
 // Add CSS styles for the modal
 
 
@@ -87,7 +88,7 @@ export async function createModal() {
       // BEFORE UNLOAD : MONITOR DROP
       window.addEventListener('beforeunload', function () {
         // Generate and store a new sessionUID before the tab is closed
-        localStorage.setItem('sessionUID', generateSessionUID());
+        localStorage.setItem('sessionUID', generateSessionUUID());
       });
     }
 }
