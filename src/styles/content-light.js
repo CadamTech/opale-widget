@@ -1,4 +1,8 @@
 export const modalContentLightStyles = `
+  #opale-modal-container, #opale-modal-content { 
+    padding: 1%;
+    width: 100%;
+  }
   #opale-modal-container .button { 
     border-radius: 50px  !important;
     overflow: hidden;

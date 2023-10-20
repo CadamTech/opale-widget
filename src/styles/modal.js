@@ -12,6 +12,7 @@ export const modalStyles = `
     justify-content: center;
     align-items: center;
     display: flex;
+    width: 100%;
   }
 
   #opale-modal-content {
@@ -29,6 +30,7 @@ export const modalStyles = `
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      width: 100%;
   }
 
 `;
