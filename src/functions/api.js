@@ -40,8 +40,6 @@ export function pickIdentityProvider(provider, uuid = '123') {
     verificationIframe.classList.remove('verification-iframe-lg');
   }
 
-
-
   return fetch(provider.redirect_url)
     .then(response => response.json())
     .then(data => {    
@@ -49,8 +47,14 @@ export function pickIdentityProvider(provider, uuid = '123') {
       document.querySelector('.verification-options-content').style.display = 'block';
       document.querySelector('#verification-iframe-container').style.display = 'block';
 
+      // ADD THEME ATTRIBUTE TO IFRAME URL 
+      var iframeUrl = data.redirect_url;
+      if (typeof OPALE_THEME !== 'undefined') {
+        iframeUrl += '&theme='+OPALE_THEME;
+      }
+
       // Change the verification iframe src to the provider's redirect_url
-      verificationIframe.setAttribute('src', data.redirect_url);
+      verificationIframe.setAttribute('src', iframeUrl);
 
       // Show the verification iframe
       document.querySelector('.loader-container').style.display = 'none';
