@@ -14,23 +14,36 @@ export const modalStyles = `
     display: flex;
     width: 100%;
   }
-
   #opale-modal-content {
-      background-color: #000000;
-      color: #dddddd;
-      width: 100%;
-      max-width: 600px;
-      padding: 20px;
-      border-radius: 5px;
-      min-height: 600px;
-      box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
-      text-align: center;
-      font-family: sans-serif; /* Use sans-serif font */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
+    background-color: #000000;
+    color: #dddddd;
+    width: 100%;
+    max-width: 600px;
+    padding: 2%; /* Default padding for small screens */
+    border-radius: 5px;
+    min-height: 600px;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+    text-align: center;
+    font-family: sans-serif; /* Use sans-serif font */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Medium devices (tablets, 768px and up) */
+  @media (min-width: 768px) { 
+    #opale-modal-content {
+      padding: 10%; 
+    }
+  }
+
+  /* Large devices (desktops, 992px and up) */
+  @media (min-width: 992px) { 
+    #opale-modal-content {
+      padding: 20%; 
+    }
   }
 
 `;
