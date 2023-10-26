@@ -31,19 +31,4 @@ export const modalStyles = `
     align-items: center;
     width: 100%;
   }
-
-  /* Medium devices (tablets, 768px and up) */
-  @media (min-width: 768px) { 
-    #opale-modal-content {
-      padding: 10%; 
-    }
-  }
-
-  /* Large devices (desktops, 992px and up) */
-  @media (min-width: 992px) { 
-    #opale-modal-content {
-      padding: 20%; 
-    }
-  }
-
 `;
