@@ -18,8 +18,6 @@ export const modalStyles = `
     width: 100%;
   }
   #opale-modal-content {
-    background-color: #000000;
-    color: #dddddd;
     width: 100%;
     max-width: 600px;
     padding: 2%; /* Default padding for small screens */
