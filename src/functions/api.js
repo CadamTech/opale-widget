@@ -51,6 +51,8 @@ export function pickIdentityProvider(provider, uuid = '123') {
       var iframeUrl = data.redirect_url;
       if (typeof OPALE_THEME !== 'undefined') {
         iframeUrl += '&theme='+OPALE_THEME;
+      } else {
+        iframeUrl += '&theme=none';
       }
 
       // Change the verification iframe src to the provider's redirect_url
