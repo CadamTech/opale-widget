@@ -1,3 +1,5 @@
+import { darkenColor } from "../functions/css";
+
 export const modalContentLightStyles = `
 
   #opale-modal-container .button { 
@@ -6,12 +8,12 @@ export const modalContentLightStyles = `
   }
   
   #opale-modal-container .button-verification {
-    background-color: #d0006f !important;
-    border-color: #d0006f  !important; 
+    background-color: ${OPALE_PRIMARY_COLOR} !important;
+    border-color: ${OPALE_PRIMARY_COLOR}  !important; 
   }
 
   #opale-modal-container .button-verification:hover {
-    background-color: #c0005f !important;
+    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 10)} !important;
   }
 
   #opale-modal-container .button-white {
