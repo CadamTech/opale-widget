@@ -5,8 +5,9 @@ import { isOver18, setIsOver18, checkSignature } from './functions/session.js';
 
 // Check if the cookie exists, if not, create and display the initial modal
 window.onload = async function () {
-    // Load Milligram CSS
-    loadCSS(env.cssFrameWorkUrl);
+    if (typeof OPALE_THEME !== 'undefined') {
+      if (OPALE_THEME != "none") loadCSS(env.cssFrameWorkUrl);
+    }
 
     // If param has ?over18=true, set the cookie 
     var over18CheckPassed = false;

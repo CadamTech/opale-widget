@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inline demo</title>
+</head>
+<body>
+  <h1>Protected website (no theme)</h1>
+  <p>This is an Opale.io protected website using the 'Inline' protection service and no pre-made theme.</p>
+  <p>You have to configure it yourself by adding a CSS file.</p>
+
+  <div style="display:flex; justify-content: center; align-items: center;flex-direction: column;">
+    <div id="opale-modal-container"></div>
+  </div>
+
+  <p>This is during a user onboarding verification process, directly inside your application</p>
+  <!-- Your HTML content goes here -->
+  <script>
+    OPALE_WEBSITE_ID = "6dd57f3f-a5f3-459e-b908-d4fcc898ab70";
+    OPALE_USER_ID = "123456789";
+    OPALE_FORMAT = "inline"; // or modal
+    // OPALE_THEME = "light"; // or dark
+    // OPALE_LOGO = "https://opale.io/wp-content/uploads/2023/10/Logo-Opale-fond-blanc-petit-format-retina-site.png";
+
+    (function() {
+      d = document;
+      s = d.createElement("script");
+      s.src = "1.js";
+      s.async = 1;
+      d.getElementsByTagName("head")[0].appendChild(s);
+    })();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

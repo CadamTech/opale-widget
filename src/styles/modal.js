@@ -1,5 +1,8 @@
 export const modalStyles = `
 
+  #opale-modal-container, #opale-modal-content { 
+    padding: 1%;
+  } 
 
   #opale-modal-container {
     display: none;

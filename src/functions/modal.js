@@ -2,6 +2,7 @@ import { getIdentityProviders, pickIdentityProvider } from './api';
 import { modalStyles } from '../styles/modal';
 import { modalContentDarkStyles } from '../styles/content-dark';
 import { modalContentLightStyles } from '../styles/content-light';
+import { modalContentStructure } from '../styles/structure.js';
 import { getSessionUUID } from './session.js';
 import { generateSessionUUID } from './session.js';
 // Add CSS styles for the modal
@@ -10,11 +11,15 @@ import { generateSessionUUID } from './session.js';
 // Create a <style> element and append the CSS rules to it
 var styleElement = document.createElement("style");
 
-if (OPALE_THEME == "dark") {
-  styleElement.textContent = modalContentDarkStyles;
-} else {
-  styleElement.textContent = modalContentLightStyles;
+if(typeof OPALE_THEME !== 'undefined') {
+  if (OPALE_THEME == "dark") {
+    styleElement.textContent = modalContentDarkStyles;
+  } else if (OPALE_THEME == "light") {
+    styleElement.textContent = modalContentLightStyles;
+  }
 }
+
+styleElement.textContent += modalContentStructure;
 
 // add modal styles to current styles
 if (OPALE_FORMAT == "modal") styleElement.textContent += modalStyles;
@@ -43,12 +48,12 @@ export async function createModal() {
 
       modalContent.innerHTML = '';
 
-      if (typeof OPALE_LOGO !== 'undefined') modalContent.innerHTML += `<img src="${OPALE_LOGO}">`;
+      if (typeof OPALE_LOGO !== 'undefined') modalContent.innerHTML += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
       modalContent.innerHTML += `
           <h4 style="margin:10%">Ce site est accessible uniquement aux personnes âgées de 18 ans et plus</h4>
           <div>
-            <button id="over-18-button" class="button button-pink" style="width:100%;margin-bottom:5%">J'ai 18 ans ou plus</button>
+            <button id="over-18-button" class="button button-verification" style="width:100%;margin-bottom:5%">J'ai 18 ans ou plus</button>
             <a href="https://google.com" id="not-over-18-button" class="button button-outline button-white">Sortir</a>
           </div>
       `;
@@ -103,21 +108,25 @@ export async function showVerificationOptions(identityProviders) {
         <div class="verification-options-container">
           <div class="verification-options-content">`
 
-    if (typeof OPALE_LOGO !== 'undefined') html += `<img src="${OPALE_LOGO}">`;
+    if (typeof OPALE_LOGO !== 'undefined') html += `<img src="${OPALE_LOGO}" id="opale-logo">`;
           
     html += `<h5>Choisissez l'une des options suivantes pour vérifier votre âge</h5>
             <div class="verification-options">
                 ${identityProviders.map(identityProvider => `
                     <div class="verification-option" id="${identityProvider.name}-button">
                         <img src="${identityProvider.logo}" alt="${identityProvider.name}">
-                        <a class="button button-pink">${identityProvider.description}</a>
+                        <a class="button button-verification">${identityProvider.description}</a>
                     </div>
                 `).join('')}
             </div>
             <p>
               <small>Les vérifications sont sécurisées et anonymisées par <a href="https://opale.io" target="_blank">Opale.io</a></small>
             </p>
-            <button id="back-button-openmodal" class="button button-outline button-white">Retour</button>
+            `;
+
+            if (OPALE_FORMAT == "modal") html += `<button id="back-button-openmodal" class="button button-outline button-white">Retour</button>`;
+
+            html += `
           </div>
         </div>
         <div id="verification-iframe-container" style="display:none">
@@ -140,21 +149,21 @@ export async function showVerificationOptions(identityProviders) {
 
     // add event listener to back button
     document.getElementById('back-button').addEventListener('click', function() {
-        console.log('back button click')
         showVerificationOptions(identityProviders);
     });
 
-    document.getElementById('back-button-openmodal').addEventListener('click', function() {
-      console.log('click')
-      // delete "opale-modal-container" element
-      var modalContainer = document.getElementById("opale-modal-container");
-      // empty modalContainer
-      modalContainer.innerHTML = '';
-      // create and display the modal
-      createModal();
-      openModal();
-    });
-
+    // BACK BUTTON ONLY EXISTS IN MODAL FORMAT
+    if (OPALE_FORMAT == "modal") {
+      document.getElementById('back-button-openmodal').addEventListener('click', function() {
+        // delete "opale-modal-container" element
+        var modalContainer = document.getElementById("opale-modal-container");
+        // empty modalContainer
+        modalContainer.innerHTML = '';
+        // create and display the modal
+        createModal();
+        openModal();
+      });
+    }
     
     openModal();
 }
