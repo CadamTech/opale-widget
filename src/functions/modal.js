@@ -54,7 +54,7 @@ export async function createModal() {
           <h4 style="margin:10%">Ce site est accessible uniquement aux personnes âgées de 18 ans et plus</h4>
           <div>
             <button id="over-18-button" class="button button-verification" style="width:100%;margin-bottom:5%">J'ai 18 ans ou plus</button>
-            <a href="https://google.com" id="not-over-18-button" class="button button-outline button-white">Sortir</a>
+            <a href="https://google.com" id="not-over-18-button" class="button button-outline">Sortir</a>
           </div>
       `;
       modalContainer.appendChild(modalContent);
@@ -124,7 +124,7 @@ export async function showVerificationOptions(identityProviders) {
             </p>
             `;
 
-            if (OPALE_FORMAT == "modal") html += `<button id="back-button-openmodal" class="button button-outline button-white">Retour</button>`;
+            if (OPALE_FORMAT == "modal") html += `<button id="back-button-openmodal" class="button button-outline">Retour</button>`;
 
             html += `
           </div>
@@ -134,7 +134,7 @@ export async function showVerificationOptions(identityProviders) {
             <span class="loader"></span>
           </div>
           <iframe id="verification-iframe" allow="camera;microphone" width="100%" height="300px"></iframe>
-          <button id="back-button" class="button button-outline button-white">Retour</button>
+          <button id="back-button" class="button button-outline">Retour</button>
         </div>
     `;
 

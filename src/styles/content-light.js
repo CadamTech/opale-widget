@@ -6,6 +6,10 @@ export const modalContentLightStyles = `
     border-radius: 50px  !important;
     overflow: hidden;
   }
+
+  #opale-modal-container .button-outline { 
+    color: #222222 !important;
+  }
   
   #opale-modal-container .button-verification {
     background-color: ${OPALE_PRIMARY_COLOR} !important;
