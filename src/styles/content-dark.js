@@ -14,6 +14,7 @@ export const modalContentDarkStyles = `
   #opale-modal-container .button-verification {
     background-color: ${OPALE_PRIMARY_COLOR} !important;
     border-color: ${OPALE_PRIMARY_COLOR}  !important; 
+    width: 100%;
   }
 
   #opale-modal-container .button-verification:hover {
