@@ -152,6 +152,12 @@ export async function showVerificationOptions(identityProviders) {
         showVerificationOptions(identityProviders);
     });
 
+    // add event listener for messages from iframe
+    window.addEventListener('message', (event) => {
+      var iframe = document.getElementById('verification-iframe');
+      iframe.src = event.data.newIframeSrc;
+    });
+
     // BACK BUTTON ONLY EXISTS IN MODAL FORMAT
     if (OPALE_FORMAT == "modal") {
       document.getElementById('back-button-openmodal').addEventListener('click', function() {
