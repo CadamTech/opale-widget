@@ -133,7 +133,7 @@ export async function showVerificationOptions(identityProviders) {
           <div class="loader-container" style="display:none !important;justify-content:center !important;align-items:center !important;padding: 30%">
             <span class="loader"></span>
           </div>
-          <iframe id="verification-iframe" allow="camera;microphone" width="100%" height="300px"></iframe>
+          <iframe id="verification-iframe" allow="camera" width="100%" height="300px"></iframe>
           <button id="back-button" class="button button-outline">Retour</button>
         </div>
     `;
