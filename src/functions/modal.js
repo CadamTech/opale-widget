@@ -154,8 +154,12 @@ export async function showVerificationOptions(identityProviders) {
 
     // add event listener for messages from iframe
     window.addEventListener('message', (event) => {
-      var iframe = document.getElementById('verification-iframe');
-      iframe.src = event.data.newIframeSrc;
+      console.log('rcvd event:', event)
+
+      if (event.data && event.data.newIframeSrc) {
+        var iframe = document.getElementById('verification-iframe');
+        iframe.src = event.data.newIframeSrc;
+      }
     });
 
     // BACK BUTTON ONLY EXISTS IN MODAL FORMAT
