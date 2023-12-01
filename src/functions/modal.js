@@ -156,9 +156,19 @@ export async function showVerificationOptions(identityProviders) {
     window.addEventListener('message', (event) => {
       console.log('rcvd event:', event)
 
-      if (event.data && event.data.newIframeSrc) {
+      const data = event.data
+
+      if (data && data.newIframeSrc) {
         var iframe = document.getElementById('verification-iframe');
-        iframe.src = event.data.newIframeSrc;
+        iframe.src = data.newIframeSrc;
+      } else if (data && data.newUrl) {
+        window.location.href = data.newUrl
+      } else if (data && data.hasCompleted) {
+        console.log('Session ID: ' + data.sessionId);
+        // Success
+      } else if (data && data.hasError) {
+        console.log('Error: ' + data.error);
+        // Error handling
       }
     });
 
