@@ -100,7 +100,7 @@ export async function createModal() {
 
 // Fonction pour afficher les options de vérification
 export async function showVerificationOptions(identityProviders) {
-
+    const sessionUUID = await getSessionUUID();
 
     var modalContent = document.getElementById("opale-modal-content");
 
@@ -164,11 +164,10 @@ export async function showVerificationOptions(identityProviders) {
       } else if (data && data.newUrl) {
         window.location.href = data.newUrl
       } else if (data && data.hasCompleted) {
-        console.log('Session ID: ' + data.sessionId);
-        // Success
+        var iframe = document.getElementById('verification-iframe');
+        iframe.src = 'https://verifier.opale.io/finish-verification/trustmatic/' + sessionUUID +'?key=' + OPALE_WEBSITE_ID + '&session_id=' + data.sessionId;
       } else if (data && data.hasError) {
-        console.log('Error: ' + data.error);
-        // Error handling
+        console.log('Trustmatic error: ' + data.error);
       }
     });
 
