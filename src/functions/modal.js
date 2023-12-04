@@ -100,7 +100,7 @@ export async function createModal() {
 
 // Fonction pour afficher les options de vérification
 export async function showVerificationOptions(identityProviders) {
-    const params = new URLSearchParams(window.location.href);
+    const params = new URLSearchParams(window.location.search);
     const failureMessage = params.has('opale-verif-failed') ? "La vérification a échoué, merci de réessayer.<br>" : "";
 
     const sessionUUID = await getSessionUUID();
@@ -113,7 +113,7 @@ export async function showVerificationOptions(identityProviders) {
 
     if (typeof OPALE_LOGO !== 'undefined') html += `<img src="${OPALE_LOGO}" id="opale-logo">`;
           
-    html += `<h5>${failureMessage}Choisissez l'une des options suivantes pour vérifier votre âge</h5>
+    html += `<h5>${failureMessage}Choisissez l'une des options suivantes pour vérifier votre âge.</h5>
             <div class="verification-options">
                 ${identityProviders.map(identityProvider => `
                     <div class="verification-option" id="${identityProvider.name}-button">
