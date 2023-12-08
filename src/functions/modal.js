@@ -123,7 +123,7 @@ export async function showVerificationOptions(identityProviders) {
                 `).join('')}
             </div>
             <p>
-              <small>Les vérifications sont sécurisées et anonymisées par <a href="https://opale.io" target="_blank">Opale.io</a><br> En utilisant ce service, vous acceptez notre <a href="https://opale.io/fr/politique-de-confidentialite/" target="_blank">Politique de Confidentialité</a>.</small>
+              <small>Les vérifications sont sécurisées et anonymisées par <a href="https://opale.io" target="_blank">Opale.io</a><br> En utilisant ce service, vous acceptez notre <a href="https://opale.io/fr/politique-de-confidentialite/" target="_blank">Politique de Confidentialité</a></small>
             </p>
             `;
 
