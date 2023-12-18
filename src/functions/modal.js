@@ -5,6 +5,7 @@ import { modalContentLightStyles } from '../styles/content-light';
 import { modalContentStructure } from '../styles/structure.js';
 import { getSessionUUID } from './session.js';
 import { generateSessionUUID } from './session.js';
+import { env } from '../env.js';
 // Add CSS styles for the modal
 
 
@@ -74,8 +75,8 @@ export async function createModal() {
         // Replace button content by a loader
         over18Button.innerHTML = '<span class="loader"></span>';
 
-        // Log to https://verifier.opale.io/log/ if the user is over 18
-        fetch("https://verifier.opale.io/log/"+sessionUUID+"?key="+OPALE_WEBSITE_ID,
+        // Log to /log/ if the user is over 18
+        fetch(env.apiUrl+"/log/"+sessionUUID+"?key="+OPALE_WEBSITE_ID,
         { 
             method: 'POST',
             body: JSON.stringify({
@@ -168,7 +169,7 @@ export async function showVerificationOptions(identityProviders) {
         window.location.href = data.newUrl
       } else if (data && data.hasCompleted) {
         var iframe = document.getElementById('verification-iframe');
-        iframe.src = 'https://verifier.opale.io/finish-verification/trustmatic/' + sessionUUID +'?key=' + OPALE_WEBSITE_ID + '&session_id=' + data.sessionId;
+        iframe.src = env.apiUrl+'/finish-verification/trustmatic/' + sessionUUID +'?key=' + OPALE_WEBSITE_ID + '&session_id=' + data.sessionId;
       } else if (data && data.hasError) {
         console.log('Trustmatic error: ' + data.error);
       }
