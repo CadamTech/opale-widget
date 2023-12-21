@@ -110,7 +110,8 @@ export const modalContentStructure = `
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 20rem;
+      width: 100%;
+      padding: 0px 5px 0px 5px;
   }
 
   #opale-modal-container .verification-option img {
