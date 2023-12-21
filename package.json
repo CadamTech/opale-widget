@@ -11,6 +11,7 @@
   "license": "ISC",
   "devDependencies": {
     "mini-css-extract-plugin": "^2.7.6",
+    "webpack-cli": "^5.1.4",
     "webpack-obfuscator": "^3.5.1"
   },
   "dependencies": {
