@@ -42,7 +42,7 @@ export async function createModal() {
     var modalContent = document.createElement("div");
     modalContent.id = "opale-modal-content";
 
-    if (OPALE_FORMAT == "inline") {
+    if (OPALE_FORMAT == "inline") { // TODO: we also want to skip the first screen and show the identity providers if the session property opale-clicked-over-18 exists
       waitForIdentityProviders(sessionUUID);
       modalContainer.appendChild(modalContent);
     } else {
@@ -74,6 +74,8 @@ export async function createModal() {
 
         // Replace button content by a loader
         over18Button.innerHTML = '<span class="loader"></span>';
+
+        // TODO: create a session storage property (https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage) called opale-clicked-over-18 to save the fact that this user already saw the first screen and clicked on "I am over 18".
 
         // Log to /log/ if the user is over 18
         fetch(env.apiUrl+"/log/"+sessionUUID+"?key="+OPALE_WEBSITE_ID,
