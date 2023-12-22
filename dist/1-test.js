@@ -366,7 +366,7 @@ eval(";(function (root, factory) {\n\tif (true) {\n\t\t// CommonJS\n\t\tmodule.e
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   env: () => (/* binding */ env)\n/* harmony export */ });\nconst API_URL = \"https://verifier.opale.io\";\n\nconst env = {\n  \"apiUrl\": API_URL,\n  \"opaleIdentityProvidersEndpoint\": `${API_URL}/identity-providers`,\n  \"cssFrameWorkUrl\": \"https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css\"\n};\n\n\n//# sourceURL=webpack://modal/./src/env.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   env: () => (/* binding */ env)\n/* harmony export */ });\nconst API_URL = \"https://verifier-test.opale.io\";\n\nconst env = {\n  \"apiUrl\": API_URL,\n  \"opaleIdentityProvidersEndpoint\": `${API_URL}/identity-providers`,\n  \"cssFrameWorkUrl\": \"https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css\"\n};\n\n\n//# sourceURL=webpack://modal/./src/env.js?");
 
 /***/ }),
 
