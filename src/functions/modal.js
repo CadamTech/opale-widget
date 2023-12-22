@@ -41,16 +41,15 @@ export async function createModal() {
     var modalContainer = document.getElementById("opale-modal-container");
     var modalContent = document.createElement("div");
     modalContent.id = "opale-modal-content";
-
     const hasClickedOver18 = sessionStorage.getItem("opale-clicked-over-18");
+
     if (OPALE_FORMAT == "inline" || hasClickedOver18 === "true") {
       waitForIdentityProviders(sessionUUID);
       modalContainer.appendChild(modalContent);
     } else {
       modalContent.innerHTML = "";
 
-      if (typeof OPALE_LOGO !== "undefined")
-        modalContent.innerHTML += `<img src="${OPALE_LOGO}" id="opale-logo">`;
+      if (typeof OPALE_LOGO !== "undefined") modalContent.innerHTML += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
       modalContent.innerHTML += `
           <h4 style="margin:10%">Ce site est accessible uniquement aux personnes âgées de 18 ans et plus</h4>
@@ -78,22 +77,24 @@ export async function createModal() {
         sessionStorage.setItem("opale-clicked-over-18", "true");
 
         // Log to /log/ if the user is over 18
-        fetch(env.apiUrl + "/log/" + sessionUUID + "?key=" + OPALE_WEBSITE_ID, {
+        fetch(env.apiUrl + "/log/" + sessionUUID + "?key=" + OPALE_WEBSITE_ID,
+        {
           method: "POST",
           body: JSON.stringify({
             log_type: "is_over_18",
             value: "",
           }),
           redirect: "follow",
-        }).catch((error) => console.log("error", error));
+        }
+        ).catch((error) => console.log("error", error));
 
         waitForIdentityProviders(sessionUUID);
       });
 
       // BEFORE UNLOAD : MONITOR DROP
-      window.addEventListener("beforeunload", function () {
+      window.addEventListener('beforeunload', function () {
         // Generate and store a new sessionUID before the tab is closed
-        localStorage.setItem("sessionUID", generateSessionUUID());
+        localStorage.setItem('sessionUID', generateSessionUUID());
       });
     }
 }
