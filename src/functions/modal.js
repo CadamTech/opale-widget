@@ -37,19 +37,20 @@ async function waitForIdentityProviders(sessionUUID) {
 export async function createModal() {
   // Warm identity providers
     const sessionUUID = await getSessionUUID();
-
+    
     var modalContainer = document.getElementById("opale-modal-container");
     var modalContent = document.createElement("div");
     modalContent.id = "opale-modal-content";
 
-    if (OPALE_FORMAT == "inline") { // TODO: we also want to skip the first screen and show the identity providers if the session property opale-clicked-over-18 exists
+    const hasClickedOver18 = sessionStorage.getItem("opale-clicked-over-18");
+    if (OPALE_FORMAT == "inline" || hasClickedOver18 === "true") {
       waitForIdentityProviders(sessionUUID);
       modalContainer.appendChild(modalContent);
     } else {
+      modalContent.innerHTML = "";
 
-      modalContent.innerHTML = '';
-
-      if (typeof OPALE_LOGO !== 'undefined') modalContent.innerHTML += `<img src="${OPALE_LOGO}" id="opale-logo">`;
+      if (typeof OPALE_LOGO !== "undefined")
+        modalContent.innerHTML += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
       modalContent.innerHTML += `
           <h4 style="margin:10%">Ce site est accessible uniquement aux personnes âgées de 18 ans et plus</h4>
@@ -70,33 +71,29 @@ export async function createModal() {
       var over18Button = document.getElementById("over-18-button");
 
       // CLICK ON OVER 18 BUTTON
-      over18Button.addEventListener("click", function() {
-
+      over18Button.addEventListener("click", function () {
         // Replace button content by a loader
         over18Button.innerHTML = '<span class="loader"></span>';
 
-        // TODO: create a session storage property (https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage) called opale-clicked-over-18 to save the fact that this user already saw the first screen and clicked on "I am over 18".
+        sessionStorage.setItem("opale-clicked-over-18", "true");
 
         // Log to /log/ if the user is over 18
-        fetch(env.apiUrl+"/log/"+sessionUUID+"?key="+OPALE_WEBSITE_ID,
-        { 
-            method: 'POST',
-            body: JSON.stringify({
-              "log_type": "is_over_18",
-              "value": ""
-            }),
-            redirect: 'follow'
-        })
-        .catch(error => console.log('error', error));
-        
+        fetch(env.apiUrl + "/log/" + sessionUUID + "?key=" + OPALE_WEBSITE_ID, {
+          method: "POST",
+          body: JSON.stringify({
+            log_type: "is_over_18",
+            value: "",
+          }),
+          redirect: "follow",
+        }).catch((error) => console.log("error", error));
+
         waitForIdentityProviders(sessionUUID);
-        
       });
 
       // BEFORE UNLOAD : MONITOR DROP
-      window.addEventListener('beforeunload', function () {
+      window.addEventListener("beforeunload", function () {
         // Generate and store a new sessionUID before the tab is closed
-        localStorage.setItem('sessionUID', generateSessionUUID());
+        localStorage.setItem("sessionUID", generateSessionUUID());
       });
     }
 }
