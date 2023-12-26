@@ -168,7 +168,7 @@ export async function showVerificationOptions(identityProviders) {
 
   // add event listener for messages from iframe
   window.addEventListener("message", (event) => {
-    console.log("rcvd event:", event);
+    // console.log("rcvd event:", event);
 
     const data = event.data;
 
