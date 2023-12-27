@@ -171,7 +171,7 @@ export async function showVerificationOptions(identityProviders) {
     // console.log("rcvd event:", event);
 
     const data = event.data;
-
+    console.log("testing origin")
     console.log(data);
 
     if (data && data.newIframeSrc) {
