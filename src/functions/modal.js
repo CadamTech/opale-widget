@@ -172,8 +172,8 @@ export async function showVerificationOptions(identityProviders) {
 
     const data = event.data;
 
-    if (data) console.log(data);
-    
+    console.log(data);
+
     if (data && data.newIframeSrc) {
       var iframe = document.getElementById("verification-iframe");
       iframe.src = data.newIframeSrc;
