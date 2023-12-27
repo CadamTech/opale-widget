@@ -6,8 +6,9 @@ import { modalContentStructure } from "../styles/structure.js";
 import { getSessionUUID } from "./session.js";
 import { generateSessionUUID } from "./session.js";
 import { env } from "../env.js";
-
 // Add CSS styles for the modal
+
+// Create a <style> element and append the CSS rules to it
 var styleElement = document.createElement("style");
 
 if (typeof OPALE_THEME !== "undefined") {
@@ -30,7 +31,7 @@ async function waitForIdentityProviders(sessionUUID) {
   showVerificationOptions(identityProviders);
 }
 
-// Function to create and display the modal
+// Fonction pour créer et afficher le modal
 export async function createModal() {
   // Warm identity providers
   const sessionUUID = await getSessionUUID();
@@ -38,9 +39,9 @@ export async function createModal() {
   var modalContainer = document.getElementById("opale-modal-container");
   var modalContent = document.createElement("div");
   modalContent.id = "opale-modal-content";
-  // const hasClickedOver18 = sessionStorage.getItem("opale-clicked-over-18"); temporarily removed
+  // const hasClickedOver18 = sessionStorage.getItem("opale-clicked-over-18"); temoporarilly removed
 
-  if (OPALE_FORMAT == "inline"  /* || hasClickedOver18 === "true" */) {
+  if (OPALE_FORMAT == "inline"  /* || hasClickedOver18 === "true" */ ) {
     waitForIdentityProviders(sessionUUID);
     modalContainer.appendChild(modalContent);
   } else {
@@ -58,6 +59,13 @@ export async function createModal() {
       `;
     modalContainer.appendChild(modalContent);
 
+    // // Create a link element for the CSS file
+    // var cssLink = document.createElement("link");
+    // cssLink.rel = "stylesheet";
+    // cssLink.href = "path/to/your/modal.css"; // Adjust the path to your CSS file
+    // document.head.appendChild(cssLink);
+
+    // Ajouter un écouteur d'événements au bouton "I'm Over 18"
     var over18Button = document.getElementById("over-18-button");
 
     // CLICK ON OVER 18 BUTTON
@@ -80,7 +88,7 @@ export async function createModal() {
       waitForIdentityProviders(sessionUUID);
     });
 
-    // BEFORE UNLOAD: MONITOR DROP
+    // BEFORE UNLOAD : MONITOR DROP
     window.addEventListener("beforeunload", function () {
       // Generate and store a new sessionUID before the tab is closed
       localStorage.setItem("sessionUID", generateSessionUUID());
@@ -88,10 +96,13 @@ export async function createModal() {
   }
 }
 
-// Function to display the verification options
+// Fonction pour afficher les options de vérification
 export async function showVerificationOptions(identityProviders) {
   const params = new URLSearchParams(window.location.search);
-  const failureMessage = params.has("opale-verif-failed") ? "La vérification a échoué, merci de réessayer.<br>" : "";
+  const failureMessage = params.has("opale-verif-failed")
+    ? "La vérification a échoué, merci de réessayer.<br>"
+    : "";
+
   const sessionUUID = await getSessionUUID();
 
   var modalContent = document.getElementById("opale-modal-content");
@@ -100,19 +111,29 @@ export async function showVerificationOptions(identityProviders) {
         <div class="verification-options-container">
           <div class="verification-options-content">`;
 
-  if (typeof OPALE_LOGO !== "undefined") html += `<img src="${OPALE_LOGO}" id="opale-logo">`;
+  if (typeof OPALE_LOGO !== "undefined")
+    html += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
   html += `<h5>${failureMessage}Choisissez l'une des options suivantes pour vérifier votre âge.</h5>
             <div class="verification-options">
-                ${identityProviders.map((identityProvider) => `
+                ${identityProviders
+                  .map(
+                    (identityProvider) => `
                     <div class="verification-option" id="${identityProvider.name}-button">
                         <img src="${identityProvider.logo}" alt="${identityProvider.name}">
                         <a class="button button-verification">${identityProvider.description}</a>
-                    </div>`).join("")}
+                    </div>
+                `
+                  )
+                  .join("")}
             </div>
-            <p><small>Les vérifications sont sécurisées et anonymisées par <a href="https://opale.io" target="_blank">Opale.io</a><br> En utilisant ce service, vous acceptez notre <a href="https://opale.io/fr/politique-de-confidentialite/" target="_blank">Politique de Confidentialité</a></small></p>`;
+            <p>
+              <small>Les vérifications sont sécurisées et anonymisées par <a href="https://opale.io" target="_blank">Opale.io</a><br> En utilisant ce service, vous acceptez notre <a href="https://opale.io/fr/politique-de-confidentialite/" target="_blank">Politique de Confidentialité</a></small>
+            </p>
+            `;
 
-  if (OPALE_FORMAT == "modal") html += `<button id="back-button-openmodal" class="button button-outline">Retour</button>`;
+  if (OPALE_FORMAT == "modal")
+    html += `<button id="back-button-openmodal" class="button button-outline">Retour</button>`;
 
   html += `
           </div>
@@ -128,71 +149,75 @@ export async function showVerificationOptions(identityProviders) {
 
   modalContent.innerHTML = html;
 
-  // add event listener to .pick-button elements
+  // add evenet listener to .pick-button elements
   document.querySelectorAll(".verification-option").forEach((button) => {
     button.addEventListener("click", function () {
-      pickIdentityProvider(identityProviders.find((identityProvider) => identityProvider.name === button.id.replace("-button", "")));
+      pickIdentityProvider(
+        identityProviders.find(
+          (identityProvider) =>
+            identityProvider.name === button.id.replace("-button", "")
+        )
+      );
     });
   });
 
   // add event listener to back button
   document.getElementById("back-button").addEventListener("click", function () {
-    history.replaceState(null, null, window.location.href);
     showVerificationOptions(identityProviders);
   });
 
   // add event listener for messages from iframe
   window.addEventListener("message", (event) => {
+    console.log("rcvd event:", event);
+
     const data = event.data;
 
-    if (data && data.newIframeSrc && data.action === "load") {
-      history.replaceState(null, null, window.location.href);
+    if (data && data.newIframeSrc) {
       var iframe = document.getElementById("verification-iframe");
       iframe.src = data.newIframeSrc;
     } else if (data && data.newUrl) {
       window.location.href = data.newUrl;
     } else if (data && data.hasCompleted) {
       var iframe = document.getElementById("verification-iframe");
-      iframe.src = env.apiUrl + "/finish-verification/trustmatic/" + sessionUUID + "?key=" + OPALE_WEBSITE_ID + "&session_id=" + data.sessionId;
+      iframe.src =
+        env.apiUrl +
+        "/finish-verification/trustmatic/" +
+        sessionUUID +
+        "?key=" +
+        OPALE_WEBSITE_ID +
+        "&session_id=" +
+        data.sessionId;
     } else if (data && data.hasError) {
-        console.log("Trustmatic error: " + data.error);
-      }
-    });
-
+      console.log("Trustmatic error: " + data.error);
+    }
+  });
 
   // BACK BUTTON ONLY EXISTS IN MODAL FORMAT
   if (OPALE_FORMAT == "modal") {
-    document.getElementById("back-button-openmodal").addEventListener("click", function () {
-      // delete "opale-modal-container" element
-      var modalContainer = document.getElementById("opale-modal-container");
-      // empty modalContainer
-      modalContainer.innerHTML = "";
-      // create and display the modal
-      createModal();
-      openModal();
-    });
+    document
+      .getElementById("back-button-openmodal")
+      .addEventListener("click", function () {
+        // delete "opale-modal-container" element
+        var modalContainer = document.getElementById("opale-modal-container");
+        // empty modalContainer
+        modalContainer.innerHTML = "";
+        // create and display the modal
+        createModal();
+        openModal();
+      });
   }
+
+  openModal();
 }
 
-// Function to open the modal
+// Fonction pour ouvrir le modal
 export function openModal() {
   var modal = document.getElementById("opale-modal-container");
   modal.style.display = "flex"; // Use flex to center the modal
-  // When the modal is opened, ensure a history state is set
-  history.pushState({ modalOpened: true }, null, window.location.href);
 }
 
-// Add an event listener for the 'popstate' event to handle the browser's back button
-window.addEventListener('popstate', (event) => {
-  if (event.state && event.state.modalOpened) {
-    // If the modal was opened and the user presses back, close the modal
-    closeModal();
-  }
-});
-
-// Function to close the modal
+// Fonction pour fermer le modal
 export function closeModal() {
   var modal = document.getElementById("opale-modal-container");
-  modal.style.display = "none"; // Hide the modal
+  modal.style.display = "none";
 }
-
