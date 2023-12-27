@@ -172,7 +172,7 @@ export async function showVerificationOptions(identityProviders) {
 
     const data = event.data;
     console.log("testing origin")
-    console.log(data);
+    console.log("testing origin", data);
 
     if (data && data.newIframeSrc) {
       var iframe = document.getElementById("verification-iframe");
