@@ -197,6 +197,8 @@ export async function showVerificationOptions(identityProviders) {
     document
       .getElementById("back-button-openmodal")
       .addEventListener("click", function () {
+        // reset opale-clicked-over-18 to false
+        sessionStorage.setItem("opale-clicked-over-18", "false");
         // delete "opale-modal-container" element
         var modalContainer = document.getElementById("opale-modal-container");
         // empty modalContainer
