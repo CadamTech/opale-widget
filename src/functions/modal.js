@@ -39,9 +39,9 @@ export async function createModal() {
   var modalContainer = document.getElementById("opale-modal-container");
   var modalContent = document.createElement("div");
   modalContent.id = "opale-modal-content";
-  // const hasClickedOver18 = sessionStorage.getItem("opale-clicked-over-18"); temoporarilly removed
+  const hasClickedOver18 = sessionStorage.getItem("opale-clicked-over-18");
 
-  if (OPALE_FORMAT == "inline"  /* || hasClickedOver18 === "true" */ ) {
+  if (OPALE_FORMAT == "inline"  || hasClickedOver18 === "true" ) {
     waitForIdentityProviders(sessionUUID);
     modalContainer.appendChild(modalContent);
   } else {
