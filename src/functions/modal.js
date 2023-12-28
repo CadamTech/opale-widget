@@ -179,7 +179,7 @@ export async function showVerificationOptions(identityProviders) {
       window.location.href = data.newUrl;
     } else if (data && data.hasCompleted) {
       var iframe = document.getElementById("verification-iframe");
-      console.log(data)
+      console.log("data is here",data)
       iframe.src =
         env.apiUrl +
         "/finish-verification/trustmatic/" +
