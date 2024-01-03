@@ -10,8 +10,6 @@ import { isOver18, setIsOver18, checkSignature } from './functions/session.js';
         if (OPALE_THEME != "none") loadCSS(env.cssFrameWorkUrl);
       }
 
-      console.log(OPALE_LANGUAGE);
-
       if (typeof OPALE_LANGUAGE === "undefined") {
             OPALE_LANGUAGE = "fr";
       }
