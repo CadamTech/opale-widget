@@ -23,14 +23,14 @@
     "it": "Uscire"
   },
   {
-    "fr": "Choisissez l'une des options suivantes pour vérifier votre âge.",
-    "en": "Choose one of the following options to verify your age.",
-    "it": "Scegli una delle seguenti opzioni per verificare la tua età."
-  },
-  {
     "fr": "La vérification a échoué, merci de réessayer.",
     "en": "Verification failed, please try again.",
     "it": "Verifica fallita. Per favore provate di nuovo."
+  },
+  {
+    "fr": "Choisissez l'une des options suivantes pour vérifier votre âge.",
+    "en": "Choose one of the following options to verify your age.",
+    "it": "Scegli una delle seguenti opzioni per verificare la tua età."
   },
   {
     "fr": "Les vérifications sont sécurisées et anonymisées par ",
