@@ -1,4 +1,4 @@
-const API_URL = "https://verifier-test.opale.io";
+const API_URL = "https://verifier.opale.io";
 
 export const env = {
   "apiUrl": API_URL,
