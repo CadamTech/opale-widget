@@ -9,4 +9,14 @@
     en: "This site is accessible only to persons aged 18 and over",
     it: "Questo sito è accessibile solo a persone di età pari o superiore a 18 anni",
   },
+  {
+    fr: "J'ai 18 ans ou plus",
+    en: "I am 18 years old or older",
+    it: "Ho 18 anni o più",
+  },
+  {
+    fr: "Sortir",
+    en: "Exit",
+    it: "Uscire",
+  },
 ];
