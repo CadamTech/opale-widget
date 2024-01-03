@@ -11,7 +11,7 @@ import { isOver18, setIsOver18, checkSignature } from './functions/session.js';
       }
 
       if (typeof window.OPALE_LANGUAGE === "undefined") {
-        OPALE_LANGUAGE = "fr";
+        window.OPALE_LANGUAGE = "fr";
       }
 
       console.log(OPALE_LANGUAGE)
