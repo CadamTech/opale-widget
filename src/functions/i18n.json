@@ -1,8 +1,6 @@
 [
   {
-    "fr": "fr",
-    "en": "en",
-    "it": "it"
+    "sheetName": "widget"
   },
   {
     "fr": "fr",
@@ -23,5 +21,10 @@
     "fr": "Sortir",
     "en": "Exit",
     "it": "Uscire"
+  },
+  {
+    "fr": "Choisissez l'une des options suivantes pour vérifier votre âge.",
+    "en": "Choose one of the following options to verify your age.",
+    "it": "Scegli una delle seguenti opzioni per verificare la tua età."
   }
 ]

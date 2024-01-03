@@ -5,8 +5,8 @@ import { modalContentLightStyles } from "../styles/content-light";
 import { modalContentStructure } from "../styles/structure.js";
 import { getSessionUUID } from "./session.js";
 import { generateSessionUUID } from "./session.js";
+import { translate } from "./translate.js";
 import { env } from "../env.js";
-import i18n from "./i18n.json"
 // Add CSS styles for the modal
 
 // Create a <style> element and append the CSS rules to it
@@ -42,11 +42,7 @@ export async function createModal() {
   modalContent.id = "opale-modal-content";
   const hasClickedOver18 = sessionStorage.getItem("opale-clicked-over-18");
 
-  console.log("i18n array", i18n);
-  console.log("i18n[2].fr", i18n[2]);
-  console.log("i18n[2].OPALE_LANGUAGE", i18n[2].OPALE_LANGUAGE);
-
-  if (OPALE_FORMAT == "inline"  || hasClickedOver18 === "true" ) {
+  if (OPALE_FORMAT == "inline" || hasClickedOver18 === "true") {
     waitForIdentityProviders(sessionUUID);
     modalContainer.appendChild(modalContent);
   } else {
@@ -56,10 +52,10 @@ export async function createModal() {
       modalContent.innerHTML += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
     modalContent.innerHTML += `
-          <h4 style="margin:10%">Ce site est accessible uniquement aux personnes âgées de 18 ans et plus</h4>
+          <h4 style="margin:10%">${translate(2)}</h4>
           <div>
-            <button id="over-18-button" class="button button-verification" style="width:100%;margin-bottom:5%">J'ai 18 ans ou plus</button>
-            <a href="https://google.com" id="not-over-18-button" class="button button-outline">Sortir</a>
+            <button id="over-18-button" class="button button-verification" style="width:100%;margin-bottom:5%">${translate(3)}</button>
+            <a href="https://google.com" id="not-over-18-button" class="button button-outline">${translate(4)}</a>
           </div>
       `;
     modalContainer.appendChild(modalContent);
@@ -119,7 +115,7 @@ export async function showVerificationOptions(identityProviders) {
   if (typeof OPALE_LOGO !== "undefined")
     html += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
-  html += `<h5>${failureMessage}Choisissez l'une des options suivantes pour vérifier votre âge.</h5>
+  html += `<h5>${failureMessage}${translate(5)}</h5>
             <div class="verification-options">
                 ${identityProviders
                   .map(
