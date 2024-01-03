@@ -43,7 +43,7 @@ export async function createModal() {
   const hasClickedOver18 = sessionStorage.getItem("opale-clicked-over-18");
 
   console.log("i18n array", i18n);
-  console.log("i18n[2].fr", i18n[2].fr);
+  console.log("i18n[2].fr", i18n[2]);
   console.log("i18n[2].OPALE_LANGUAGE", i18n[2].OPALE_LANGUAGE);
 
   if (OPALE_FORMAT == "inline"  || hasClickedOver18 === "true" ) {

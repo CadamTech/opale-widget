@@ -4,7 +4,11 @@
     en: "en",
     it: "it",
   },
-  {},
+  {
+    fr: "fr",
+    en: "en",
+    it: "it",
+  },
   {
     fr: "Ce site est accessible uniquement aux personnes âgées de 18 ans et plus",
     en: "This site is accessible only to persons aged 18 and over",
