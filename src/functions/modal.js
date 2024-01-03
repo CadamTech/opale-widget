@@ -6,7 +6,7 @@ import { modalContentStructure } from "../styles/structure.js";
 import { getSessionUUID } from "./session.js";
 import { generateSessionUUID } from "./session.js";
 import { env } from "../env.js";
-import i18n from "./i18n.json.js"
+import {i18n} from "./i18n.json.js"
 // Add CSS styles for the modal
 
 // Create a <style> element and append the CSS rules to it

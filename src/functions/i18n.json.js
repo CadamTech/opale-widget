@@ -1,27 +1,27 @@
 [
   {
-    fr: "fr",
-    en: "en",
-    it: "it",
+    "fr": "fr",
+    "en": "en",
+    "it": "it"
   },
   {
-    fr: "fr",
-    en: "en",
-    it: "it",
+    "fr": "fr",
+    "en": "en",
+    "it": "it"
   },
   {
-    fr: "Ce site est accessible uniquement aux personnes âgées de 18 ans et plus",
-    en: "This site is accessible only to persons aged 18 and over",
-    it: "Questo sito è accessibile solo a persone di età pari o superiore a 18 anni",
+    "fr": "Ce site est accessible uniquement aux personnes âgées de 18 ans et plus",
+    "en": "This site is accessible only to persons aged 18 and over",
+    "it": "Questo sito è accessibile solo a persone di età pari o superiore a 18 anni"
   },
   {
-    fr: "J'ai 18 ans ou plus",
-    en: "I am 18 years old or older",
-    it: "Ho 18 anni o più",
+    "fr": "J'ai 18 ans ou plus",
+    "en": "I am 18 years old or older",
+    "it": "Ho 18 anni o più"
   },
   {
-    fr: "Sortir",
-    en: "Exit",
-    it: "Uscire",
-  },
+    "fr": "Sortir",
+    "en": "Exit",
+    "it": "Uscire"
+  }
 ];
