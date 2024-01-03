@@ -5,7 +5,7 @@ import { modalContentLightStyles } from "../styles/content-light";
 import { modalContentStructure } from "../styles/structure.js";
 import { getSessionUUID } from "./session.js";
 import { generateSessionUUID } from "./session.js";
-import { translate } from "./translate.js";
+import { i18n } from "./i18n.js";
 import { env } from "../env.js";
 // Add CSS styles for the modal
 
@@ -52,10 +52,14 @@ export async function createModal() {
       modalContent.innerHTML += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
     modalContent.innerHTML += `
-          <h4 style="margin:10%">${translate(2)}</h4>
+          <h4 style="margin:10%">${i18n(2)}</h4>
           <div>
-            <button id="over-18-button" class="button button-verification" style="width:100%;margin-bottom:5%">${translate(3)}</button>
-            <a href="https://google.com" id="not-over-18-button" class="button button-outline">${translate(4)}</a>
+            <button id="over-18-button" class="button button-verification" style="width:100%;margin-bottom:5%">${i18n(
+              3
+            )}</button>
+            <a href="https://google.com" id="not-over-18-button" class="button button-outline">${i18n(
+              4
+            )}</a>
           </div>
       `;
     modalContainer.appendChild(modalContent);
@@ -101,7 +105,7 @@ export async function createModal() {
 export async function showVerificationOptions(identityProviders) {
   const params = new URLSearchParams(window.location.search);
   const failureMessage = params.has("opale-verif-failed")
-    ? "La vérification a échoué, merci de réessayer.<br>"
+    ? `${i18n(6)}<br>`
     : "";
 
   const sessionUUID = await getSessionUUID();
@@ -115,7 +119,7 @@ export async function showVerificationOptions(identityProviders) {
   if (typeof OPALE_LOGO !== "undefined")
     html += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
-  html += `<h5>${failureMessage}${translate(5)}</h5>
+  html += `<h5>${failureMessage}${i18n(5)}</h5>
             <div class="verification-options">
                 ${identityProviders
                   .map(
@@ -129,12 +133,20 @@ export async function showVerificationOptions(identityProviders) {
                   .join("")}
             </div>
             <p>
-              <small>Les vérifications sont sécurisées et anonymisées par <a href="https://opale.io" target="_blank">Opale.io</a><br> En utilisant ce service, vous acceptez notre <a href="https://opale.io/fr/politique-de-confidentialite/" target="_blank">Politique de Confidentialité</a></small>
+              <small>${i18n(
+                7
+              )}<a href="https://opale.io" target="_blank">Opale.io </a><br>${i18n(
+    8
+  )} <a href="https://opale.io/fr/politique-de-confidentialite/" target="_blank">${i18n(
+    9
+  )}</a></small>
             </p>
             `;
 
   if (OPALE_FORMAT == "modal")
-    html += `<button id="back-button-openmodal" class="button button-outline">Retour</button>`;
+    html += `<button id="back-button-openmodal" class="button button-outline">${i18n(
+      10
+    )}</button>`;
 
   html += `
           </div>
@@ -144,7 +156,9 @@ export async function showVerificationOptions(identityProviders) {
             <span class="loader"></span>
           </div>
           <iframe id="verification-iframe" allow="camera" width="100%" height="300px"></iframe>
-          <button id="back-button" class="button button-outline">Retour</button>
+          <button id="back-button" class="button button-outline">${i18n(
+            10
+          )}</button>
         </div>
     `;
 
