@@ -126,7 +126,7 @@ export async function showVerificationOptions(identityProviders) {
                     (identityProvider) => `
                     <div class="verification-option" id="${identityProvider.name}-button">
                         <img src="${identityProvider.logo}" alt="${identityProvider.name}">
-                        <a class="button button-verification">${identityProvider.description}</a>
+                        <a class="button button-verification">${translate(identityProvider.description_translation)}</a>
                     </div>
                 `
                   )
@@ -135,7 +135,7 @@ export async function showVerificationOptions(identityProviders) {
             <p>
               <small>${i18n(
                 7
-              )}<a href="https://opale.io" target="_blank">Opale.io </a><br>${i18n(
+              )}<a href="https://opale.io" target="_blank"> Opale.io </a><br>${i18n(
     8
   )} <a href="https://opale.io/fr/politique-de-confidentialite/" target="_blank">${i18n(
     9

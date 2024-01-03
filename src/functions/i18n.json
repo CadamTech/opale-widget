@@ -51,5 +51,25 @@
     "fr": "Retour",
     "en": "Back",
     "it": "Indietro"
+  },
+  {
+    "fr": "Carte bancaire 0€",
+    "en": "Bank card 0€",
+    "it": "Carta bancaria 0€"
+  },
+  {
+    "fr": "Identité numérique",
+    "en": "Digital Identity",
+    "it": "Identità digitale"
+  },
+  {
+    "fr": "pièce d'identité",
+    "en": "ID",
+    "it": "ID"
+  },
+  {
+    "fr": "Selfie",
+    "en": "Selfie",
+    "it": "Selfie"
   }
 ]
