@@ -398,7 +398,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \************************************/
 /***/ (() => {
 
-eval("[\n  {\n    fr: \"fr\",\n    en: \"en\",\n    it: \"it\",\n  },\n  {\n    fr: \"Ce site est accessible uniquement aux personnes âgées de 18 ans et plus\",\n    en: \"This site is accessible only to persons aged 18 and over\",\n    it: \"Questo sito è accessibile solo a persone di età pari o superiore a 18 anni\",\n  },\n  {\n    fr: \"J'ai 18 ans ou plus\",\n    en: \"I am 18 years old or older\",\n    it: \"Ho 18 anni o più\",\n  },\n  {\n    fr: \"Sortir\",\n    en: \"Exit\",\n    it: \"Uscire\",\n  },\n];\n\n\n//# sourceURL=webpack://modal/./src/functions/i18n.json.js?");
+eval("[\n  {\n    fr: \"fr\",\n    en: \"en\",\n    it: \"it\",\n  },\n  {},\n  {\n    fr: \"Ce site est accessible uniquement aux personnes âgées de 18 ans et plus\",\n    en: \"This site is accessible only to persons aged 18 and over\",\n    it: \"Questo sito è accessibile solo a persone di età pari o superiore a 18 anni\",\n  },\n  {\n    fr: \"J'ai 18 ans ou plus\",\n    en: \"I am 18 years old or older\",\n    it: \"Ho 18 anni o più\",\n  },\n  {\n    fr: \"Sortir\",\n    en: \"Exit\",\n    it: \"Uscire\",\n  },\n];\n\n\n//# sourceURL=webpack://modal/./src/functions/i18n.json.js?");
 
 /***/ }),
 
