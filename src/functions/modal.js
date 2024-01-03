@@ -105,7 +105,7 @@ export async function createModal() {
 export async function showVerificationOptions(identityProviders) {
   const params = new URLSearchParams(window.location.search);
   const failureMessage = params.has("opale-verif-failed")
-    ? `${i18n(6)}<br>`
+    ? `${i18n(5)}<br>`
     : "";
 
   const sessionUUID = await getSessionUUID();
@@ -119,7 +119,7 @@ export async function showVerificationOptions(identityProviders) {
   if (typeof OPALE_LOGO !== "undefined")
     html += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
-  html += `<h5>${failureMessage}${i18n(5)}</h5>
+  html += `<h5>${failureMessage}${i18n(6)}</h5>
             <div class="verification-options">
                 ${identityProviders
                   .map(
