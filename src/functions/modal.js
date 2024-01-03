@@ -6,6 +6,7 @@ import { modalContentStructure } from "../styles/structure.js";
 import { getSessionUUID } from "./session.js";
 import { generateSessionUUID } from "./session.js";
 import { env } from "../env.js";
+import i18n from "./i18n.json.js"
 // Add CSS styles for the modal
 
 // Create a <style> element and append the CSS rules to it
@@ -51,7 +52,7 @@ export async function createModal() {
       modalContent.innerHTML += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
     modalContent.innerHTML += `
-          <h4 style="margin:10%">Ce site est accessible uniquement aux personnes âgées de 18 ans et plus</h4>
+          <h4 style="margin:10%">${i18n.OPALE_LANGUAGE[2]}</h4>
           <div>
             <button id="over-18-button" class="button button-verification" style="width:100%;margin-bottom:5%">J'ai 18 ans ou plus</button>
             <a href="https://google.com" id="not-over-18-button" class="button button-outline">Sortir</a>

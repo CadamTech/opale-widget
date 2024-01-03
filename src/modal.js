@@ -13,8 +13,6 @@ import { isOver18, setIsOver18, checkSignature } from "./functions/session.js";
     if (typeof window.OPALE_LANGUAGE === "undefined") {
       window.OPALE_LANGUAGE = "fr"; // default language set to French
     }
-    console.log(OPALE_THEME);
-    console.log(OPALE_LANGUAGE);
 
     // If param has ?over18=true, set the cookie
     var over18CheckPassed = false;
