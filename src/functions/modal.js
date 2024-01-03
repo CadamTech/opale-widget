@@ -42,6 +42,10 @@ export async function createModal() {
   modalContent.id = "opale-modal-content";
   const hasClickedOver18 = sessionStorage.getItem("opale-clicked-over-18");
 
+  console.log("i18n array", i18n);
+  console.log("i18n[2].fr", i18n[2].fr);
+  console.log("i18n[2].OPALE_LANGUAGE", i18n[2].OPALE_LANGUAGE);
+
   if (OPALE_FORMAT == "inline"  || hasClickedOver18 === "true" ) {
     waitForIdentityProviders(sessionUUID);
     modalContainer.appendChild(modalContent);
@@ -52,10 +56,10 @@ export async function createModal() {
       modalContent.innerHTML += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
     modalContent.innerHTML += `
-          <h4 style="margin:10%">${i18n[2].OPALE_LANGUAGE}</h4>
+          <h4 style="margin:10%">Ce site est accessible uniquement aux personnes âgées de 18 ans et plus</h4>
           <div>
-            <button id="over-18-button" class="button button-verification" style="width:100%;margin-bottom:5%">${i18n[3].OPALE_LANGUAGE}</button>
-            <a href="https://google.com" id="not-over-18-button" class="button button-outline">${i18n[4].OPALE_LANGUAGE}</a>
+            <button id="over-18-button" class="button button-verification" style="width:100%;margin-bottom:5%">J'ai 18 ans ou plus</button>
+            <a href="https://google.com" id="not-over-18-button" class="button button-outline">Sortir</a>
           </div>
       `;
     modalContainer.appendChild(modalContent);
