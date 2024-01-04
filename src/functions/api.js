@@ -58,12 +58,13 @@ export function pickIdentityProvider(provider, uuid = '123') {
         iframeUrl += "&theme=none";
       }
 
+      console.log("language", OPALE_LANGUAGE)
       // ADD LANGUAGE ATTRIBUTE TO IFRAME URL
-      if (typeof OPALE_LANGUAGE !== "undefined") {
-        iframeUrl += "&language=" + OPALE_LANGUAGE;
-      } else {
-        iframeUrl += "&language=fr";
-      }
+      // if (typeof OPALE_LANGUAGE !== "undefined") {
+      //   iframeUrl += "&language=" + OPALE_LANGUAGE;
+      // } else {
+      //   iframeUrl += "&language=fr";
+      // }
 
       // Change the verification iframe src to the provider's redirect_url
       verificationIframe.setAttribute("src", iframeUrl);
