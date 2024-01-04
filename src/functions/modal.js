@@ -123,12 +123,10 @@ export async function showVerificationOptions(identityProviders) {
             <div class="verification-options">
                 ${identityProviders
                   .map(
-                    (identityProvider) => {
-                      const verificationButton = i18n(identityProvider.description_translation)
-                      return `
+                    (identityProvider) => {`
                     <div class="verification-option" id="${identityProvider.name}-button">
                         <img src="${identityProvider.logo}" alt="${identityProvider.name}">
-                        <a class="button button-verification">${verificationButton}</a>
+                        <a class="button button-verification">${i18n(identityProvider.description_translation)}</a>
                     </div>
                 `;}
                   )
