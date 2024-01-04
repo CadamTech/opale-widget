@@ -42,24 +42,34 @@ export function pickIdentityProvider(provider, uuid = '123') {
 
   return fetch(provider.redirect_url)
     .then(response => response.json())
-    .then(data => {    
-      document.querySelector('.verification-options-container').style.display = 'none';
-      document.querySelector('.verification-options-content').style.display = 'block';
-      document.querySelector('#verification-iframe-container').style.display = 'block';
+    .then(data => {
+      document.querySelector(".verification-options-container").style.display =
+        "none";
+      document.querySelector(".verification-options-content").style.display =
+        "block";
+      document.querySelector("#verification-iframe-container").style.display =
+        "block";
 
-      // ADD THEME ATTRIBUTE TO IFRAME URL 
+      // ADD THEME ATTRIBUTE TO IFRAME URL
       var iframeUrl = data.redirect_url;
-      if (typeof OPALE_THEME !== 'undefined') {
-        iframeUrl += '&theme='+OPALE_THEME;
+      if (typeof OPALE_THEME !== "undefined") {
+        iframeUrl += "&theme=" + OPALE_THEME;
       } else {
-        iframeUrl += '&theme=none';
+        iframeUrl += "&theme=none";
+      }
+
+      // ADD LANGUAGE ATTRIBUTE TO IFRAME URL
+      if (typeof OPALE_LANGUAGE !== "undefined") {
+        iframeUrl += "&language=" + OPALE_LANGUAGE;
+      } else {
+        iframeUrl += "&language=fr";
       }
 
       // Change the verification iframe src to the provider's redirect_url
-      verificationIframe.setAttribute('src', iframeUrl);
+      verificationIframe.setAttribute("src", iframeUrl);
 
       // Show the verification iframe
-      document.querySelector('.loader-container').style.display = 'none';
-      verificationIframe.style.display = 'block';
+      document.querySelector(".loader-container").style.display = "none";
+      verificationIframe.style.display = "block";
     });
 }
