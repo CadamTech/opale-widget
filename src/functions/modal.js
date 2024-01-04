@@ -123,19 +123,24 @@ export async function showVerificationOptions(identityProviders) {
             <div class="verification-options">
                 ${identityProviders
                   .map(
-                    (identityProvider) => { return `
-                    <div class="verification-option" id="${identityProvider.name}-button">
-                        <img src="${identityProvider.logo}" alt="${identityProvider.name}">
-                        <a class="button button-verification">${i18n(identityProvider.description_translation)}</a>
-                    </div>
-                `;}
+                    (identityProvider) => `
+                      <div class="verification-option" id="${
+                        identityProvider.name
+                      }-button">
+                        <img src="${identityProvider.logo}" alt="${
+                      identityProvider.name
+                    }">
+                        <a class="button button-verification">${i18n(
+                          identityProvider.description_translation
+                        )}</a>
+                      </div>`
                   )
                   .join("")}
             </div>
-            <p>
-              <small>${i18n(
-                7
-              )} <a href="https://opale.io" target="_blank"> Opale.io </a><br>${i18n(
+              <p>
+                <small>${i18n(
+                  7
+                )} <a href="https://opale.io" target="_blank"> Opale.io </a><br>${i18n(
     8
   )} <a href="https://opale.io/fr/politique-de-confidentialite/" target="_blank">${i18n(
     9
