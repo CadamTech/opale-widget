@@ -198,6 +198,7 @@ export async function showVerificationOptions(identityProviders) {
     } else if (data && data.newUrl) {
       window.location.href = data.newUrl;
     } else if (data && data.hasCompleted) {
+      console.log(data)
       var iframe = document.getElementById("verification-iframe");
       iframe.src =
         env.apiUrl +
