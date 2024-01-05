@@ -199,9 +199,10 @@ export async function showVerificationOptions(identityProviders) {
       window.location.href = data.newUrl;
     } else if (data && data.hasCompleted) {
       var iframe = document.getElementById("verification-iframe");
-      iframe.src =
-        env.apiUrl +
-        "/finish-verification/trustmatic/" +
+      iframe.src = env.apiUrl +
+        "/finish-verification/" +
+        data.identityProvider +
+        "/" +
         sessionUUID +
         "?key=" +
         OPALE_WEBSITE_ID +
