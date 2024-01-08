@@ -197,12 +197,21 @@ export async function showVerificationOptions(identityProviders) {
       iframe.src = data.newIframeSrc;
     } else if (data && data.newUrl) {
       window.location.href = data.newUrl;
-    } else if (data && data.hasCompleted) {
+    } else if (data && data.hasCompleted && data.identityProvider === "trustmatic") {
       var iframe = document.getElementById("verification-iframe");
-      iframe.src = env.apiUrl +
-        "/finish-verification/" +
-        data.identityProvider +
-        "/" +
+      iframe.src =
+        env.apiUrl +
+        "/finish-verification/trustmatic/" +
+        sessionUUID +
+        "?key=" +
+        OPALE_WEBSITE_ID +
+        "&session_id=" +
+        data.sessionId;
+    } else if (data && data.hasCompleted && data.identityProvider === "yoti") {
+      var iframe = document.getElementById("verification-iframe");
+      iframe.src =
+        env.apiUrl +
+        "/finish-verification/yoti/" +
         sessionUUID +
         "?key=" +
         OPALE_WEBSITE_ID +
