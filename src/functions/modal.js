@@ -161,7 +161,7 @@ export async function showVerificationOptions(identityProviders) {
             <span class="loader"></span>
           </div>
           <iframe id="verification-iframe" allow="camera" width="100%" height="300px"></iframe>
-          <button id="back-button" class="button button-outline">${i18n(
+          <button id="back-button" class="button button-outline" style="margin-top: 1rem;">${i18n(
             10
           )}</button>
         </div>
@@ -197,22 +197,13 @@ export async function showVerificationOptions(identityProviders) {
       iframe.src = data.newIframeSrc;
     } else if (data && data.newUrl) {
       window.location.href = data.newUrl;
-    } else if (data && data.hasCompleted && data.identityProvider === "trustmatic") {
+    } else if (data && data.hasCompleted && data.identityProvider) {
       var iframe = document.getElementById("verification-iframe");
       iframe.src =
         env.apiUrl +
-        "/finish-verification/trustmatic/" +
-        sessionUUID +
-        "?key=" +
-        OPALE_WEBSITE_ID +
-        "&session_id=" +
-        data.sessionId;
-    } else if (data && data.hasCompleted && data.identityProvider === "yoti") {
-      var iframe = document.getElementById("verification-iframe");
-      iframe.src =
-        env.apiUrl +
-        "/finish-verification/yoti/" +
-        sessionUUID +
+        "/finish-verification/" +
+        data.identityProvider + 
+        "/" + sessionUUID +
         "?key=" +
         OPALE_WEBSITE_ID +
         "&session_id=" +
