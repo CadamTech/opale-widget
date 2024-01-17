@@ -3,6 +3,7 @@ import { loadCSS } from "./functions/css.js";
 import { env } from "./env.js";
 import { isOver18, setIsOver18, checkSignature } from "./functions/session.js";
 
+
 // Check if the cookie exists, if not, create and display the initial modal
 (function () {
   async function launchOpale() {
