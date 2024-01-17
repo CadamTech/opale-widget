@@ -5,7 +5,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "dev": "webpack --config webpack.dev.js",
-    "prod": "webpack --config webpack.prod.js"
+    "prod": "webpack --config webpack.prod.js",
+    "sync": "aws s3 sync ./dist s3://widget.opale.io/dist",
+    "inv": "aws cloudfront create-invalidation --distribution-id EFQVPOOHKWVXH --paths '/*'"
   },
   "author": "",
   "license": "ISC",

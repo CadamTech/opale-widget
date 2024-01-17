@@ -1,5 +1,5 @@
 const TerserPlugin = require('terser-webpack-plugin');
-const WebpackObfuscator = require('webpack-obfuscator'); // Import webpack-obfuscator
+// const WebpackObfuscator = require('webpack-obfuscator'); // Import webpack-obfuscator
 
 module.exports = {
   entry: './src/modal.prod.js',
@@ -10,13 +10,13 @@ module.exports = {
   optimization: {
     minimizer: [new TerserPlugin()],
   },
-  plugins: [
-    // // Add the WebpackObfuscator plugin to obfuscate your code
-    new WebpackObfuscator({
-      rotateStringArray: true,
-      stringArrayThreshold: 0.75,
-    }),
-  ],
+  // plugins: [
+  //   // // Add the WebpackObfuscator plugin to obfuscate your code
+  //   new WebpackObfuscator({
+  //     rotateStringArray: true,
+  //     stringArrayThreshold: 0.75,
+  //   }),
+  // ],
   watch: true,
   mode: 'production',
 };
