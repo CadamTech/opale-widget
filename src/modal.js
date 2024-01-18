@@ -16,9 +16,6 @@ import { isOver18, setIsOver18, checkSignature } from "./functions/session.js";
       window.OPALE_LANGUAGE = "fr"; // default language set to French
     }
 
-    console.log("test test test")
-    console.log("these cookies", document.cookies)
-    document.cookie = "cookie_name=some_name;path=/;";
     // If param has ?over18=true, set the cookie
     var over18CheckPassed = false;
     if (window.location.search.includes("opaleverif=")) {
