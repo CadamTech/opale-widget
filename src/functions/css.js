@@ -28,6 +28,6 @@ export function darkenColor(color, percent) {
   // Convert the components back to a hexadecimal string
   var darkerColor = "#" + (1 << 24 | R << 16 | G << 8 | B).toString(16).slice(1);
 
-  console.log('darker', darkerColor);
+  // console.log('darker', darkerColor);
   return darkerColor;
 }
