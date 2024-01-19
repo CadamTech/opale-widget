@@ -138,9 +138,9 @@ export async function showVerificationOptions(identityProviders) {
                   .join("")}
             <button id="remember-me-button">remember me</button>
             </div>
-          <div id="login-form-container" style="display:none">
+          <div id="create-login-form-container" style="display:none">
             <h3>create temporary login credentials</h3>
-            <form id="login-form">
+            <form id="create-login-form">
               <input type="text" id="username" placeholder="Username" required>
               <input type="password" id="password" placeholder="Password" required>
               <button type="submit">Login</button>
@@ -227,12 +227,12 @@ export async function showVerificationOptions(identityProviders) {
   document
     .getElementById("remember-me-button")
     .addEventListener("click", function () {
-      document.getElementById("login-form-container").style.display = "block";
+      document.getElementById("create-login-form-container").style.display = "block";
       document.getElementById("verification-options").style.display = "none";
     });
 
   document
-    .getElementById("login-form")
+    .getElementById("create-login-form")
     .addEventListener("submit", function (event) {
       event.preventDefault();
       const username = document.getElementById("username").value;
@@ -240,8 +240,8 @@ export async function showVerificationOptions(identityProviders) {
       // Handle the login logic here
       console.log("Username:", username, "Password:", password);
       // You might want to call a function here to process the login
-      document.getElementById("login-form-container").style.display = "none";
-      document.getElementById("verification-options").style.display = "block";
+      document.getElementById("create-login-form-container").style.display = "none";
+      document.getElementById("verification-options").style.display = "inline";
     });
 
   // BACK BUTTON ONLY EXISTS IN MODAL FORMAT
