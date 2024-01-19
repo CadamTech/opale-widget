@@ -120,7 +120,6 @@ export async function showVerificationOptions(identityProviders) {
     html += `<img src="${OPALE_LOGO}" id="opale-logo">`;
   //  verification options
   html += `<h5>${failureMessage}${i18n(6)}</h5>
-            <h2>this is a test</h2>
             <div class="verification-options" id="verification-options"> 
                 ${identityProviders
                   .map(
