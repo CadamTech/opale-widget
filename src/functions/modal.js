@@ -105,7 +105,7 @@ export async function createModal() {
 export async function showVerificationOptions(identityProviders) {
   const params = new URLSearchParams(window.location.search);
   const failureMessage = params.has("opale-verif-failed")
-    ? `${i18n(5)}<br>`
+    ? `${i18n(5)}<br>`  /* verification failed */ 
     : "";
 
   const sessionUUID = await getSessionUUID();
@@ -118,9 +118,9 @@ export async function showVerificationOptions(identityProviders) {
 
   if (typeof OPALE_LOGO !== "undefined")
     html += `<img src="${OPALE_LOGO}" id="opale-logo">`;
-
+  //  verification options
   html += `<h5>${failureMessage}${i18n(6)}</h5>
-            <div class="verification-options">
+            <div class="verification-options" id="verification-options"> 
                 ${identityProviders
                   .map(
                     (identityProvider) => `
@@ -136,21 +136,30 @@ export async function showVerificationOptions(identityProviders) {
                       </div>`
                   )
                   .join("")}
+            <button id="remember-me-button">Remember me for 30 days</button>
             </div>
+          <div id="login-form-container" style="display:none">
+            <h3>create temporary login credentials</h3>
+            <form id="login-form">
+              <input type="text" id="username" placeholder="Username" required>
+              <input type="password" id="password" placeholder="Password" required>
+              <button type="submit">Login</button>
+            </form>
+          </div>
               <p>
                 <small>${i18n(
-                  7
+                  7 /* Verifications are secure and anonymized by */
                 )} <a href="https://opale.io" target="_blank"> Opale.io </a><br>${i18n(
-    8
+    8 /* By using this service, you agree to our  */
   )} <a href="https://opale.io/fr/politique-de-confidentialite/" target="_blank">${i18n(
-    9
+    9 /* Privacy Policy */
   )}</a></small>
             </p>
             `;
 
   if (OPALE_FORMAT == "modal")
     html += `<button id="back-button-openmodal" class="button button-outline">${i18n(
-      10
+      10 /* back button */
     )}</button>`;
 
   html += `
@@ -162,7 +171,7 @@ export async function showVerificationOptions(identityProviders) {
           </div>
           <iframe id="verification-iframe" allow="camera" width="100%" height="300px"></iframe>
           <button id="back-button" class="button button-outline" style="margin-top: 1rem;">${i18n(
-            10
+            10 /* back button */
           )}</button>
         </div>
     `;
@@ -202,8 +211,9 @@ export async function showVerificationOptions(identityProviders) {
       iframe.src =
         env.apiUrl +
         "/finish-verification/" +
-        data.identityProvider + 
-        "/" + sessionUUID +
+        data.identityProvider +
+        "/" +
+        sessionUUID +
         "?key=" +
         OPALE_WEBSITE_ID +
         "&session_id=" +
@@ -212,6 +222,27 @@ export async function showVerificationOptions(identityProviders) {
       console.log("Trustmatic error: " + data.error);
     }
   });
+
+  // Event listener for "Remember me" button
+  document
+    .getElementById("remember-me-button")
+    .addEventListener("click", function () {
+      document.getElementById("login-form-container").style.display = "block";
+      document.getElementById("verification-options").style.display = "none";
+    });
+
+  document
+    .getElementById("login-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      // Handle the login logic here
+      console.log("Username:", username, "Password:", password);
+      // You might want to call a function here to process the login
+      document.getElementById("login-form-container").style.display = "none";
+      document.getElementById("verification-options").style.display = "block";
+    });
 
   // BACK BUTTON ONLY EXISTS IN MODAL FORMAT
   if (OPALE_FORMAT == "modal") {

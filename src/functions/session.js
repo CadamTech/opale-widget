@@ -15,7 +15,7 @@ export  function isOver18() {
 }
 
 export function setIsOver18(signature) {
-  document.cookie = 'opaleverif='+signature+';path=/;expires=0;Secure';
+  document.cookie = 'opaleverif='+signature+';path=/;Secure';
 }
 
 // uuid management
