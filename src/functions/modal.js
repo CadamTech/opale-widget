@@ -120,6 +120,7 @@ export async function showVerificationOptions(identityProviders) {
     html += `<img src="${OPALE_LOGO}" id="opale-logo">`;
   //  verification options
   html += `<h5>${failureMessage}${i18n(6)}</h5>
+            <h2>this is a test</h2>
             <div class="verification-options" id="verification-options"> 
                 ${identityProviders
                   .map(
@@ -136,7 +137,7 @@ export async function showVerificationOptions(identityProviders) {
                       </div>`
                   )
                   .join("")}
-            <button id="remember-me-button">Remember me for 30 days</button>
+            <button id="remember-me-button">remember me</button>
             </div>
           <div id="login-form-container" style="display:none">
             <h3>create temporary login credentials</h3>
@@ -163,7 +164,7 @@ export async function showVerificationOptions(identityProviders) {
     )}</button>`;
 
   html += `
-          </div>
+        </div>
         </div>
         <div id="verification-iframe-container" style="display:none">
           <div class="loader-container" style="display:none !important;justify-content:center !important;align-items:center !important;padding: 30%">
