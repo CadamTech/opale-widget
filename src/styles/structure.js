@@ -119,6 +119,10 @@ export const modalContentStructure = `
       margin-bottom: 10px;
   }
 
+  #verification-options button {
+    width: 75%;
+  }
+
   #opale-modal-container #verification-iframe {
     display: none;
   }

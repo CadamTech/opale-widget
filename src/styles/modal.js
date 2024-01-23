@@ -32,4 +32,8 @@ export const modalStyles = `
     align-items: center;
     width: 100%;
   }
+
+  #opale-modal-content button {
+    border-radius: 50px;
+  }
 `;
