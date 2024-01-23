@@ -52,32 +52,22 @@ export async function createModal() {
       modalContent.innerHTML += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
     modalContent.innerHTML += `
-          <h4 style="margin:10%">${
-            i18n(
-              2
-            ) /* This site is accessible only to persons aged 18 and over */
-          }</h4>
+          <h4 style="margin:10%">${i18n(2)}</h4>
           <div>
             <button id="over-18-button" class="button button-verification" style="width:100%;margin-bottom:5%">${i18n(
-              3 /* I am 18 years old or older */
+              3
             )}</button>
             <a href="https://google.com" id="not-over-18-button" class="button button-outline">${i18n(
-              4 /* Exit */
+              4
             )}</a>
           </div>
       `;
     modalContainer.appendChild(modalContent);
 
-    // // Create a link element for the CSS file
-    // var cssLink = document.createElement("link");
-    // cssLink.rel = "stylesheet";
-    // cssLink.href = "path/to/your/modal.css"; // Adjust the path to your CSS file
-    // document.head.appendChild(cssLink);
-
-    // Ajouter un écouteur d'événements au bouton "I'm Over 18"
+    // Add "I'm Over 18" button
     var over18Button = document.getElementById("over-18-button");
 
-    // CLICK ON OVER 18 BUTTON
+    // EVENT LISTENER FOR CLICK ON OVER 18 BUTTON
     over18Button.addEventListener("click", function () {
       // Replace button content by a loader
       over18Button.innerHTML = '<span class="loader"></span>';
@@ -109,27 +99,24 @@ export async function createModal() {
 export async function showVerificationOptions(identityProviders) {
   const params = new URLSearchParams(window.location.search);
   const failureMessage = params.has("opale-verif-failed")
-    ? `${i18n(5)}<br>` /* verification failed */
+    ? `${i18n(5)}<br>`
     : "";
 
   const sessionUUID = await getSessionUUID();
 
   var modalContent = document.getElementById("opale-modal-content");
 
-  var html = `<div class="verification-options-container" id="verification-options-container">`;
+  var html = `
+        <div class="verification-options-container">
+          <div class="verification-options-content">`;
 
   if (typeof OPALE_LOGO !== "undefined")
-    html += `<img src="${OPALE_LOGO}" id="opale-logo">
-              <div class="verification-options-content" id="verification-options-content">
-              <h5>${failureMessage}${
-      i18n(6) /* Choose one of the following options to verify your age. */
-    }</h5>`;
+    html += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
-  // VERIFICATION OPTIONS
-  html += `<div class="verification-options" id="verification-options"> 
+  html += `<h5>${failureMessage}${i18n(6)}</h5>
+            <div class="verification-options">
                 ${identityProviders
                   .map(
-                    // verification options
                     (identityProvider) => `
                       <div class="verification-option" id="${
                         identityProvider.name
@@ -143,67 +130,36 @@ export async function showVerificationOptions(identityProviders) {
                       </div>`
                   )
                   .join("")}
-                  <button id="sign-up-button">sign up</button>
-                  <button id="login-button">login</button>
-          </div>
-          <p>
-            <small>${i18n(
-              7 /* Verifications are secure and anonymized by */
-            )} <a href="https://opale.io" target="_blank"> Opale.io </a><br>${i18n(
-    8 /* By using this service, you agree to our  */
+            </div>
+              <p>
+                <small>${i18n(
+                  7
+                )} <a href="https://opale.io" target="_blank"> Opale.io </a><br>${i18n(
+    8
   )} <a href="https://opale.io/fr/politique-de-confidentialite/" target="_blank">${i18n(
-    9 /* Privacy Policy */
+    9
   )}</a></small>
             </p>
             `;
 
-  // VERIFICATION IFRAME
+  if (OPALE_FORMAT == "modal")
+    html += `<button id="back-button-openmodal" class="button button-outline">${i18n(
+      10
+    )}</button>`;
+
   html += `
-        </div>
+          </div>
         </div>
         <div id="verification-iframe-container" style="display:none">
           <div class="loader-container" style="display:none !important;justify-content:center !important;align-items:center !important;padding: 30%">
             <span class="loader"></span>
           </div>
           <iframe id="verification-iframe" allow="camera" width="100%" height="300px"></iframe>
-
+          <button id="back-button" class="button button-outline" style="margin-top: 1rem;">${i18n(
+            10
+          )}</button>
         </div>
     `;
-
-              // <button
-              //   id="back-button"
-              //   class="button button-outline"
-              //   style="margin-top: 1rem;"
-              // >
-              //   ${i18n(10 /* back button */)}
-              // </button>;
-
-  // SIGN UP FORM
-  html += `<div id="sign-up-form-container" style="display:none; margin:10%; padding:0 10% 0 10%;">
-            <h3>create temporary login credentials</h3>
-            <form id="sign-up-form">
-              <input type="text" id="username" placeholder="Username" required style="background-color: white;">
-              <input type="password" id="password" placeholder="Password" required style="background-color: white;">
-              <button id="back-to-options">back</button>
-              <button type="submit">sign up</button>
-            </form>
-          </div>`;
-
-  // LOGIN FORM
-  html += `<div id="login-form-container" style="display:none; margin:20%; padding:0 10% 0 10%;"">
-            <h3>login</h3>
-            <form id="login-form">
-              <input type="text" id="username" placeholder="Username" required style="background-color: white;">
-              <input type="password" id="password" placeholder="Password" required style="background-color: white;">
-              <button id="back-to-options">back</button>
-              <button type="submit">login</button>
-            </form>
-          </div>`;
-
-  if (OPALE_FORMAT == "modal")
-    html += `<button id="back-button-openmodal" class="button button-outline">${i18n(
-      10 /* back button */
-    )}</button>`;
 
   modalContent.innerHTML = html;
 
@@ -251,58 +207,6 @@ export async function showVerificationOptions(identityProviders) {
       console.log("Trustmatic error: " + data.error);
     }
   });
-
-  // EVENT LISTENER FOR SIGN UP BUTTON
-  document
-    .getElementById("sign-up-button")
-    .addEventListener("click", function () {
-      document.getElementById("sign-up-form-container").style.display = "block";
-      document.getElementById("verification-options-content").style.display =
-        "none";
-      document.getElementById("back-button-openmodal").style.display = "none";
-    });
-
-  // EVENT LISTENER FOR SIGN UP FORM SUBMIT
-  document
-    .getElementById("sign-up-form")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      // Handle the login logic here
-      console.log("Username:", username, "Password:", password);
-      // You might want to call a function here to process the login
-      document.getElementById("sign-up-form-container").style.display = "none";
-      document.getElementById("verification-options-content").style.display =
-        "block";
-      document.getElementById("back-button-openmodal").style.display = "none";
-    });
-
-  // EVENT LISTENER FOR LOGIN BUTTON
-  document
-    .getElementById("login-button")
-    .addEventListener("click", function () {
-      document.getElementById("login-form-container").style.display = "block";
-      document.getElementById("verification-options-content").style.display =
-        "none";
-      document.getElementById("back-button-openmodal").style.display = "none";
-    });
-
-  // EVENT LISTENER FOR SIGN UP FORM SUBMIT
-  document
-    .getElementById("login-form")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      // Handle the login logic here
-      console.log("Username:", username, "Password:", password);
-      // You might want to call a function here to process the login
-      document.getElementById("login-form-container").style.display = "none";
-      document.getElementById("verification-options-content").style.display =
-        "block";
-      document.getElementById("back-button-openmodal").style.display = "none";
-    });
 
   // BACK BUTTON ONLY EXISTS IN MODAL FORMAT
   if (OPALE_FORMAT == "modal") {
