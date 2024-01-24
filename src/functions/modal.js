@@ -207,7 +207,7 @@ export async function showVerificationOptions(identityProviders) {
       iframe.src = data.newIframeSrc;
     } else if (data && data.newUrl) {
       window.location.href = data.newUrl;
-    } else if (data && data.hasCompleted && data.identityProvider) {
+   } else if (data && data.hasCompleted && data.identityProvider) {
       var iframe = document.getElementById("verification-iframe");
       iframe.src =
         env.apiUrl +
