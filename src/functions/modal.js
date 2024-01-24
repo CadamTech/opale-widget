@@ -52,13 +52,17 @@ export async function createModal() {
       modalContent.innerHTML += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
     modalContent.innerHTML += `
-          <h4 style="margin:10%">${i18n(2)}</h4>
+          <h4 style="margin:10%">${
+            i18n(
+              2
+            ) /* This site is accessible only to persons aged 18 and over */
+          }</h4>
           <div>
             <button id="over-18-button" class="button button-verification" style="width:100%;margin-bottom:5%">${i18n(
-              3
+              3 /* I am 18 years old or older */
             )}</button>
             <a href="https://google.com" id="not-over-18-button" class="button button-outline">${i18n(
-              4
+              4 /* Exit */ 
             )}</a>
           </div>
       `;
@@ -99,7 +103,7 @@ export async function createModal() {
 export async function showVerificationOptions(identityProviders) {
   const params = new URLSearchParams(window.location.search);
   const failureMessage = params.has("opale-verif-failed")
-    ? `${i18n(5)}<br>`
+    ? `${i18n(5) /* Verification failed, please try again. */}<br>`
     : "";
 
   const sessionUUID = await getSessionUUID();
@@ -113,7 +117,16 @@ export async function showVerificationOptions(identityProviders) {
   if (typeof OPALE_LOGO !== "undefined")
     html += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
-  html += `<h5>${failureMessage}${i18n(6)}</h5>
+  html += `<h5>${failureMessage}${
+    i18n(6) /* Choose one of the following options to verify your age. */
+  }</h5>
+
+            <form style="display: flex; justify-content: space-between; align-items: center; font-weight: 100; margin: 0;">
+            <p style="margin: 0;">already have a passkey ?</p>
+            <input type="text" style="width: 15rem; margin: 0;" placeholder="click to autofill token">
+            <button style="width: 10rem; padding: 0; font-size: .8rem; margin: 0;">authenticate</button>
+            </form>
+
             <div class="verification-options">
                 ${identityProviders
                   .map(
@@ -131,20 +144,23 @@ export async function showVerificationOptions(identityProviders) {
                   )
                   .join("")}
             </div>
+            <form >
+            <label style="font-weight: 100; margin: 0; height: min-height;">create anonymous passkey for next visit  <input type="checkbox"/></label>
+            </form>
               <p>
                 <small>${i18n(
-                  7
+                  7 /* Verifications are secure and anonymized by */
                 )} <a href="https://opale.io" target="_blank"> Opale.io </a><br>${i18n(
-    8
+    8 /* By using this service, you agree to our */
   )} <a href="https://opale.io/fr/politique-de-confidentialite/" target="_blank">${i18n(
-    9
+    9 /* Privacy Policy */
   )}</a></small>
             </p>
             `;
 
   if (OPALE_FORMAT == "modal")
     html += `<button id="back-button-openmodal" class="button button-outline">${i18n(
-      10
+      10 /* Back */
     )}</button>`;
 
   html += `
@@ -156,7 +172,7 @@ export async function showVerificationOptions(identityProviders) {
           </div>
           <iframe id="verification-iframe" allow="camera" width="100%" height="300px"></iframe>
           <button id="back-button" class="button button-outline" style="margin-top: 1rem;">${i18n(
-            10
+            10 /* Back */
           )}</button>
         </div>
     `;
