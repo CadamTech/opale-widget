@@ -10,39 +10,34 @@ export async function getIdentityProviders(sessionUUID) {
     });
 }
 
-export function pickIdentityProvider(provider, uuid = '123') {
+export function pickIdentityProvider(
+  provider,
+  uuid = "123",
+) {
   // Fetch the URL from the identity provider and handle the response
-  console.log('PICKING IDENTITY PROVIDER');
+  console.log("PICKING IDENTITY PROVIDER");
   console.log(provider);
-  // // Listen to messages from child window
-  // window.addEventListener('message', function(event) {
-  //   console.log('EVENT RECEIVED');
-  //   console.log(event);
-  //   console.log(event.data);
-  //   console.log(event.origin);
-  //   console.log(event.source);
-  //   console.log(event.source.location);
-  // }, false);
 
   // display loader
-  document.querySelector('.loader-container').style.display = 'flex';
+  document.querySelector(".loader-container").style.display = "flex";
   // Hide the verification providers
-  document.querySelector('.verification-options-content').style.display = 'none';
+  document.querySelector(".verification-options-content").style.display =
+    "none";
 
   // replace {uuid} by uuid in provider.redirect_url
-  provider.redirect_url = provider.redirect_url.replace('{uuid}', uuid);
+  provider.redirect_url = provider.redirect_url.replace("{uuid}", uuid);
 
-  const verificationIframe = document.querySelector('#verification-iframe');
+  const verificationIframe = document.querySelector("#verification-iframe");
 
-  if (provider.iframe_height == 'lg') {
-    verificationIframe.classList.add('verification-iframe-lg');
+  if (provider.iframe_height == "lg") {
+    verificationIframe.classList.add("verification-iframe-lg");
   } else {
-    verificationIframe.classList.remove('verification-iframe-lg');
+    verificationIframe.classList.remove("verification-iframe-lg");
   }
 
   return fetch(provider.redirect_url)
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       document.querySelector(".verification-options-container").style.display =
         "none";
       document.querySelector(".verification-options-content").style.display =
@@ -71,5 +66,18 @@ export function pickIdentityProvider(provider, uuid = '123') {
       // Show the verification iframe
       document.querySelector(".loader-container").style.display = "none";
       verificationIframe.style.display = "block";
+    });
+}
+
+import { env } from "../env.js";
+
+export async function storeUsername(sessionUUID, username) {
+  fetch(
+    `${env.apiUrl}/${sessionUUID}/register_webauthn/?request_type=store-username&username=${username}&key=` +
+      OPALE_WEBSITE_ID
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
     });
 }

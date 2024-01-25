@@ -1,10 +1,11 @@
-import { getIdentityProviders, pickIdentityProvider } from "./api";
+import { getIdentityProviders, pickIdentityProvider, storeUsername } from "./api";
 import { modalStyles } from "../styles/modal";
 import { modalContentDarkStyles } from "../styles/content-dark";
 import { modalContentLightStyles } from "../styles/content-light";
 import { modalContentStructure } from "../styles/structure.js";
 import { getSessionUUID } from "./session.js";
 import { generateSessionUUID } from "./session.js";
+import { generateWebauthnUsername } from "./session.js";
 import { i18n } from "./i18n.js";
 import { env } from "../env.js";
 // Add CSS styles for the modal
@@ -145,7 +146,9 @@ export async function showVerificationOptions(identityProviders) {
                   .join("")}
             </div>
             <form >
-            <label style="font-weight: 100; margin: 0; height: min-height;">create anonymous passkey for next visit  <input type="checkbox"/></label>
+               <label style="font-weight: 100; margin: 0;">create anonymous passkey for next visit
+                  <input type="checkbox" id="webauthnUsernameCheckbox"/>
+              </label>
             </form>
               <p>
                 <small>${i18n(
@@ -179,6 +182,21 @@ export async function showVerificationOptions(identityProviders) {
 
   modalContent.innerHTML = html;
 
+
+  let username = "";
+  document
+    .getElementById("webauthnUsernameCheckbox")
+    .addEventListener("change", async function () {
+      const sessionUUID = await getSessionUUID();
+      if (this.checked) {
+        username = generateWebauthnUsername();
+        storeUsername(sessionUUID, username);
+      } else {
+        username = "";
+        storeUsername(sessionUUID, username);
+      }
+    });
+
   // add evenet listener to .pick-button elements
   document.querySelectorAll(".verification-option").forEach((button) => {
     button.addEventListener("click", function () {
@@ -186,7 +204,8 @@ export async function showVerificationOptions(identityProviders) {
         identityProviders.find(
           (identityProvider) =>
             identityProvider.name === button.id.replace("-button", "")
-        )
+        ),
+        webauthnUsername
       );
     });
   });
@@ -198,7 +217,6 @@ export async function showVerificationOptions(identityProviders) {
 
   // add event listener for messages from iframe
   window.addEventListener("message", (event) => {
-    console.log("rcvd event:", event);
 
     const data = event.data;
 
