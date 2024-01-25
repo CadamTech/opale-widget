@@ -69,15 +69,32 @@ export function pickIdentityProvider(
     });
 }
 
-import { env } from "../env.js";
-
 export async function storeUsername(sessionUUID, username) {
   fetch(
-    `${env.apiUrl}/${sessionUUID}/register_webauthn/?request_type=store-username&username=${username}&key=` +
+    `${env.apiUrl}/register_webauthn/${sessionUUID}/?request_type=store-username&username=${username}&key=` +
       OPALE_WEBSITE_ID
   )
     .then((response) => response.json())
     .then((data) => {
       return data;
     });
+}
+
+export async function registerWebAuth(sessionUUID, username, domain) {
+  const response = await fetch(
+    `${env.apiUrl}/register_webauthn/${sessionUUID}/` +
+      `?request_type=register` +
+      `&username=${username}` +
+      `&domain=${domain}` +
+      `&key=` +
+      OPALE_WEBSITE_ID
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch registration options");
+  }
+
+  const data = await response.json();
+  console.log(data)
+  return data;
 }

@@ -1,4 +1,9 @@
-import { getIdentityProviders, pickIdentityProvider, storeUsername } from "./api";
+import {
+  getIdentityProviders,
+  pickIdentityProvider,
+  storeUsername,
+  registerWebAuth,
+} from "./api";
 import { modalStyles } from "../styles/modal";
 import { modalContentDarkStyles } from "../styles/content-dark";
 import { modalContentLightStyles } from "../styles/content-light";
@@ -8,6 +13,8 @@ import { generateSessionUUID } from "./session.js";
 import { generateWebauthnUsername } from "./session.js";
 import { i18n } from "./i18n.js";
 import { env } from "../env.js";
+import SimpleWebAuthnBrowser from "@simplewebauthn/browser";
+import { startRegistration } from "@simplewebauthn/browser";
 // Add CSS styles for the modal
 
 // Create a <style> element and append the CSS rules to it
@@ -63,7 +70,7 @@ export async function createModal() {
               3 /* I am 18 years old or older */
             )}</button>
             <a href="https://google.com" id="not-over-18-button" class="button button-outline">${i18n(
-              4 /* Exit */ 
+              4 /* Exit */
             )}</a>
           </div>
       `;
@@ -182,7 +189,6 @@ export async function showVerificationOptions(identityProviders) {
 
   modalContent.innerHTML = html;
 
-
   let username = "";
   document
     .getElementById("webauthnUsernameCheckbox")
@@ -190,7 +196,17 @@ export async function showVerificationOptions(identityProviders) {
       const sessionUUID = await getSessionUUID();
       if (this.checked) {
         username = generateWebauthnUsername();
+        console.log(username)
         storeUsername(sessionUUID, username);
+        registerWebAuth(sessionUUID, username, window.location.hostname).then(
+          (data) => {
+            let attResp;
+            const registrationOptions = JSON.parse(data);
+            attResp = startRegistration(registrationOptions)
+            return attResp
+          }     
+        ).then((response) => console.log(response))
+      
       } else {
         username = "";
         storeUsername(sessionUUID, username);
@@ -204,8 +220,7 @@ export async function showVerificationOptions(identityProviders) {
         identityProviders.find(
           (identityProvider) =>
             identityProvider.name === button.id.replace("-button", "")
-        ),
-        webauthnUsername
+        )
       );
     });
   });
@@ -217,7 +232,6 @@ export async function showVerificationOptions(identityProviders) {
 
   // add event listener for messages from iframe
   window.addEventListener("message", (event) => {
-
     const data = event.data;
 
     if (data && data.newIframeSrc) {
@@ -225,7 +239,7 @@ export async function showVerificationOptions(identityProviders) {
       iframe.src = data.newIframeSrc;
     } else if (data && data.newUrl) {
       window.location.href = data.newUrl;
-   } else if (data && data.hasCompleted && data.identityProvider) {
+    } else if (data && data.hasCompleted && data.identityProvider) {
       var iframe = document.getElementById("verification-iframe");
       iframe.src =
         env.apiUrl +
