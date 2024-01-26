@@ -69,22 +69,10 @@ export function pickIdentityProvider(
     });
 }
 
-export async function storeUsername(sessionUUID, username) {
-  fetch(
-    `${env.apiUrl}/register_webauthn/${sessionUUID}/?request_type=store-username&username=${username}&key=` +
-      OPALE_WEBSITE_ID
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      return data;
-    });
-}
-
-export async function registerWebAuth(sessionUUID, username, domain) {
+export async function registerWebAuth(sessionUUID, domain) {
   const response = await fetch(
     `${env.apiUrl}/register_webauthn/${sessionUUID}/` +
       `?request_type=register` +
-      `&username=${username}` +
       `&domain=${domain}` +
       `&key=` +
       OPALE_WEBSITE_ID
@@ -95,6 +83,21 @@ export async function registerWebAuth(sessionUUID, username, domain) {
   }
 
   const data = await response.json();
-  console.log(data)
   return data;
+}
+
+export async function verifyWebAuth(sessionUUID, attResp) {
+  const response = await fetch(
+    `${env.apiUrl}/register_webauthn/${sessionUUID}/` +
+      `?request_type=verify` +
+      `&key=` + OPALE_WEBSITE_ID,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(attResp),
+    }
+  );
+  console.log(response);
 }

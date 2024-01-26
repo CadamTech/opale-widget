@@ -1,8 +1,8 @@
 import {
   getIdentityProviders,
   pickIdentityProvider,
-  storeUsername,
   registerWebAuth,
+  verifyWebAuth,
 } from "./api";
 import { modalStyles } from "../styles/modal";
 import { modalContentDarkStyles } from "../styles/content-dark";
@@ -10,10 +10,8 @@ import { modalContentLightStyles } from "../styles/content-light";
 import { modalContentStructure } from "../styles/structure.js";
 import { getSessionUUID } from "./session.js";
 import { generateSessionUUID } from "./session.js";
-import { generateWebauthnUsername } from "./session.js";
 import { i18n } from "./i18n.js";
 import { env } from "../env.js";
-import SimpleWebAuthnBrowser from "@simplewebauthn/browser";
 import { startRegistration } from "@simplewebauthn/browser";
 // Add CSS styles for the modal
 
@@ -154,7 +152,7 @@ export async function showVerificationOptions(identityProviders) {
             </div>
             <form >
                <label style="font-weight: 100; margin: 0;">create anonymous passkey for next visit
-                  <input type="checkbox" id="webauthnUsernameCheckbox"/>
+                  <input type="checkbox" id="webauthnCheckbox"/>
               </label>
             </form>
               <p>
@@ -189,27 +187,34 @@ export async function showVerificationOptions(identityProviders) {
 
   modalContent.innerHTML = html;
 
-  let username = "";
   document
-    .getElementById("webauthnUsernameCheckbox")
+    .getElementById("webauthnCheckbox")
     .addEventListener("change", async function () {
       const sessionUUID = await getSessionUUID();
       if (this.checked) {
-        username = generateWebauthnUsername();
-        console.log(username)
-        storeUsername(sessionUUID, username);
-        registerWebAuth(sessionUUID, username, window.location.hostname).then(
-          (data) => {
-            let attResp;
-            const registrationOptions = JSON.parse(data);
-            attResp = startRegistration(registrationOptions)
-            return attResp
-          }     
-        ).then((response) => console.log(response))
+        try {
+          // Create registration options
+          const opts = await registerWebAuth(
+            sessionUUID,
+            window.location.hostname
+          );
+          console.log(opts)
+          // Send options and receive attestation
+          const parsedOpts = JSON.parse(opts);
+          const attResp = await startRegistration(parsedOpts);
+          console.log(attResp)
+          // Verify registration completion and receive registrationVerification
+          const registrationVerification = await verifyWebAuth(
+            sessionUUID,
+            attResp
+          );
+          console.log(registrationVerification);
+        } catch (error) {
+          console.log(error)
+        }
       
       } else {
-        username = "";
-        storeUsername(sessionUUID, username);
+        console.log("checkbox unticked")
       }
     });
 

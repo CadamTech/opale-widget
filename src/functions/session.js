@@ -87,13 +87,3 @@ export async function checkSignature(hash) {
     console.log('SIGNATURE NOT VALID');
     return false;
 }
-
-export function generateWebauthnUsername(length = 30) {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let webauthnUsername = "";
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * chars.length);
-    webauthnUsername += chars[randomIndex];
-  }
-  return webauthnUsername;
-}
