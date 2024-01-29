@@ -1,19 +1,19 @@
-import { env } from '../env.js';
+import { env } from "../env.js";
 
 export async function getIdentityProviders(sessionUUID) {
   // Fetch identity providers for the user
-  return fetch(`${env.opaleIdentityProvidersEndpoint}/${sessionUUID}?key=`+OPALE_WEBSITE_ID)
-    .then(response => response.json())
-    .then(data => {
+  return fetch(
+    `${env.opaleIdentityProvidersEndpoint}/${sessionUUID}?key=` +
+      OPALE_WEBSITE_ID
+  )
+    .then((response) => response.json())
+    .then((data) => {
       // Return the fetched data
       return data;
     });
 }
 
-export function pickIdentityProvider(
-  provider,
-  uuid = "123",
-) {
+export function pickIdentityProvider(provider, uuid = "123") {
   // Fetch the URL from the identity provider and handle the response
   console.log("PICKING IDENTITY PROVIDER");
   console.log(provider);
@@ -70,34 +70,20 @@ export function pickIdentityProvider(
 }
 
 export async function registerWebAuth(sessionUUID, domain) {
+  const encodedDomain = encodeURIComponent(domain); // URL-encode the domain
   const response = await fetch(
-    `${env.apiUrl}/register_webauthn/${sessionUUID}/` +
-      `?request_type=register` +
-      `&domain=${domain}` +
-      `&key=` +
-      OPALE_WEBSITE_ID
+    `${env.apiUrl}/register_webauthn/${sessionUUID}/?request_type=register&domain=${encodedDomain}&key=${OPALE_WEBSITE_ID}`
   );
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch registration options");
-  }
-
   const data = await response.json();
   return data;
 }
 
-export async function verifyWebAuth(sessionUUID, attResp) {
+export async function verifyWebAuth(sessionUUID, domain, attResp) {
+  const encodedDomain = encodeURIComponent(domain);
+  const stringifiedAttrepst = encodeURIComponent(JSON.stringify({ attResp }));
   const response = await fetch(
-    `${env.apiUrl}/register_webauthn/${sessionUUID}/` +
-      `?request_type=verify` +
-      `&key=` + OPALE_WEBSITE_ID,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(attResp),
-    }
+    `${env.apiUrl}/register_webauthn/${sessionUUID}/?request_type=verify&domain=${encodedDomain}&attresp=${stringifiedAttrepst}&key=${OPALE_WEBSITE_ID}`
   );
-  console.log(response);
+  const data = await response.json();
+  return data;
 }

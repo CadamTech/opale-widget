@@ -129,8 +129,8 @@ export async function showVerificationOptions(identityProviders) {
 
             <form style="display: flex; justify-content: space-between; align-items: center; font-weight: 100; margin: 0;">
             <p style="margin: 0;">already have a passkey ?</p>
-            <input type="text" style="width: 15rem; margin: 0;" placeholder="click to autofill token">
-            <button style="width: 10rem; padding: 0; font-size: .8rem; margin: 0;">authenticate</button>
+            <input type="text" style="width: 15rem; margin: 0;" placeholder="click to autofill token" autocomplete="username webauthn">
+            <button id="authenticate_button" style="width: 10rem; padding: 0; font-size: .8rem; margin: 0;">authenticate</button>
             </form>
 
             <div class="verification-options">
@@ -192,31 +192,34 @@ export async function showVerificationOptions(identityProviders) {
     .addEventListener("change", async function () {
       const sessionUUID = await getSessionUUID();
       if (this.checked) {
-        try {
           // Create registration options
           const opts = await registerWebAuth(
             sessionUUID,
             window.location.hostname
           );
-          console.log(opts)
           // Send options and receive attestation
           const parsedOpts = JSON.parse(opts);
-          const attResp = await startRegistration(parsedOpts);
-          console.log(attResp)
+          const attResp = await startRegistration(parsedOpts, true);
           // Verify registration completion and receive registrationVerification
           const registrationVerification = await verifyWebAuth(
             sessionUUID,
+            window.location.hostname,
             attResp
           );
-          console.log(registrationVerification);
-        } catch (error) {
-          console.log(error)
-        }
-      
+          console.log(registrationVerification)
       } else {
         console.log("checkbox unticked")
       }
     });
+
+  document
+    .getElementById("authenticate_button")
+    .addEventListener("click", async function (event) {
+      event.preventDefault()
+      console.log("clicked")
+  })
+
+  
 
   // add evenet listener to .pick-button elements
   document.querySelectorAll(".verification-option").forEach((button) => {
