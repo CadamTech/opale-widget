@@ -1,9 +1,4 @@
-import {
-  getIdentityProviders,
-  pickIdentityProvider,
-  registerWebAuth,
-  verifyWebAuth,
-} from "./api";
+import { getIdentityProviders, pickIdentityProvider } from "./api";
 import { modalStyles } from "../styles/modal";
 import { modalContentDarkStyles } from "../styles/content-dark";
 import { modalContentLightStyles } from "../styles/content-light";
@@ -12,7 +7,7 @@ import { getSessionUUID } from "./session.js";
 import { generateSessionUUID } from "./session.js";
 import { i18n } from "./i18n.js";
 import { env } from "../env.js";
-import { startRegistration } from "@simplewebauthn/browser";
+import { registerPasskey, validatePasskey } from "./webauthn.js";
 // Add CSS styles for the modal
 
 // Create a <style> element and append the CSS rules to it
@@ -123,15 +118,15 @@ export async function showVerificationOptions(identityProviders) {
   if (typeof OPALE_LOGO !== "undefined")
     html += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
-  html += `<h5>${failureMessage}${
+  html += `<h5 style="margin-bottom: 1rem;">${failureMessage}${
     i18n(6) /* Choose one of the following options to verify your age. */
   }</h5>
 
-            <form style="display: flex; justify-content: space-between; align-items: center; font-weight: 100; margin: 0;">
-            <p style="margin: 0;">already have a passkey ?</p>
-            <input type="text" style="width: 15rem; margin: 0;" placeholder="click to autofill token" autocomplete="username webauthn">
-            <button id="authenticate_button" style="width: 10rem; padding: 0; font-size: .8rem; margin: 0;">authenticate</button>
+            <form id="authenticate-form" style="display: flex; justify-content: space-around; align-items: center; font-weight: 100; margin: 0;">
+              <input type="text" id="authentication-button" style="height: 3rem; margin: 0 2rem 0 2rem;" class="button-outline" placeholder="have a passkey ?" autocomplete="username webauthn">
             </form>
+            <div id="successful-authentication" style="display: none;">successfully verified passkey</div>
+            <div id="error-authentication" style="display: none;">error authenticating passkey</div>
 
             <div class="verification-options">
                 ${identityProviders
@@ -150,11 +145,13 @@ export async function showVerificationOptions(identityProviders) {
                   )
                   .join("")}
             </div>
+
             <form >
-               <label style="font-weight: 100; margin: 0;">create anonymous passkey for next visit
-                  <input type="checkbox" id="webauthnCheckbox"/>
+              <label style="font-weight: 100; margin: 0;" id="start-registration">create anonymous passkey for next visit
+                <input type="checkbox" id="register-checkbox"/>
               </label>
             </form>
+
               <p>
                 <small>${i18n(
                   7 /* Verifications are secure and anonymized by */
@@ -187,41 +184,23 @@ export async function showVerificationOptions(identityProviders) {
 
   modalContent.innerHTML = html;
 
+  let passkeyCheckBox = false;
+  // REGISTER NEW PASSKEY
   document
-    .getElementById("webauthnCheckbox")
-    .addEventListener("change", async function () {
-      const sessionUUID = await getSessionUUID();
+    .getElementById("register-checkbox")
+    .addEventListener("change", function () {
       if (this.checked) {
-          // Create registration options
-          const opts = await registerWebAuth(
-            sessionUUID,
-            window.location.hostname
-          );
-          // Send options and receive attestation
-          const parsedOpts = JSON.parse(opts);
-          const attResp = await startRegistration(parsedOpts, true);
-          // Verify registration completion and receive registrationVerification
-          const registrationVerification = await verifyWebAuth(
-            sessionUUID,
-            window.location.hostname,
-            attResp
-          );
-          console.log(registrationVerification)
+        passkeyCheckBox = true;
       } else {
-        console.log("checkbox unticked")
+        passkeyCheckBox = false;
       }
     });
 
-  document
-    .getElementById("authenticate_button")
-    .addEventListener("click", async function (event) {
-      event.preventDefault()
-      console.log("clicked")
-  })
+  document.getElementById("authentication-button").addEventListener("click", async function () {
+    await validatePasskey(sessionUUID);
+  });
 
-  
-
-  // add evenet listener to .pick-button elements
+  // add event listener to .pick-button elements
   document.querySelectorAll(".verification-option").forEach((button) => {
     button.addEventListener("click", function () {
       pickIdentityProvider(
@@ -239,13 +218,16 @@ export async function showVerificationOptions(identityProviders) {
   });
 
   // add event listener for messages from iframe
-  window.addEventListener("message", (event) => {
+  window.addEventListener("message", async (event) => {
     const data = event.data;
-
     if (data && data.newIframeSrc) {
       var iframe = document.getElementById("verification-iframe");
       iframe.src = data.newIframeSrc;
     } else if (data && data.newUrl) {
+      if (data.newUrl.includes("&result=ok&") && passkeyCheckBox) {
+        await registerPasskey(sessionUUID);
+      }
+      // redirection url after verification complete
       window.location.href = data.newUrl;
     } else if (data && data.hasCompleted && data.identityProvider) {
       var iframe = document.getElementById("verification-iframe");
@@ -260,7 +242,7 @@ export async function showVerificationOptions(identityProviders) {
         "&session_id=" +
         data.sessionId;
     } else if (data && data.hasError) {
-      console.log("Trustmatic error: " + data.error);
+      console.log("Error: " + data.error);
     }
   });
 

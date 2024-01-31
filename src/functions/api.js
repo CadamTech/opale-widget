@@ -13,10 +13,9 @@ export async function getIdentityProviders(sessionUUID) {
     });
 }
 
-export function pickIdentityProvider(provider, uuid = "123") {
+export async function pickIdentityProvider(provider, uuid = "123") {
   // Fetch the URL from the identity provider and handle the response
   console.log("PICKING IDENTITY PROVIDER");
-  console.log(provider);
 
   // display loader
   document.querySelector(".loader-container").style.display = "flex";
@@ -69,21 +68,50 @@ export function pickIdentityProvider(provider, uuid = "123") {
     });
 }
 
-export async function registerWebAuth(sessionUUID, domain) {
-  const encodedDomain = encodeURIComponent(domain); // URL-encode the domain
+export async function generateRegistrationOptions(sessionUUID, domain) {
   const response = await fetch(
-    `${env.apiUrl}/register_webauthn/${sessionUUID}/?request_type=register&domain=${encodedDomain}&key=${OPALE_WEBSITE_ID}`
+    `${
+      env.apiUrl
+    }/register_webauthn/${sessionUUID}/?request_type=register&domain=${encodeURIComponent(
+      window.location.hostname
+    )}&key=${OPALE_WEBSITE_ID}`
   );
   const data = await response.json();
   return data;
 }
 
-export async function verifyWebAuth(sessionUUID, domain, attResp) {
-  const encodedDomain = encodeURIComponent(domain);
+export async function verifyRegistrationResponse(sessionUUID, attResp) {
   const stringifiedAttrepst = encodeURIComponent(JSON.stringify({ attResp }));
   const response = await fetch(
-    `${env.apiUrl}/register_webauthn/${sessionUUID}/?request_type=verify&domain=${encodedDomain}&attresp=${stringifiedAttrepst}&key=${OPALE_WEBSITE_ID}`
+    `${
+      env.apiUrl
+    }/register_webauthn/${sessionUUID}/?request_type=verify&domain=${encodeURIComponent(
+      window.location.hostname
+    )}&attresp=${stringifiedAttrepst}&key=${OPALE_WEBSITE_ID}`
   );
   const data = await response.json();
   return data;
+}
+
+export async function generateAuthenticationOptions(sessionUUID) {
+  const response = await fetch(
+    `${
+      env.apiUrl
+    }/authenticate_webauthn/${sessionUUID}/?request_type=generate-options&domain=${encodeURIComponent(
+      window.location.hostname
+    )}&key=${OPALE_WEBSITE_ID}`
+  );
+  const data = await response.json();
+  return data;
+}
+
+export async function verifyAuthenticationResponse(sessionUUID, assResp) {
+  const response = await fetch(
+    `${
+      env.apiUrl
+    }/authenticate_webauthn/${sessionUUID}/?request_type=verify-authentication&domain=${encodeURIComponent(
+      window.location.hostname
+    )}&assresp=${assResp}&key=${OPALE_WEBSITE_ID}`
+  );
+  console.log(await response.json());
 }
