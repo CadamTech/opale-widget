@@ -248,6 +248,7 @@ export async function showVerificationOptions(identityProviders) {
       console.log("Error: " + data.error);
     }
   });
+  console.log("new commit")
 
   // BACK BUTTON ONLY EXISTS IN MODAL FORMAT
   if (OPALE_FORMAT == "modal") {
