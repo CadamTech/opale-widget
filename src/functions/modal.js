@@ -188,17 +188,20 @@ export async function showVerificationOptions(identityProviders) {
   // REGISTER NEW PASSKEY
   document
     .getElementById("register-checkbox")
-    .addEventListener("change", function () {
+    .addEventListener("change", async function () {
       if (this.checked) {
+        await registerPasskey(sessionUUID)
         passkeyCheckBox = true;
       } else {
         passkeyCheckBox = false;
       }
     });
 
-  document.getElementById("authentication-button").addEventListener("click", async function () {
-    await validatePasskey(sessionUUID);
-  });
+  document
+    .getElementById("authentication-button")
+    .addEventListener("click", async function () {
+      await validatePasskey(sessionUUID);
+    });
 
   // add event listener to .pick-button elements
   document.querySelectorAll(".verification-option").forEach((button) => {

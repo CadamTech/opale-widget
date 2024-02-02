@@ -19,10 +19,10 @@ export async function registerPasskey(sessionUUID) {
   await verifyRegistrationResponse(sessionUUID, attResp);
 }
 
-
-
 export async function validatePasskey(sessionUUID) {
-  const authenticationOptions = await generateAuthenticationOptions();
+  const authenticationOptions = await generateAuthenticationOptions(
+    sessionUUID
+  );
   // Create validation options
   const assResp = await startAuthentication(
     JSON.parse(authenticationOptions)
