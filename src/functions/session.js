@@ -1,5 +1,4 @@
 import { SHA256 } from 'crypto-js';
-import { startRegistration } from "@simplewebauthn/browser";
 
 export  function isOver18() {
 

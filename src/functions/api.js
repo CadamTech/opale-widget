@@ -68,34 +68,20 @@ export async function pickIdentityProvider(provider, uuid = "123") {
     });
 }
 
-export async function generateRegistrationOptions(sessionUUID) {
-  const response = await fetch(
-    `${env.apiUrl}/register_webauthn/${sessionUUID}/?request_type=register&domain=${window.location.hostname}&key=${OPALE_WEBSITE_ID}`
+export async function authPopup(mode, sessionUUID) {
+  const width = 240;
+  const left = window.innerWidth / 2 - width / 2 + window.screenX;
+  const top = window.innerHeight / 2 - width / 2 + window.screenY;
+  const popup = window.open(
+    `${env.authenticatorURL}/?mode=${mode}&sessionUUID=${sessionUUID}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}`,
+    "popup",
+    `width=240,height=240,popup=true,left=${left},top=${top},menubar=no,toolbar=no,location=no,status=no`
   );
-  const data = await response.json();
-  return data;
-}
-
-export async function verifyRegistrationResponse(sessionUUID, attResp) {
-  const stringifiedAttrepst = encodeURIComponent(JSON.stringify({ attResp }));
-  const response = await fetch(
-    `${env.apiUrl}/register_webauthn/${sessionUUID}/?request_type=verify&domain=${window.location.hostname}&attresp=${stringifiedAttrepst}&key=${OPALE_WEBSITE_ID}`
-  );
-  const data = await response.json();
-  return data;
-}
-
-export async function generateAuthenticationOptions(sessionUUID) {
-  const response = await fetch(
-    `${env.apiUrl}/authenticate_webauthn/${sessionUUID}/?request_type=generate-options&domain=${window.location.hostname}&key=${OPALE_WEBSITE_ID}`
-  );
-  const data = await response.json();
-  return data;
-}
-
-export async function verifyAuthenticationResponse(sessionUUID, assResp) {
-  const response = await fetch(
-    `${env.apiUrl}/authenticate_webauthn/${sessionUUID}/?request_type=verify-authentication&domain=${window.location.hostname}&assresp=${assResp}&key=${OPALE_WEBSITE_ID}`
-  );
-  console.log(await response.json());
+  const checkPopup = setInterval(() => {
+    if (popup.window.location.href.includes(CLIENT_URL)) {
+      popup.close();
+    }
+    if (!popup || !popup.closed) return;
+    clearInterval(checkPopup);
+  }, 1000);
 }

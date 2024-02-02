@@ -17,7 +17,6 @@
     "webpack-obfuscator": "^3.5.1"
   },
   "dependencies": {
-    "@simplewebauthn/browser": "^9.0.0",
     "crypto-js": "^4.1.1"
   }
 }

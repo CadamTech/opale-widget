@@ -1,4 +1,4 @@
-import { getIdentityProviders, pickIdentityProvider } from "./api";
+import { getIdentityProviders, pickIdentityProvider,authPopup } from "./api";
 import { modalStyles } from "../styles/modal";
 import { modalContentDarkStyles } from "../styles/content-dark";
 import { modalContentLightStyles } from "../styles/content-light";
@@ -7,7 +7,6 @@ import { getSessionUUID } from "./session.js";
 import { generateSessionUUID } from "./session.js";
 import { i18n } from "./i18n.js";
 import { env } from "../env.js";
-import { registerPasskey, validatePasskey } from "./webauthn.js";
 // Add CSS styles for the modal
 
 // Create a <style> element and append the CSS rules to it
@@ -190,7 +189,7 @@ export async function showVerificationOptions(identityProviders) {
     .getElementById("register-checkbox")
     .addEventListener("change", async function () {
       if (this.checked) {
-        await registerPasskey(sessionUUID)
+        authPopup("register", sessionUUID)
         passkeyCheckBox = true;
       } else {
         passkeyCheckBox = false;
@@ -228,7 +227,7 @@ export async function showVerificationOptions(identityProviders) {
       iframe.src = data.newIframeSrc;
     } else if (data && data.newUrl) {
       if (data.newUrl.includes("&result=ok&") && passkeyCheckBox) {
-        await registerPasskey(sessionUUID);
+        await authPopup("register", sessionUUID);
       }
       // redirection url after verification complete
       window.location.href = data.newUrl;
@@ -248,7 +247,6 @@ export async function showVerificationOptions(identityProviders) {
       console.log("Error: " + data.error);
     }
   });
-  console.log("new commit")
 
   // BACK BUTTON ONLY EXISTS IN MODAL FORMAT
   if (OPALE_FORMAT == "modal") {
