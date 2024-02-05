@@ -69,19 +69,17 @@ export async function pickIdentityProvider(provider, uuid = "123") {
 }
 
 export async function authPopup(mode, sessionUUID) {
-  const width = 240;
+  const origin = window.location.origin;
+  const width = window.screenX / 6;
+  const height = window.screenY / 3;
   const left = window.innerWidth / 2 - width / 2 + window.screenX;
-  const top = window.innerHeight / 2 - width / 2 + window.screenY;
+  const top = window.innerHeight / 2 - height / 2 + window.screenY;
+  
   const popup = window.open(
-    `${env.authenticatorURL}/?mode=${mode}&sessionUUID=${sessionUUID}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}`,
+    `${
+      env.authenticatorURL
+    }/?mode=${mode}&sessionUUID=${sessionUUID}&origin=${encodeURIComponent(origin)}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}`,
     "popup",
     `width=240,height=240,popup=true,left=${left},top=${top},menubar=no,toolbar=no,location=no,status=no`
   );
-  const checkPopup = setInterval(() => {
-    if (popup.window.location.href.includes(CLIENT_URL)) {
-      popup.close();
-    }
-    if (!popup || !popup.closed) return;
-    clearInterval(checkPopup);
-  }, 1000);
 }

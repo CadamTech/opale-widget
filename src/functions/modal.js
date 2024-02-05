@@ -1,4 +1,4 @@
-import { getIdentityProviders, pickIdentityProvider,authPopup } from "./api";
+import { getIdentityProviders, pickIdentityProvider, authPopup } from "./api";
 import { modalStyles } from "../styles/modal";
 import { modalContentDarkStyles } from "../styles/content-dark";
 import { modalContentLightStyles } from "../styles/content-light";
@@ -120,12 +120,7 @@ export async function showVerificationOptions(identityProviders) {
   html += `<h5 style="margin-bottom: 1rem;">${failureMessage}${
     i18n(6) /* Choose one of the following options to verify your age. */
   }</h5>
-
-            <form id="authenticate-form" style="display: flex; justify-content: space-around; align-items: center; font-weight: 100; margin: 0;">
-              <input type="text" id="authentication-button" style="height: 3rem; margin: 0 2rem 0 2rem;" class="button-outline" placeholder="have a passkey ?" autocomplete="username webauthn">
-            </form>
-            <div id="successful-authentication" style="display: none;">successfully verified passkey</div>
-            <div id="error-authentication" style="display: none;">error authenticating passkey</div>
+            <button type="text" id="authentication-button" style="height: 5rem; margin: 0 2rem 0 2rem;" class="button-outline">use passkey</button>
 
             <div class="verification-options">
                 ${identityProviders
@@ -189,7 +184,7 @@ export async function showVerificationOptions(identityProviders) {
     .getElementById("register-checkbox")
     .addEventListener("change", async function () {
       if (this.checked) {
-        authPopup("register", sessionUUID)
+        await authPopup("register", sessionUUID);
         passkeyCheckBox = true;
       } else {
         passkeyCheckBox = false;
@@ -199,7 +194,7 @@ export async function showVerificationOptions(identityProviders) {
   document
     .getElementById("authentication-button")
     .addEventListener("click", async function () {
-      await validatePasskey(sessionUUID);
+      await authPopup("authenticate", sessionUUID);
     });
 
   // add event listener to .pick-button elements
@@ -217,6 +212,15 @@ export async function showVerificationOptions(identityProviders) {
   // add event listener to back button
   document.getElementById("back-button").addEventListener("click", function () {
     showVerificationOptions(identityProviders);
+  });
+
+  // event listener for authentication popup
+  window.addEventListener("message", (event) => {
+    if (event.origin !== env.authenticatorURL) {
+      return;
+    }
+    const data = event.data;
+    console.log(data)
   });
 
   // add event listener for messages from iframe
