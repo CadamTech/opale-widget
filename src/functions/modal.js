@@ -117,10 +117,10 @@ export async function showVerificationOptions(identityProviders) {
   if (typeof OPALE_LOGO !== "undefined")
     html += `<img src="${OPALE_LOGO}" id="opale-logo">`;
 
-  html += `<h5 style="margin-bottom: 1rem;">${failureMessage}${
+  html += `<h5 style="margin: 0;">${failureMessage}${
     i18n(6) /* Choose one of the following options to verify your age. */
   }</h5>
-            <button type="text" id="authentication-button" style="height: 5rem; margin: 0 2rem 0 2rem;" class="button-outline">use passkey</button>
+            or use anonymous <a id="authentication-button" style="cursor: pointer;">passkey</a>
 
             <div class="verification-options">
                 ${identityProviders
@@ -184,13 +184,13 @@ export async function showVerificationOptions(identityProviders) {
     .getElementById("register-checkbox")
     .addEventListener("change", async function () {
       if (this.checked) {
-        await authPopup("register", sessionUUID);
         passkeyCheckBox = true;
       } else {
         passkeyCheckBox = false;
       }
     });
 
+  // AUTHENTICATE EXISTING PASSKEY
   document
     .getElementById("authentication-button")
     .addEventListener("click", async function () {
@@ -214,39 +214,39 @@ export async function showVerificationOptions(identityProviders) {
     showVerificationOptions(identityProviders);
   });
 
-  // event listener for authentication popup
-  window.addEventListener("message", (event) => {
-    if (event.origin !== env.authenticatorURL) {
-      return;
-    }
+  // Event listener for authentication popup
+  window.addEventListener("message", async (event) => {
+    if (event.origin !== env.authenticatorURL) return;
     const data = event.data;
-    console.log(data)
+    if (data.mode === "register" && data.outcome === "registered") {
+      return;
+    } else if (data.mode === "authenticate") {
+      const response = await fetch(
+        `${env.apiUrl}/finish-verification/passkey/${sessionUUID}?key=${OPALE_WEBSITE_ID}&passkey=${data.outcome}`
+      );
+      const responseData = await response.json();
+      if (response.status === 200) {
+        window.location.href = responseData.redirectUrl;
+      }
+    }
   });
 
-  // add event listener for messages from iframe
+  // Event listener for messages from iframe
   window.addEventListener("message", async (event) => {
     const data = event.data;
     if (data && data.newIframeSrc) {
       var iframe = document.getElementById("verification-iframe");
       iframe.src = data.newIframeSrc;
     } else if (data && data.newUrl) {
-      if (data.newUrl.includes("&result=ok&") && passkeyCheckBox) {
+        if (data.newUrl.includes("&result=ok&") && passkeyCheckBox) {
+        // Register new passkey if successfull verification and checkbox ticked
         await authPopup("register", sessionUUID);
       }
-      // redirection url after verification complete
       window.location.href = data.newUrl;
     } else if (data && data.hasCompleted && data.identityProvider) {
+      // Finish iFrame verification
       var iframe = document.getElementById("verification-iframe");
-      iframe.src =
-        env.apiUrl +
-        "/finish-verification/" +
-        data.identityProvider +
-        "/" +
-        sessionUUID +
-        "?key=" +
-        OPALE_WEBSITE_ID +
-        "&session_id=" +
-        data.sessionId;
+      iframe.src = `${env.apiUrl}/finish-verification/${data.identityProvider}/${sessionUUID}?key=${OPALE_WEBSITE_ID}&session_id=${data.sessionId}`;
     } else if (data && data.hasError) {
       console.log("Error: " + data.error);
     }
@@ -272,13 +272,13 @@ export async function showVerificationOptions(identityProviders) {
   openModal();
 }
 
-// Fonction pour ouvrir le modal
+// Function to open modal
 export function openModal() {
   var modal = document.getElementById("opale-modal-container");
-  modal.style.display = "flex"; // Use flex to center the modal
+  modal.style.display = "flex";
 }
 
-// Fonction pour fermer le modal
+// Function to close modal
 export function closeModal() {
   var modal = document.getElementById("opale-modal-container");
   modal.style.display = "none";

@@ -70,16 +70,16 @@ export async function pickIdentityProvider(provider, uuid = "123") {
 
 export async function authPopup(mode, sessionUUID) {
   const origin = window.location.origin;
-  const width = window.screenX / 6;
-  const height = window.screenY / 3;
-  const left = window.innerWidth / 2 - width / 2 + window.screenX;
-  const top = window.innerHeight / 2 - height / 2 + window.screenY;
+  const screenX = window.screen.width;
+  const screenY = window.screen.height;
+  const width = screenX / 4;
+  const height = screenY / 2;
+  const left = screenX / 2 - width / 2;
+  const top = screenY / 2 - height / 2;
   
-  const popup = window.open(
-    `${
-      env.authenticatorURL
-    }/?mode=${mode}&sessionUUID=${sessionUUID}&origin=${encodeURIComponent(origin)}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}`,
+  window.open(
+    `${env.authenticatorURL }/?mode=${mode}&sessionUUID=${sessionUUID}&origin=${encodeURIComponent(origin)}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}&OPALE_LANGUAGE=${OPALE_LANGUAGE}`,
     "popup",
-    `width=240,height=240,popup=true,left=${left},top=${top},menubar=no,toolbar=no,location=no,status=no`
+    `width=${width},height=${height},popup=true,left=${left},top=${top},menubar=no,toolbar=no,location=no,status=no`
   );
 }
