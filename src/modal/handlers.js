@@ -1,7 +1,6 @@
 import { authPopup } from "./api";
 
 export function displayVerificationSuccessPage(newUrl, sessionUUID) {
-  // document.getElementById("opale-modal-content").style.display = "none";
   const modalContainer = document.getElementById("opale-modal-content");
   // This replaces all existing content of modalContainer with the new HTML
   modalContainer.innerHTML = `

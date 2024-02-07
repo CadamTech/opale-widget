@@ -1,4 +1,9 @@
-import { getIdentityProviders, pickIdentityProvider, authPopup, logIsOver18 } from "./api.js";
+import {
+  getIdentityProviders,
+  pickIdentityProvider,
+  authPopup,
+  logIsOver18,
+} from "./api.js";
 import { displayVerificationSuccessPage } from "./handlers.js";
 import { modalStyles } from "../styles/modal.js";
 import { modalContentDarkStyles } from "../styles/content-dark.js";
@@ -180,13 +185,11 @@ export async function showVerificationOptions(identityProviders) {
     showVerificationOptions(identityProviders);
   });
 
-  // Event listener for authentication popup
+  // Event listener for authentice popup
   window.addEventListener("message", async (event) => {
     if (event.origin !== env.authenticatorURL) return;
     const data = event.data;
-    if (data.mode === "register" && data.outcome === "registered") {
-      return;
-    } else if (data.mode === "authenticate") {
+    if (data.mode === "authenticate") {
       const response = await fetch(
         `${env.apiUrl}/finish-verification/passkey/${sessionUUID}?key=${OPALE_WEBSITE_ID}&passkey=${data.outcome}`
       );
