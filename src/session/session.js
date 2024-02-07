@@ -7,7 +7,6 @@ export  function isOver18() {
   for (var i = 0; i < cookies.length; i++) {
     var cookie = cookies[i].trim();
     if (cookie.startsWith('opaleverif=')) {
-      console.log('COOKIE FOUND');
       return true; // The "opaleverif" cookie is set
     }
   }
@@ -32,14 +31,12 @@ export function generateSessionUUID() {
   const sessionUUID = generateUUID();
   // set a session cookie
   document.cookie = 'opaleuuid='+sessionUUID+';path=/;expires=0;Secure';
-  console.log('SETTING SESSION UUID COOKIE to '+sessionUUID);
   return sessionUUID;
 }
 
 export async function getSessionUUID() {
   // IF USER ID WAS PROVIDED, JUST USE THAT
   if (typeof OPALE_USER_ID !== 'undefined') {
-    console.log('OPALE_USER_ID IS DEFINED');
     return OPALE_USER_ID;
   }
 
@@ -53,7 +50,6 @@ export async function getSessionUUID() {
     var cookie = cookies[i].trim();
     if (cookie.startsWith('opaleuuid=')) {
       sessionUUID = cookie.substring('opaleuuid='.length, cookie.length);
-      console.log('SESSION UUID COOKIE FOUND: '+sessionUUID);
       break;
     }
   }

@@ -1,5 +1,5 @@
 import { getIdentityProviders, pickIdentityProvider, authPopup, logIsOver18 } from "./api.js";
-import { completeSuccessfulVerification } from "./handlers.js"
+import { displayVerificationSuccessPage } from "./handlers.js";
 import { modalStyles } from "../styles/modal.js";
 import { modalContentDarkStyles } from "../styles/content-dark.js";
 import { modalContentLightStyles } from "../styles/content-light.js";
@@ -212,7 +212,7 @@ export async function showVerificationOptions(identityProviders) {
       // Redirect user based on verification outcome
       if (data.newUrl.includes("&result=ok&")) {
         // Successful verification page
-        completeSuccessfulVerification(data.newUrl);
+        displayVerificationSuccessPage(data.newUrl, sessionUUID);
       } else {
         window.location.href = data.newUrl;
       }
