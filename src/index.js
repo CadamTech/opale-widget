@@ -1,21 +1,18 @@
-import { createModal, openModal, closeModal } from "./functions/modal.js";
-import { loadCSS } from "./functions/css.js";
+import { createModal, openModal, closeModal } from "./modal/modal.js";
+import { loadCSS } from "./styles/css.js";
 import { env } from "./env.js";
-import { isOver18, setIsOver18, checkSignature } from "./functions/session.js";
+import { isOver18, setIsOver18, checkSignature } from "./session/session.js";
 
 
 // Check if the cookie exists, if not, create and display the initial modal
 (function () {
-  async function launchOpale() {
-    
+  async function launchOpale() { 
     if (typeof window.OPALE_THEME !== "undefined") {
       if (window.OPALE_THEME != "none") loadCSS(env.cssFrameWorkUrl);
     }
-
     if (typeof window.OPALE_LANGUAGE === "undefined") {
       window.OPALE_LANGUAGE = "fr"; // default language set to French
     }
-
     // If param has ?over18=true, set the cookie
     var over18CheckPassed = false;
     if (window.location.search.includes("opaleverif=")) {

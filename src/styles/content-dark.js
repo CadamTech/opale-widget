@@ -1,4 +1,4 @@
-import { darkenColor } from "../functions/css";
+import { darkenColor } from "./css";
 
 export const modalContentDarkStyles = `
 

@@ -57,7 +57,6 @@ export async function getSessionUUID() {
       break;
     }
   }
-
   if (!sessionUUID) sessionUUID = generateSessionUUID()
 
   return sessionUUID;
@@ -67,22 +66,9 @@ export async function checkSignature(hash) {
     const sessionUUID = await getSessionUUID();
     // CALCULATING HASH FOR "TRUE" ANSWER ONLY
     const dataToHash = "true" + OPALE_WEBSITE_ID + sessionUUID;
-
-    console.log('DATA TO HASH');
-    console.log(dataToHash);
-
     const hashedData = SHA256(dataToHash).toString();
-
-    console.log('CHECKING SIGNATURE');
-    console.log('HASH');
-    console.log(hash);
-    console.log('HASHED DATA');
-    console.log(hashedData);
-  
     if (hash === hashedData) {
-      console.log('SIGNATURE VALID');
       return true;
     }
-    console.log('SIGNATURE NOT VALID');
     return false;
 }

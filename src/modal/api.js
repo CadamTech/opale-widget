@@ -68,6 +68,17 @@ export async function pickIdentityProvider(provider, uuid = "123") {
     });
 }
 
+export function logIsOver18(sessionUUID, OPALE_WEBSITE_ID) {
+  fetch(env.apiUrl + "/log/" + sessionUUID + "?key=" + OPALE_WEBSITE_ID, {
+    method: "POST",
+    body: JSON.stringify({
+      log_type: "is_over_18",
+      value: "",
+    }),
+    redirect: "follow",
+  }).catch((error) => console.log("error", error));
+}
+
 export async function authPopup(mode, sessionUUID) {
   const origin = window.location.origin;
   const screenX = window.screen.width;
@@ -76,9 +87,13 @@ export async function authPopup(mode, sessionUUID) {
   const height = screenY / 2;
   const left = screenX / 2 - width / 2;
   const top = screenY / 2 - height / 2;
-  
+
   window.open(
-    `${env.authenticatorURL }/?mode=${mode}&sessionUUID=${sessionUUID}&origin=${encodeURIComponent(origin)}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}&OPALE_LANGUAGE=${OPALE_LANGUAGE}`,
+    `${
+      env.authenticatorURL
+    }/?mode=${mode}&sessionUUID=${sessionUUID}&origin=${encodeURIComponent(
+      origin
+    )}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}&OPALE_LANGUAGE=${OPALE_LANGUAGE}`,
     "popup",
     `width=${width},height=${height},popup=true,left=${left},top=${top},menubar=no,toolbar=no,location=no,status=no`
   );

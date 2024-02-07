@@ -1,13 +1,12 @@
-import { getIdentityProviders, pickIdentityProvider, authPopup } from "./api";
-import { modalStyles } from "../styles/modal";
-import { modalContentDarkStyles } from "../styles/content-dark";
-import { modalContentLightStyles } from "../styles/content-light";
+import { getIdentityProviders, pickIdentityProvider, authPopup, logIsOver18 } from "./api.js";
+import { completeSuccessfulVerification } from "./handlers.js"
+import { modalStyles } from "../styles/modal.js";
+import { modalContentDarkStyles } from "../styles/content-dark.js";
+import { modalContentLightStyles } from "../styles/content-light.js";
 import { modalContentStructure } from "../styles/structure.js";
-import { getSessionUUID } from "./session.js";
-import { generateSessionUUID } from "./session.js";
-import { i18n } from "./i18n.js";
+import { getSessionUUID, generateSessionUUID } from "../session/session.js";
+import { i18n } from "../language/i18n.js";
 import { env } from "../env.js";
-// Add CSS styles for the modal
 
 // Create a <style> element and append the CSS rules to it
 var styleElement = document.createElement("style");
@@ -47,10 +46,7 @@ export async function createModal() {
     modalContainer.appendChild(modalContent);
   } else {
     modalContent.innerHTML = "";
-
-    if (typeof OPALE_LOGO !== "undefined")
-      modalContent.innerHTML += `<img src="${OPALE_LOGO}" id="opale-logo">`;
-
+    modalContent.innerHTML += `<img src="${OPALE_LOGO}" id="opale-logo">`;
     modalContent.innerHTML += `
           <h4 style="margin:10%">${
             i18n(
@@ -75,19 +71,8 @@ export async function createModal() {
     over18Button.addEventListener("click", function () {
       // Replace button content by a loader
       over18Button.innerHTML = '<span class="loader"></span>';
-
       sessionStorage.setItem("opale-clicked-over-18", "true");
-
-      // Log to /log/ if the user is over 18
-      fetch(env.apiUrl + "/log/" + sessionUUID + "?key=" + OPALE_WEBSITE_ID, {
-        method: "POST",
-        body: JSON.stringify({
-          log_type: "is_over_18",
-          value: "",
-        }),
-        redirect: "follow",
-      }).catch((error) => console.log("error", error));
-
+      logIsOver18(sessionUUID, OPALE_WEBSITE_ID);
       waitForIdentityProviders(sessionUUID);
     });
 
@@ -139,13 +124,6 @@ export async function showVerificationOptions(identityProviders) {
                   )
                   .join("")}
             </div>
-
-            <form >
-              <label style="font-weight: 100; margin: 0;" id="start-registration">create anonymous passkey for next visit
-                <input type="checkbox" id="register-checkbox"/>
-              </label>
-            </form>
-
               <p>
                 <small>${i18n(
                   7 /* Verifications are secure and anonymized by */
@@ -164,9 +142,9 @@ export async function showVerificationOptions(identityProviders) {
 
   html += `
           </div>
-        </div>
+          </div>
         <div id="verification-iframe-container" style="display:none">
-          <div class="loader-container" style="display:none !important;justify-content:center !important;align-items:center !important;padding: 30%">
+        <div class="loader-container" style="display:none !important;justify-content:center !important;align-items:center !important;padding: 30%">
             <span class="loader"></span>
           </div>
           <iframe id="verification-iframe" allow="camera" width="100%" height="300px"></iframe>
@@ -177,18 +155,6 @@ export async function showVerificationOptions(identityProviders) {
     `;
 
   modalContent.innerHTML = html;
-
-  let passkeyCheckBox = false;
-  // REGISTER NEW PASSKEY
-  document
-    .getElementById("register-checkbox")
-    .addEventListener("change", async function () {
-      if (this.checked) {
-        passkeyCheckBox = true;
-      } else {
-        passkeyCheckBox = false;
-      }
-    });
 
   // AUTHENTICATE EXISTING PASSKEY
   document
@@ -231,22 +197,25 @@ export async function showVerificationOptions(identityProviders) {
     }
   });
 
-  // Event listener for messages from iframe
+  // Event listener for messages from verification iframe
   window.addEventListener("message", async (event) => {
     const data = event.data;
     if (data && data.newIframeSrc) {
+      // Start verification
       var iframe = document.getElementById("verification-iframe");
       iframe.src = data.newIframeSrc;
-    } else if (data && data.newUrl) {
-        if (data.newUrl.includes("&result=ok&") && passkeyCheckBox) {
-        // Register new passkey if successfull verification and checkbox ticked
-        await authPopup("register", sessionUUID);
-      }
-      window.location.href = data.newUrl;
     } else if (data && data.hasCompleted && data.identityProvider) {
       // Finish iFrame verification
       var iframe = document.getElementById("verification-iframe");
       iframe.src = `${env.apiUrl}/finish-verification/${data.identityProvider}/${sessionUUID}?key=${OPALE_WEBSITE_ID}&session_id=${data.sessionId}`;
+    } else if (data && data.newUrl) {
+      // Redirect user based on verification outcome
+      if (data.newUrl.includes("&result=ok&")) {
+        // Successful verification page
+        completeSuccessfulVerification(data.newUrl);
+      } else {
+        window.location.href = data.newUrl;
+      }
     } else if (data && data.hasError) {
       console.log("Error: " + data.error);
     }
@@ -268,7 +237,6 @@ export async function showVerificationOptions(identityProviders) {
         openModal();
       });
   }
-
   openModal();
 }
 
