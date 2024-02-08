@@ -110,8 +110,7 @@ export async function showVerificationOptions(identityProviders) {
   html += `<h5 style="margin: 0;">${failureMessage}${
     i18n(6) /* Choose one of the following options to verify your age. */
   }</h5>
-            or use anonymous <a id="authentication-button" style="cursor: pointer;">passkey</a>
-
+            <a id="authentication-button" style="cursor: pointer;">Opale.io passkey</a>
             <div class="verification-options">
                 ${identityProviders
                   .map(
