@@ -85,26 +85,6 @@ export const modalContentStructure = `
   #opale-modal-content .verification-options-content {
     height: 100%;
   }
-  
-  /* Styles for mobile devices (screen width less than 768px) */
-  @media screen and (max-width: 767px) {
-      #opale-modal-content .verification-options {
-          grid-template-columns: 1fr; /* Display as a single column */
-      }
-      #opale-modal-content .verification-option {
-        margin-top: 5%;
-        margin-bottom: 5%;
-      }
-      #opale-modal-content {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: around;
-      }
-  }
-  
 
   #opale-modal-container .verification-option {
       display: flex;
@@ -140,5 +120,28 @@ export const modalContentStructure = `
     width: 100%;
     min-height: 500px;
     border: none;
+  }
+  
+  /* Styles for mobile devices (screen width less than 768px) */
+  @media screen and (max-width: 767px) {
+      #opale-modal-content .verification-option {
+        margin-top: 5%;
+        margin-bottom: 5%;
+      }
+      #opale-modal-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: around;
+      }
+      #opale-modal-container .verification-option {
+        width: 15rem;
+      }
+      #opale-modal-container .button-verification {
+        padding: 0;
+        font-size: 1rem;
+  }
   }
 `;

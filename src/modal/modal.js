@@ -3,8 +3,9 @@ import {
   pickIdentityProvider,
   authPopup,
   logIsOver18,
+  checkForExistingPasskey,
 } from "./api.js";
-import { displayVerificationSuccessPage } from "./handlers.js";
+import { displayVerificationSuccessPage } from "./continuePage.js";
 import { modalStyles } from "../styles/modal.js";
 import { modalContentDarkStyles } from "../styles/content-dark.js";
 import { modalContentLightStyles } from "../styles/content-light.js";
@@ -163,8 +164,9 @@ export async function showVerificationOptions(identityProviders) {
   // AUTHENTICATE EXISTING PASSKEY
   document
     .getElementById("authentication-button")
-    .addEventListener("click", async function () {
-      await authPopup("authenticate", sessionUUID);
+    .addEventListener("click", async function () { 
+      authPopup("authenticate", sessionUUID)
+      // checkForExistingPasskey(sessionUUID, OPALE_WEBSITE_ID)
     });
 
   // add event listener to .pick-button elements

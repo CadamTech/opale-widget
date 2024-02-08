@@ -79,6 +79,28 @@ export function logIsOver18(sessionUUID, OPALE_WEBSITE_ID) {
   }).catch((error) => console.log("error", error));
 }
 
+// export async function checkForExistingPasskey(sessionUUID, OPALE_WEBSITE_ID) {
+//   const response = await fetch(
+//     `${env.apiUrl}/authenticate_webauthn/${sessionUUID}/?request_type=generate-options&key=${OPALE_WEBSITE_ID}`
+//   );
+//   let options = await response.text();
+//   options = JSON.parse(options);
+//   options = JSON.parse(options);
+//   const challengeArrayBuffer = Uint8Array.from(
+//     atob(options.challenge.replace(/\-/g, "+").replace(/\_/g, "/")),
+//     (c) => c.charCodeAt(0)
+//   );
+//   const publicKeyCredentialRequestOptions = {
+//     challenge: challengeArrayBuffer, 
+//     rpId: options.rpId,
+//     userVerification: "preferred",
+//     timeout: 60000,
+//   };
+//   options.publicKey = publicKeyCredentialRequestOptions
+//   const assertion = await navigator.credentials.get(options);
+//   console.log("Assertion:", assertion);
+// }
+
 export async function authPopup(mode, sessionUUID) {
   const origin = window.location.origin;
   const screenX = window.screen.width;
