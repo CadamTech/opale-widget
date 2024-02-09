@@ -7,9 +7,11 @@ export function displayVerificationSuccessPage(newUrl, sessionUUID) {
   modalContainer.innerHTML = `
     <div id="successful-verification-page" style="display: flex; flex-direction: column; align-items: center; align-self: center; width: 100%;">
         <img src="${OPALE_LOGO}" id="opale-logo">
-        <p>You have been successfully verified</p>
-        <button id="continue-to-site">continue to site</button>
-        <label style="padding: 0 1rem 0 1rem; font-weight: 400; margin-top: 1rem;">${i18n(15)}<input type="checkbox" id="register-checkbox"/></label>
+        <p>${i18n(16)}</p>
+        <button id="continue-to-site">${i18n(17)}</button>
+        <label style="padding: 0 1rem 0 1rem; font-weight: 400; margin-top: 1rem;">${i18n(
+          15
+        )}<input type="checkbox" id="register-checkbox"/></label>
     </div>`;
   let registerCheckbox = false;
   document

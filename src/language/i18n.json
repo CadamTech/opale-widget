@@ -76,5 +76,15 @@
     "fr": "créer un passkey anonyme et </br> ignorer la vérification",
     "en": "create anonymous passkey and </br> skip verification",
     "it": "crea una passkey anonima e </br> salta la verifica"
+  },
+  {
+    "fr": "Vous avez été vérifié avec succès",
+    "en": "You have been successfully verified",
+    "it": "Sie stata verificata con successo"
+  },
+  {
+    "fr": "continuer sur le site",
+    "en": "continue to site",
+    "it": "continua sul sito"
   }
 ]
