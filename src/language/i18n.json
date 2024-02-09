@@ -54,7 +54,7 @@
   },
   {
     "fr": "Carte bancaire 0€",
-    "en": "Bank card 0€",
+    "en": "Bank card €0",
     "it": "Carta bancaria 0€"
   },
   {
@@ -71,5 +71,10 @@
     "fr": "Selfie",
     "en": "Selfie",
     "it": "Selfie"
+  },
+  {
+    "fr": "créer un passkey anonyme et </br> ignorer la vérification",
+    "en": "create anonymous passkey and </br> skip verification",
+    "it": "crea una passkey anonima e </br> salta la verifica"
   }
 ]

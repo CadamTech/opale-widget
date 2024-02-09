@@ -1,3 +1,4 @@
+import { i18n } from "../language/i18n";
 import { authPopup } from "./api";
 
 export function displayVerificationSuccessPage(newUrl, sessionUUID) {
@@ -8,7 +9,7 @@ export function displayVerificationSuccessPage(newUrl, sessionUUID) {
         <img src="${OPALE_LOGO}" id="opale-logo">
         <p>You have been successfully verified</p>
         <button id="continue-to-site">continue to site</button>
-        <label style="padding: 0 1rem 0 1rem; font-weight: 400; margin-top: 1rem;">create anonymous passkey and skip verification <input type="checkbox" id="register-checkbox"/></label>
+        <label style="padding: 0 1rem 0 1rem; font-weight: 400; margin-top: 1rem;">${i18n(15)}<input type="checkbox" id="register-checkbox"/></label>
     </div>`;
   let registerCheckbox = false;
   document
