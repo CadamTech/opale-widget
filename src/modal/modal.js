@@ -3,7 +3,6 @@ import {
   pickIdentityProvider,
   authPopup,
   logIsOver18,
-  checkForExistingPasskey,
 } from "./api.js";
 import { displayVerificationSuccessPage } from "./continuePage.js";
 import { modalStyles } from "../styles/modal.js";
@@ -13,6 +12,9 @@ import { modalContentStructure } from "../styles/structure.js";
 import { getSessionUUID, generateSessionUUID } from "../session/session.js";
 import { i18n } from "../language/i18n.js";
 import { env } from "../env.js";
+import { checkIfWebAuthnISAvailable } from "./utils.js";
+// check if browser allows passkeys
+const isWebAuthnAvailable = await checkIfWebAuthnISAvailable();
 
 // Create a <style> element and append the CSS rules to it
 var styleElement = document.createElement("style");
@@ -111,7 +113,13 @@ export async function showVerificationOptions(identityProviders) {
   html += `<h5 style="margin: 0;">${failureMessage}${
     i18n(6) /* Choose one of the following options to verify your age. */
   }</h5>
-            <a id="authentication-button" style="cursor: pointer;">Opale.io passkey</a>
+            ${
+              isWebAuthnAvailable ? (
+                `<a id="authentication-button" style="cursor: pointer;">
+                  Opale.io passkey
+                </a>` 
+              ): ''
+            }
             <div class="verification-options">
                 ${identityProviders
                   .map(
@@ -162,12 +170,14 @@ export async function showVerificationOptions(identityProviders) {
   modalContent.innerHTML = html;
 
   // AUTHENTICATE EXISTING PASSKEY
-  document
-    .getElementById("authentication-button")
-    .addEventListener("click", async function () { 
-      authPopup("authenticate", sessionUUID)
-      // checkForExistingPasskey(sessionUUID, OPALE_WEBSITE_ID)
-    });
+  if (isWebAuthnAvailable){
+        document
+          .getElementById("authentication-button")
+          .addEventListener("click", async function () {
+            authPopup("authenticate", sessionUUID);
+            // checkForExistingPasskey(sessionUUID, OPALE_WEBSITE_ID)
+          });
+  }
 
   // add event listener to .pick-button elements
   document.querySelectorAll(".verification-option").forEach((button) => {
@@ -214,7 +224,7 @@ export async function showVerificationOptions(identityProviders) {
       iframe.src = `${env.apiUrl}/finish-verification/${data.identityProvider}/${sessionUUID}?key=${OPALE_WEBSITE_ID}&session_id=${data.sessionId}`;
     } else if (data && data.newUrl) {
       // Redirect user based on verification outcome
-      if (data.newUrl.includes("&result=ok&")) {
+      if (data.newUrl.includes("&result=ok&") && isWebAuthnAvailable) {
         // Successful verification page
         displayVerificationSuccessPage(data.newUrl, sessionUUID);
       } else {
