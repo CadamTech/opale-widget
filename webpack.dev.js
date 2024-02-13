@@ -2,7 +2,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 // const WebpackObfuscator = require('webpack-obfuscator'); // Import webpack-obfuscator
 
 module.exports = {
-  entry: "./src/modal.js", // Update with your entry file name
+  entry: "./src/index.js", // Update with your entry file name
   output: {
     filename: "1-test.js", // Output file name
     path: __dirname + "/dist", // Output directory path

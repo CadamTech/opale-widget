@@ -1,5 +1,4 @@
 import { SHA256 } from 'crypto-js';
-import { startRegistration } from "@simplewebauthn/browser";
 
 export  function isOver18() {
 
@@ -8,7 +7,6 @@ export  function isOver18() {
   for (var i = 0; i < cookies.length; i++) {
     var cookie = cookies[i].trim();
     if (cookie.startsWith('opaleverif=')) {
-      console.log('COOKIE FOUND');
       return true; // The "opaleverif" cookie is set
     }
   }
@@ -33,14 +31,12 @@ export function generateSessionUUID() {
   const sessionUUID = generateUUID();
   // set a session cookie
   document.cookie = 'opaleuuid='+sessionUUID+';path=/;expires=0;Secure';
-  console.log('SETTING SESSION UUID COOKIE to '+sessionUUID);
   return sessionUUID;
 }
 
 export async function getSessionUUID() {
   // IF USER ID WAS PROVIDED, JUST USE THAT
   if (typeof OPALE_USER_ID !== 'undefined') {
-    console.log('OPALE_USER_ID IS DEFINED');
     return OPALE_USER_ID;
   }
 
@@ -54,11 +50,9 @@ export async function getSessionUUID() {
     var cookie = cookies[i].trim();
     if (cookie.startsWith('opaleuuid=')) {
       sessionUUID = cookie.substring('opaleuuid='.length, cookie.length);
-      console.log('SESSION UUID COOKIE FOUND: '+sessionUUID);
       break;
     }
   }
-
   if (!sessionUUID) sessionUUID = generateSessionUUID()
 
   return sessionUUID;
@@ -68,22 +62,9 @@ export async function checkSignature(hash) {
     const sessionUUID = await getSessionUUID();
     // CALCULATING HASH FOR "TRUE" ANSWER ONLY
     const dataToHash = "true" + OPALE_WEBSITE_ID + sessionUUID;
-
-    console.log('DATA TO HASH');
-    console.log(dataToHash);
-
     const hashedData = SHA256(dataToHash).toString();
-
-    console.log('CHECKING SIGNATURE');
-    console.log('HASH');
-    console.log(hash);
-    console.log('HASHED DATA');
-    console.log(hashedData);
-  
     if (hash === hashedData) {
-      console.log('SIGNATURE VALID');
       return true;
     }
-    console.log('SIGNATURE NOT VALID');
     return false;
 }

@@ -1,3 +1,5 @@
+import {darkenColor} from "./css"
+
 export const modalContentStructure = `
 
   #opale-logo { 
@@ -85,32 +87,13 @@ export const modalContentStructure = `
   #opale-modal-content .verification-options-content {
     height: 100%;
   }
-  
-  /* Styles for mobile devices (screen width less than 768px) */
-  @media screen and (max-width: 767px) {
-      #opale-modal-content .verification-options {
-          grid-template-columns: 1fr; /* Display as a single column */
-      }
-      #opale-modal-content .verification-option {
-        margin-top: 5%;
-        margin-bottom: 5%;
-      }
-      #opale-modal-content {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: around;
-      }
-  }
-  
 
   #opale-modal-container .verification-option {
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 20rem;
+      margin: 0 1rem 0 1rem;
   }
 
   #opale-modal-container .verification-option img {
@@ -121,6 +104,24 @@ export const modalContentStructure = `
 
   #verification-options button {
     width: 75%;
+  }
+
+  .progress-buttons-container {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    min-width: 35rem;
+  }
+
+  .progress-button {
+    width: 15rem;
+    position: relative;
+    padding: 0;
+    border-radius: 50px;
+    font-size: .85rem;
+    border: none;
   }
 
   #opale-modal-container #verification-iframe {
@@ -141,4 +142,69 @@ export const modalContentStructure = `
     min-height: 500px;
     border: none;
   }
+
+  .progress-button .tooltip {
+    visibility: hidden;
+    text-align: left;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: -10%;
+    margin-left: -60px;
+    opacity: 0;
+    width: 20rem;
+    white-space: normal;
+    transition: opacity 0.3s;
+    line-height: 1rem;
+    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 50)} !important; 
+    color: #fffff;
+    text-transform: none;
+    }
+
+  .progress-button .tooltip::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: ${darkenColor(
+      OPALE_PRIMARY_COLOR,
+      50
+    )} transparent transparent transparent;
+  }
+
+  .progress-button:hover .tooltip {
+    visibility: visible;
+    opacity: .9;
+  }
+  
+  /* Styles for mobile devices (screen width less than 768px) */
+  @media screen and (max-width: 767px) {
+      #opale-modal-content .verification-option {
+        margin-top: 5%;
+        margin-bottom: 5%;
+      }
+      #opale-modal-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: around;
+      }
+      #opale-modal-container .verification-option {
+        width: 15rem;
+      }
+      #opale-modal-container .button-verification {
+        padding: 0;
+        font-size: 1rem;
+      }
+      .progress-button .tooltip {
+        left: 0%;
+      }
+    }
 `;
