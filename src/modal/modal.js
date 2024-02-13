@@ -31,6 +31,7 @@ styleElement.textContent += modalContentStructure;
 
 // add modal styles to current styles
 if (OPALE_FORMAT == "modal") styleElement.textContent += modalStyles;
+console.log(styleElement.textContent);
 
 document.head.appendChild(styleElement);
 
@@ -111,8 +112,8 @@ export async function showVerificationOptions(identityProviders) {
               : ""
           }
           <h5 style="margin-bottom: 1rem;">${failureMessage}${
-    i18n(6) /* Choose one of the following options to verify your age. */
-  }</h5>
+            i18n(6) /* Choose one of the following options to verify your age. */
+            }</h5>
           <div class="verification-options">
                 ${identityProviders
                   .map(
@@ -135,13 +136,14 @@ export async function showVerificationOptions(identityProviders) {
           <div class="progress-buttons-container">
           ${
             OPALE_FORMAT == "modal"
-              ? `<button id="back-button-openmodal" class="button button-outline progress-button" style="">
+              ? `<button id="back-button-openmodal" class="button-outline progress-button">
             ${i18n(10 /* Back */)}</button>`
               : `<div></div>`
           }
           ${
             isWebAuthnAvailable
-              ? `<button id="authentication-button" class="button progress-button" style="display: flex; padding: 0; justify-content: center; align-items: center; position: relative;">${fingerPrintIcon}passkey</button>`
+              ? `<button id="authentication-button" class="progress-button">passkey${fingerPrintIcon}
+                <span class="tooltip">${i18n(18)}</span></button>`
               : `<div></div>`
           }
           </div>
@@ -159,6 +161,7 @@ export async function showVerificationOptions(identityProviders) {
 
           </div>
           </div>
+
         <div id="verification-iframe-container" style="display:none">
         <div class="loader-container" style="display:none !important;justify-content:center !important;align-items:center !important;padding: 30%">
             <span class="loader"></span>
@@ -253,6 +256,7 @@ export async function showVerificationOptions(identityProviders) {
       });
   }
   openModal();
+  // displayVerificationSuccessPage("https://google.com", "ewefwe")
 }
 
 // Function to open modal

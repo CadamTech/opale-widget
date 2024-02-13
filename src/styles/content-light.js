@@ -40,5 +40,4 @@ export const modalContentLightStyles = `
   #opale-modal-container iframe {
     border-radius: 15px;
   }
-
-`;
+`

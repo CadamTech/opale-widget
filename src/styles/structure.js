@@ -1,3 +1,5 @@
+import {darkenColor} from "./css"
+
 export const modalContentStructure = `
 
   #opale-logo { 
@@ -110,11 +112,15 @@ export const modalContentStructure = `
     grid-template-columns: 1fr 1fr;
     justify-items: center;
     align-items: center;
+    min-width: 35rem;
   }
 
   .progress-button {
     width: 15rem;
-    font-size: .8rem;
+    position: relative;
+    padding: 0;
+    border-radius: 50px;
+    font-size: .85rem;
   }
 
   #opale-modal-container #verification-iframe {
@@ -134,6 +140,45 @@ export const modalContentStructure = `
     width: 100%;
     min-height: 500px;
     border: none;
+  }
+
+  .progress-button .tooltip {
+    visibility: hidden;
+    text-align: left;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: -10%;
+    margin-left: -60px;
+    opacity: 0;
+    width: 20rem;
+    white-space: normal;
+    transition: opacity 0.3s;
+    line-height: 1rem;
+    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 50)} !important; 
+    color: #fffff;
+    text-transform: none;
+    }
+
+  .progress-button .tooltip::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: ${darkenColor(
+      OPALE_PRIMARY_COLOR,
+      50
+    )} transparent transparent transparent;
+  }
+
+  .progress-button:hover .tooltip {
+    visibility: visible;
+    opacity: .9;
   }
   
   /* Styles for mobile devices (screen width less than 768px) */
@@ -157,8 +202,8 @@ export const modalContentStructure = `
         padding: 0;
         font-size: 1rem;
       }
-      .progress-button {
-        width: 13rem;
+      .progress-button .tooltip {
+        left: 0%;
       }
-  }
+    }
 `;

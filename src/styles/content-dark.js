@@ -39,5 +39,4 @@ export const modalContentDarkStyles = `
   #opale-modal-container iframe {
     border-radius: 15px;
   }
-
-`;
+`

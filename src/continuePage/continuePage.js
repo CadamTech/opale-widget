@@ -9,12 +9,12 @@ export function displayVerificationSuccessPage(newUrl, sessionUUID) {
         <img src="${OPALE_LOGO}" id="opale-logo">
         <p>${i18n(15)}</p>
         <div class="progress-buttons-container">
-        <button id="continue-to-site" class="progress-button" style="padding: 0;">${i18n(
+        <button id="continue-to-site" class="button-outline progress-button">${i18n(
           16
         )}</button>
-        <button type="checkbox" id="register-passkey" class="progress-button" style="padding: 0;"> ${i18n(
-          17
-        )}</button>
+        <button id="register-passkey" class="progress-button"> ${i18n(17)}
+          <span class="tooltip">${i18n(18)}</span>
+        </button>
         </div>
         
     </div>`;

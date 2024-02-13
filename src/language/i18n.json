@@ -86,5 +86,15 @@
     "fr": "passkey et continuer",
     "en": "passkey and continue",
     "it": "passkey e continuare"
+  },
+  {
+    "fr": "Créez un passkey biométrique anonyme Opale.io pour cet appareil. Cela vous permettra d’éviter le processus de vérification lors de votre prochaine visite.",
+    "en": "Create an Opale.io anonymous biometric passkey for this device. This will allow you to skip the verification process on your next visit.",
+    "it": "Crea una passkey biometrica anonima Opale.io per questo dispositivo. Ciò ti consentirà di saltare il processo di verifica alla tua prossima visita."
+  },
+  {
+    "fr": "Utilisez votre passkey que vous avez créé après une vérification réussie",
+    "en": "Use a passkey that you created after a successful verification",
+    "it": "Utilizza una passkey creata dopo una verifica riuscita"
   }
 ]
