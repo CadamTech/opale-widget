@@ -91,6 +91,7 @@ export const modalContentStructure = `
       flex-direction: column;
       align-items: center;
       width: 20rem;
+      margin: 0 1rem 0 1rem;
   }
 
   #opale-modal-container .verification-option img {
@@ -101,6 +102,19 @@ export const modalContentStructure = `
 
   #verification-options button {
     width: 75%;
+  }
+
+  .progress-buttons-container {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .progress-button {
+    width: 15rem;
+    font-size: .8rem;
   }
 
   #opale-modal-container #verification-iframe {
@@ -142,6 +156,9 @@ export const modalContentStructure = `
       #opale-modal-container .button-verification {
         padding: 0;
         font-size: 1rem;
-  }
+      }
+      .progress-button {
+        width: 13rem;
+      }
   }
 `;

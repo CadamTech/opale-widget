@@ -15,7 +15,6 @@ export async function getIdentityProviders(sessionUUID) {
 
 export async function pickIdentityProvider(provider, uuid = "123") {
   // Fetch the URL from the identity provider and handle the response
-  console.log("PICKING IDENTITY PROVIDER");
 
   // display loader
   document.querySelector(".loader-container").style.display = "flex";

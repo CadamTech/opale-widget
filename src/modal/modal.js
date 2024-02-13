@@ -4,7 +4,7 @@ import {
   authPopup,
   logIsOver18,
 } from "./api.js";
-import { displayVerificationSuccessPage } from "./continuePage.js";
+import { displayVerificationSuccessPage } from "../continuePage/continuePage.js";
 import { modalStyles } from "../styles/modal.js";
 import { modalContentDarkStyles } from "../styles/content-dark.js";
 import { modalContentLightStyles } from "../styles/content-light.js";
@@ -12,7 +12,7 @@ import { modalContentStructure } from "../styles/structure.js";
 import { getSessionUUID, generateSessionUUID } from "../session/session.js";
 import { i18n } from "../language/i18n.js";
 import { env } from "../env.js";
-import { checkIfWebAuthnISAvailable } from "./utils.js";
+import { checkIfWebAuthnISAvailable, fingerPrintIcon } from "./utils.js";
 // check if browser allows passkeys
 const isWebAuthnAvailable = await checkIfWebAuthnISAvailable();
 
@@ -53,9 +53,8 @@ export async function createModal() {
     waitForIdentityProviders(sessionUUID);
     modalContainer.appendChild(modalContent);
   } else {
-    modalContent.innerHTML = "";
-    modalContent.innerHTML += `<img src="${OPALE_LOGO}" id="opale-logo">`;
-    modalContent.innerHTML += `
+    modalContent.innerHTML = `
+          <img src="${OPALE_LOGO}" id="opale-logo">
           <h4 style="margin:10%">${
             i18n(
               2
@@ -68,8 +67,8 @@ export async function createModal() {
             <a href="https://google.com" id="not-over-18-button" class="button button-outline">${i18n(
               4 /* Exit */
             )}</a>
-          </div>
-      `;
+          </div>`;
+
     modalContainer.appendChild(modalContent);
 
     // Add "I'm Over 18" button
@@ -105,22 +104,16 @@ export async function showVerificationOptions(identityProviders) {
 
   var html = `
         <div class="verification-options-container">
-          <div class="verification-options-content">`;
-
-  if (typeof OPALE_LOGO !== "undefined")
-    html += `<img src="${OPALE_LOGO}" id="opale-logo">`;
-
-  html += `<h5 style="margin: 0;">${failureMessage}${
+        <div class="verification-options-content">
+          ${
+            typeof OPALE_LOGO !== "undefined"
+              ? `<img src="${OPALE_LOGO}" id="opale-logo">`
+              : ""
+          }
+          <h5 style="margin-bottom: 1rem;">${failureMessage}${
     i18n(6) /* Choose one of the following options to verify your age. */
   }</h5>
-            ${
-              isWebAuthnAvailable ? (
-                `<a id="authentication-button" style="cursor: pointer;">
-                  Opale.io passkey
-                </a>` 
-              ): ''
-            }
-            <div class="verification-options">
+          <div class="verification-options">
                 ${identityProviders
                   .map(
                     (identityProvider) => `
@@ -137,23 +130,33 @@ export async function showVerificationOptions(identityProviders) {
                   )
                   .join("")}
             </div>
-              <p>
-                <small>${i18n(
-                  7 /* Verifications are secure and anonymized by */
-                )} <a href="https://opale.io" target="_blank"> Opale.io </a><br>${i18n(
-    8 /* By using this service, you agree to our */
-  )} <a href="https://opale.io/fr/politique-de-confidentialite/" target="_blank">${i18n(
-    9 /* Privacy Policy */
-  )}</a></small>
-            </p>
-            `;
 
-  if (OPALE_FORMAT == "modal")
-    html += `<button id="back-button-openmodal" class="button button-outline">${i18n(
-      10 /* Back */
-    )}</button>`;
+            
+          <div class="progress-buttons-container">
+          ${
+            OPALE_FORMAT == "modal"
+              ? `<button id="back-button-openmodal" class="button button-outline progress-button" style="">
+            ${i18n(10 /* Back */)}</button>`
+              : `<div></div>`
+          }
+          ${
+            isWebAuthnAvailable
+              ? `<button id="authentication-button" class="button progress-button" style="display: flex; padding: 0; justify-content: center; align-items: center; position: relative;">${fingerPrintIcon}passkey</button>`
+              : `<div></div>`
+          }
+          </div>
 
-  html += `
+
+          <p>
+            <small>
+              ${i18n(7 /* Verifications are secure and anonymized by */)}
+            <a href="https://opale.io" target="_blank">Opale.io </a><br>
+              ${i18n(8 /* By using this service, you agree to our */)}
+            <a href="https://opale.io/fr/politique-de-confidentialite/" target="_blank">
+              ${i18n(9 /* Privacy Policy */)}</a>
+            </small>
+          </p>
+
           </div>
           </div>
         <div id="verification-iframe-container" style="display:none">
@@ -205,9 +208,7 @@ export async function showVerificationOptions(identityProviders) {
         `${env.apiUrl}/finish-verification/passkey/${sessionUUID}?key=${OPALE_WEBSITE_ID}&passkey=${data.outcome}`
       );
       const responseData = await response.json();
-      if (response.status === 200) {
-        window.location.href = responseData.redirectUrl;
-      }
+      window.location.href = responseData.redirectUrl;
     }
   });
 
