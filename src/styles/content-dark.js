@@ -21,6 +21,14 @@ export const modalContentDarkStyles = `
     background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 10)} !important;
   }
 
+  .progress-button {
+    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 70)} !important;
+  }
+
+  .progress-button:hover {
+    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 60)} !important;
+  }
+
   #opale-modal-container .button-white {
     color: #ffffff !important;
     border-color: #ffffff  !important;
@@ -39,4 +47,4 @@ export const modalContentDarkStyles = `
   #opale-modal-container iframe {
     border-radius: 15px;
   }
-`
+`;

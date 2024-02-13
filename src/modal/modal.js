@@ -256,7 +256,6 @@ export async function showVerificationOptions(identityProviders) {
       });
   }
   openModal();
-  // displayVerificationSuccessPage("https://google.com", "ewefwe")
 }
 
 // Function to open modal
