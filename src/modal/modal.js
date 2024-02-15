@@ -31,7 +31,6 @@ styleElement.textContent += modalContentStructure;
 
 // add modal styles to current styles
 if (OPALE_FORMAT == "modal") styleElement.textContent += modalStyles;
-console.log(styleElement.textContent);
 
 document.head.appendChild(styleElement);
 
@@ -181,7 +180,6 @@ export async function showVerificationOptions(identityProviders) {
           .getElementById("authentication-button")
           .addEventListener("click", async function () {
             authPopup("authenticate", sessionUUID);
-            // checkForExistingPasskey(sessionUUID, OPALE_WEBSITE_ID)
           });
   }
 
@@ -218,6 +216,7 @@ export async function showVerificationOptions(identityProviders) {
   // Event listener for messages from verification iframe
   window.addEventListener("message", async (event) => {
     const data = event.data;
+    console.log("message data: ", data)
     if (data && data.newIframeSrc) {
       // Start verification
       var iframe = document.getElementById("verification-iframe");
@@ -226,11 +225,15 @@ export async function showVerificationOptions(identityProviders) {
       // Finish iFrame verification
       var iframe = document.getElementById("verification-iframe");
       iframe.src = `${env.apiUrl}/finish-verification/${data.identityProvider}/${sessionUUID}?key=${OPALE_WEBSITE_ID}&session_id=${data.sessionId}`;
-    } else if (data && data.newUrl) {
+    } else if (data && data.newUrl && data.identityProviderId) {
       // Redirect user based on verification outcome
       if (data.newUrl.includes("&result=ok&") && isWebAuthnAvailable) {
         // Successful verification page
-        displayVerificationSuccessPage(data.newUrl, sessionUUID);
+        displayVerificationSuccessPage(
+          data.newUrl,
+          data.identityProviderId,
+          sessionUUID
+        );
       } else {
         window.location.href = data.newUrl;
       }
