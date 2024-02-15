@@ -78,8 +78,9 @@ export function logIsOver18(sessionUUID, OPALE_WEBSITE_ID) {
   }).catch((error) => console.log("error", error));
 }
 
-export async function authPopup(mode, sessionUUID) {
+export async function authPopup(mode, identityProviderId, sessionUUID) {
   const origin = window.location.origin;
+  console.log("auth pop up: ", identityProviderId);
   const screenX = window.screen.width;
   const screenY = window.screen.height;
   const width = screenX / 4;
@@ -88,7 +89,7 @@ export async function authPopup(mode, sessionUUID) {
   const top = screenY / 2 - height / 2;
 
   window.open(
-    `${env.authenticatorURL}/?mode=${mode}&sessionUUID=${sessionUUID}&origin=${encodeURIComponent(origin)}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}&OPALE_LANGUAGE=${OPALE_LANGUAGE}`,
+    `${env.authenticatorURL}/?mode=${mode}&sessionUUID=${sessionUUID}&origin=${encodeURIComponent(origin)}&identityProviderId=${identityProviderId}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}&OPALE_LANGUAGE=${OPALE_LANGUAGE}`,
     "popup",
     `width=${width},height=${height},popup=true,left=${left},top=${top},menubar=no,toolbar=no,location=no,status=no`
   );

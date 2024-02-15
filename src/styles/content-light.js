@@ -22,11 +22,11 @@ export const modalContentLightStyles = `
   }
 
   .progress-button {
-    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 30)} !important;
+    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 20)} !important;
   }
   
   .progress-button:hover {
-    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 20)} !important;
+    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 15)} !important;
   }
 
   #opale-modal-container .button-white {

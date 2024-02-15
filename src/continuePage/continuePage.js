@@ -1,7 +1,11 @@
 import { i18n } from "../language/i18n";
 import { authPopup } from "../modal/api";
 
-export function displayVerificationSuccessPage(newUrl, sessionUUID) {
+export function displayVerificationSuccessPage(
+  newUrl,
+  identityProviderId,
+  sessionUUID
+) {
   const modalContainer = document.getElementById("opale-modal-content");
   // This replaces all existing content of modalContainer with the new HTML
   modalContainer.innerHTML = `
@@ -18,16 +22,11 @@ export function displayVerificationSuccessPage(newUrl, sessionUUID) {
         </div>
         
     </div>`;
-  document
-    .getElementById("register-passkey")
-    .addEventListener("click", () => {
-      authPopup("register", sessionUUID);
-      window.location.href = newUrl;
-    });
-  document
-    .getElementById("continue-to-site")
-    .addEventListener("click", function () {
-      authPopup("register", sessionUUID);
-      window.location.href = newUrl;
-    });
+  document.getElementById("continue-to-site").addEventListener("click", () => {
+    window.location.href = newUrl;
+  });
+  document.getElementById("register-passkey").addEventListener("click", () => {
+    authPopup("register", identityProviderId, sessionUUID);
+    window.location.href = newUrl;
+  });
 }
