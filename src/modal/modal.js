@@ -166,7 +166,7 @@ export async function showVerificationOptions(identityProviders) {
             <span class="loader"></span>
           </div>
           <iframe id="verification-iframe" allow="camera" width="100%" height="300px"></iframe>
-          <button id="back-button" class="button button-outline" style="margin-top: 1rem;">${i18n(
+          <button id="back-button" class="button button-outline">${i18n(
             10 /* Back */
           )}</button>
         </div>

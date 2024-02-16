@@ -3,12 +3,14 @@ import { darkenColor } from "./css";
 export const modalContentLightStyles = `
 
   #opale-modal-container .button { 
-    border-radius: 50px  !important;
+    border-radius: 50px !important;
     overflow: hidden;
   }
 
   #opale-modal-container .button-outline { 
-    color: #222222 !important;
+    color: ${OPALE_PRIMARY_COLOR} !important;
+    background-color: #ffffff !important;
+    border-color: ${OPALE_PRIMARY_COLOR} !important; 
   }
   
   #opale-modal-container .button-verification {
@@ -23,10 +25,12 @@ export const modalContentLightStyles = `
 
   .progress-button {
     background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 20)} !important;
+    border-color: ${darkenColor(OPALE_PRIMARY_COLOR, 20)} !important; 
   }
   
   .progress-button:hover {
     background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 15)} !important;
+    border-color: ${darkenColor(OPALE_PRIMARY_COLOR, 15)} !important; 
   }
 
   #opale-modal-container .button-white {

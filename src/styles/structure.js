@@ -121,7 +121,6 @@ export const modalContentStructure = `
     padding: 0;
     border-radius: 50px;
     font-size: .85rem;
-    border: none;
   }
 
   #opale-modal-container #verification-iframe {
