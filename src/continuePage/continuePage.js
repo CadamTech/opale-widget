@@ -13,7 +13,7 @@ export function displayVerificationSuccessPage(
         <img src="${OPALE_LOGO}" id="opale-logo">
         <p>${i18n(15)}</p>
         <div class="progress-buttons-container">
-        <button id="continue-to-site" class="button-outline progress-button">${i18n(
+        <button id="continue-to-site" class="button back-button">${i18n(
           16
         )}</button>
         <button id="register-passkey" class="progress-button"> ${i18n(17)}

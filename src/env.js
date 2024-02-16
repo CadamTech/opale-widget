@@ -1,5 +1,5 @@
-const API_URL = "https://verifier-test.opale.io";
-const AUTHENTICATOR_URL = "https://authenticator-dev.opale.io"
+const API_URL = "https://verifier.opale.io";
+const AUTHENTICATOR_URL = "https://authenticator.opale.io"
 
 export const env = {
   apiUrl: API_URL,

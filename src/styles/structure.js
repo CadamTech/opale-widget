@@ -106,6 +106,26 @@ export const modalContentStructure = `
     width: 75%;
   }
 
+    #opale-modal-content button {
+    border-radius: 50px !important;
+  }
+  
+  #opale-modal-container .button-verification {
+    width: 100% !important;
+  }
+
+  #opale-modal-container .button { 
+    border-radius: 50px  !important;
+    overflow: hidden;
+  }
+
+  #opale-modal-container .back-button { 
+    width: 15rem !important;
+    overflow: hidden;
+    padding: 0;
+    font-size: .85rem;
+  }
+
   .progress-buttons-container {
     margin-top: 1rem;
     display: grid;
@@ -134,6 +154,12 @@ export const modalContentStructure = `
   #opale-modal-container #verification-iframe-container {
     width: 100%;
     height: 100%;
+  }
+
+  #opale-modal-container .button { 
+    border-radius: 50px !important;
+    overflow: hidden;
+    width: 100%;
   }
 
   #opale-modal-container iframe {
