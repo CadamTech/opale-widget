@@ -177,7 +177,7 @@ export async function showVerificationOptions(identityProviders) {
         document
           .getElementById("authentication-button")
           .addEventListener("click", async function () {
-            authPopup("authenticate", null, sessionUUID);
+            authPopup("authenticate", sessionUUID, null);
           });
   }
 
@@ -228,8 +228,8 @@ export async function showVerificationOptions(identityProviders) {
         // Successful verification page
         displayVerificationSuccessPage(
           data.newUrl,
-          data.identityProviderId,
-          sessionUUID
+          sessionUUID,
+          data.identityProviderId
         );
       } else {
         window.location.href = data.newUrl;

@@ -3,8 +3,8 @@ import { authPopup } from "../modal/api";
 
 export function displayVerificationSuccessPage(
   newUrl,
-  identityProviderId,
-  sessionUUID
+  sessionUUID,
+  identityProviderId
 ) {
   const modalContainer = document.getElementById("opale-modal-content");
   // This replaces all existing content of modalContainer with the new HTML
@@ -26,7 +26,7 @@ export function displayVerificationSuccessPage(
     window.location.href = newUrl;
   });
   document.getElementById("register-passkey").addEventListener("click", () => {
-    authPopup("register", identityProviderId, sessionUUID);
+    authPopup("register", sessionUUID, identityProviderId);
     window.location.href = newUrl;
   });
 }
