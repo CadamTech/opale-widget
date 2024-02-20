@@ -111,8 +111,8 @@ export async function showVerificationOptions(identityProviders) {
               : ""
           }
           <h5 style="margin-bottom: 1rem;">${failureMessage}${
-    i18n(6) /* Choose one of the following options to verify your age. */
-  }</h5>
+            i18n(6) /* Choose one of the following options to verify your age. */
+              }</h5>
           <div class="verification-options">
                 ${identityProviders
                   .map(
@@ -130,7 +130,6 @@ export async function showVerificationOptions(identityProviders) {
                   )
                   .join("")}
             </div>
-
             
           <div class="progress-buttons-container">
           ${
@@ -142,11 +141,10 @@ export async function showVerificationOptions(identityProviders) {
           ${
             isWebAuthnAvailable
               ? `<button id="authentication-button" class="progress-button">passkey${fingerPrintIcon}
-                <span class="tooltip">${i18n(18)}</span></button>`
+                <span class="tooltip">${i18n(19)}</span></button>`
               : `<div></div>`
           }
           </div>
-
 
           <p>
             <small>
@@ -179,7 +177,7 @@ export async function showVerificationOptions(identityProviders) {
         document
           .getElementById("authentication-button")
           .addEventListener("click", async function () {
-            authPopup("authenticate", sessionUUID);
+            authPopup("authenticate", null, sessionUUID);
           });
   }
 
@@ -216,7 +214,6 @@ export async function showVerificationOptions(identityProviders) {
   // Event listener for messages from verification iframe
   window.addEventListener("message", async (event) => {
     const data = event.data;
-    console.log("message data: ", data)
     if (data && data.newIframeSrc) {
       // Start verification
       var iframe = document.getElementById("verification-iframe");

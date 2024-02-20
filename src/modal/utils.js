@@ -21,12 +21,10 @@ export async function checkIfWebAuthnISAvailable() {
 export const fingerPrintIcon = `<?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
  "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg" style="position: absolute; right: .5rem; top: 50%; transform: translateY(-50%);"
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);"
  width="25" height="25" viewBox="0 0 512.000000 512.000000"
  preserveAspectRatio="xMidYMid meet">
-
-<g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-fill="#000000" stroke="none">
+<g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill = "#ffffff" stroke="none">
 <path d="M1635 5099 c-294 -28 -625 -114 -891 -234 -126 -56 -144 -72 -144
 -124 0 -31 6 -44 26 -60 15 -12 38 -21 51 -21 14 0 77 23 141 51 483 214 1014
 279 1545 188 133 -22 161 -17 186 35 17 36 6 71 -29 98 -29 21 -195 52 -370

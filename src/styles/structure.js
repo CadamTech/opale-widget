@@ -186,6 +186,7 @@ export const modalContentStructure = `
     background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 50)} !important; 
     color: #fffff;
     text-transform: none;
+    font-weight: 100;
     }
 
   .progress-button .tooltip::after {

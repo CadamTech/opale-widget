@@ -80,7 +80,6 @@ export function logIsOver18(sessionUUID, OPALE_WEBSITE_ID) {
 
 export async function authPopup(mode, identityProviderId, sessionUUID) {
   const origin = window.location.origin;
-  console.log("auth pop up: ", identityProviderId);
   const screenX = window.screen.width;
   const screenY = window.screen.height;
   const width = screenX / 4;
