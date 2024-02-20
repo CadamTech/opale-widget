@@ -61,10 +61,10 @@ export async function createModal() {
             ) /* This site is accessible only to persons aged 18 and over */
           }</h4>
           <div>
-            <button id="over-18-button" class="button button-verification" style="width:100%;margin-bottom:5%">${i18n(
+            <button id="over-18-button" class="button button-verification">${i18n(
               3 /* I am 18 years old or older */
             )}</button>
-            <a href="https://google.com" id="not-over-18-button" class="button button-outline">${i18n(
+            <a href="https://google.com" id="not-over-18-button" class="button back-button">${i18n(
               4 /* Exit */
             )}</a>
           </div>`;
@@ -112,7 +112,7 @@ export async function showVerificationOptions(identityProviders) {
           }
           <h5 style="margin-bottom: 1rem;">${failureMessage}${
             i18n(6) /* Choose one of the following options to verify your age. */
-            }</h5>
+              }</h5>
           <div class="verification-options">
                 ${identityProviders
                   .map(
@@ -130,23 +130,21 @@ export async function showVerificationOptions(identityProviders) {
                   )
                   .join("")}
             </div>
-
             
           <div class="progress-buttons-container">
           ${
             OPALE_FORMAT == "modal"
-              ? `<button id="back-button-openmodal" class="button-outline progress-button">
+              ? `<button id="back-button-openmodal" class="button back-button">
             ${i18n(10 /* Back */)}</button>`
               : `<div></div>`
           }
           ${
             isWebAuthnAvailable
               ? `<button id="authentication-button" class="progress-button">passkey${fingerPrintIcon}
-                <span class="tooltip">${i18n(18)}</span></button>`
+                <span class="tooltip">${i18n(19)}</span></button>`
               : `<div></div>`
           }
           </div>
-
 
           <p>
             <small>
@@ -166,7 +164,7 @@ export async function showVerificationOptions(identityProviders) {
             <span class="loader"></span>
           </div>
           <iframe id="verification-iframe" allow="camera" width="100%" height="300px"></iframe>
-          <button id="back-button" class="button button-outline" style="margin-top: 1rem;">${i18n(
+          <button id="back-button" class="button back-button" style="margin-top: 1rem;">${i18n(
             10 /* Back */
           )}</button>
         </div>
@@ -179,7 +177,7 @@ export async function showVerificationOptions(identityProviders) {
         document
           .getElementById("authentication-button")
           .addEventListener("click", async function () {
-            authPopup("authenticate", sessionUUID);
+            authPopup("authenticate", sessionUUID, null);
           });
   }
 
@@ -216,7 +214,6 @@ export async function showVerificationOptions(identityProviders) {
   // Event listener for messages from verification iframe
   window.addEventListener("message", async (event) => {
     const data = event.data;
-    console.log("message data: ", data)
     if (data && data.newIframeSrc) {
       // Start verification
       var iframe = document.getElementById("verification-iframe");
@@ -231,8 +228,8 @@ export async function showVerificationOptions(identityProviders) {
         // Successful verification page
         displayVerificationSuccessPage(
           data.newUrl,
-          data.identityProviderId,
-          sessionUUID
+          sessionUUID,
+          data.identityProviderId
         );
       } else {
         window.location.href = data.newUrl;

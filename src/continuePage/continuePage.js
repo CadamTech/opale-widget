@@ -3,8 +3,8 @@ import { authPopup } from "../modal/api";
 
 export function displayVerificationSuccessPage(
   newUrl,
-  identityProviderId,
-  sessionUUID
+  sessionUUID,
+  identityProviderId
 ) {
   const modalContainer = document.getElementById("opale-modal-content");
   // This replaces all existing content of modalContainer with the new HTML
@@ -13,7 +13,7 @@ export function displayVerificationSuccessPage(
         <img src="${OPALE_LOGO}" id="opale-logo">
         <p>${i18n(15)}</p>
         <div class="progress-buttons-container">
-        <button id="continue-to-site" class="button-outline progress-button">${i18n(
+        <button id="continue-to-site" class="button back-button">${i18n(
           16
         )}</button>
         <button id="register-passkey" class="progress-button"> ${i18n(17)}
@@ -26,7 +26,7 @@ export function displayVerificationSuccessPage(
     window.location.href = newUrl;
   });
   document.getElementById("register-passkey").addEventListener("click", () => {
-    authPopup("register", identityProviderId, sessionUUID);
+    authPopup("register", sessionUUID, identityProviderId);
     window.location.href = newUrl;
   });
 }
