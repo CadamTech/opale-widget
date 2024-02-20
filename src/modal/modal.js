@@ -111,8 +111,8 @@ export async function showVerificationOptions(identityProviders) {
               : ""
           }
           <h5 style="margin-bottom: 1rem;">${failureMessage}${
-            i18n(6) /* Choose one of the following options to verify your age. */
-              }</h5>
+    i18n(6) /* Choose one of the following options to verify your age. */
+  }</h5>
           <div class="verification-options">
                 ${identityProviders
                   .map(
@@ -159,11 +159,11 @@ export async function showVerificationOptions(identityProviders) {
           </div>
           </div>
 
-        <div id="verification-iframe-container" style="display:none">
+        <div id="verification-iframe-container" style="display:none; flex-direction: column; align-items: center; justify-content: center;">
         <div class="loader-container" style="display:none !important;justify-content:center !important;align-items:center !important;padding: 30%">
             <span class="loader"></span>
           </div>
-          <iframe id="verification-iframe" allow="camera" width="100%" height="300px"></iframe>
+          <iframe id="verification-iframe" allow="camera" width="100%" height="300px" style="max-width: 600px"></iframe>
           <button id="back-button" class="button back-button" style="margin-top: 1rem;">${i18n(
             10 /* Back */
           )}</button>

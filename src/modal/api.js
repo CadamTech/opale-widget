@@ -41,7 +41,7 @@ export async function pickIdentityProvider(provider, uuid = "123") {
       document.querySelector(".verification-options-content").style.display =
         "block";
       document.querySelector("#verification-iframe-container").style.display =
-        "block";
+        "flex";
 
       // ADD THEME ATTRIBUTE TO IFRAME URL
       var iframeUrl = data.redirect_url;
