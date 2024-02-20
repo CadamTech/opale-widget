@@ -14,7 +14,9 @@ import { i18n } from "../language/i18n.js";
 import { env } from "../env.js";
 import { checkIfWebAuthnISAvailable, fingerPrintIcon } from "./utils.js";
 // check if browser allows passkeys
-const isWebAuthnAvailable = await checkIfWebAuthnISAvailable();
+
+// const isWebAuthnAvailable = await checkIfWebAuthnISAvailable();
+const isWebAuthnAvailable = false
 
 // Create a <style> element and append the CSS rules to it
 var styleElement = document.createElement("style");
@@ -131,7 +133,7 @@ export async function showVerificationOptions(identityProviders) {
                   .join("")}
             </div>
             
-          <div class="progress-buttons-container">
+          <div class="progress-buttons-container" style="grid-template-columns: 1fr ${isWebAuthnAvailable && "1fr"};">
           ${
             OPALE_FORMAT == "modal"
               ? `<button id="back-button-openmodal" class="button back-button">
