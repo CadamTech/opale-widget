@@ -1,8 +1,9 @@
 import {
   getIdentityProviders,
   pickIdentityProvider,
-  authPopup,
   logIsOver18,
+  authPopup,
+  authRedirect
 } from "./api.js";
 import { displayVerificationSuccessPage } from "../continuePage/continuePage.js";
 import { modalStyles } from "../styles/modal.js";
@@ -15,8 +16,8 @@ import { env } from "../env.js";
 import { checkIfWebAuthnISAvailable, fingerPrintIcon } from "./utils.js";
 // check if browser allows passkeys
 
-// const isWebAuthnAvailable = await checkIfWebAuthnISAvailable();
-const isWebAuthnAvailable = false
+const isWebAuthnAvailable = await checkIfWebAuthnISAvailable();
+// const isWebAuthnAvailable = false
 
 // Create a <style> element and append the CSS rules to it
 var styleElement = document.createElement("style");
@@ -133,7 +134,9 @@ export async function showVerificationOptions(identityProviders) {
                   .join("")}
             </div>
             
-          <div class="progress-buttons-container" style="grid-template-columns: 1fr ${isWebAuthnAvailable && "1fr"};">
+          <div class="progress-buttons-container" style="grid-template-columns: 1fr ${
+            isWebAuthnAvailable && "1fr"
+          };">
           ${
             OPALE_FORMAT == "modal"
               ? `<button id="back-button-openmodal" class="button back-button">
@@ -175,12 +178,16 @@ export async function showVerificationOptions(identityProviders) {
   modalContent.innerHTML = html;
 
   // AUTHENTICATE EXISTING PASSKEY
-  if (isWebAuthnAvailable){
-        document
-          .getElementById("authentication-button")
-          .addEventListener("click", async function () {
-            authPopup("authenticate", sessionUUID, null);
-          });
+  if (isWebAuthnAvailable) {
+    document
+      .getElementById("authentication-button")
+      .addEventListener("click", async function () {
+        if (OPALE_FORMAT == "modal") {
+          authPopup("authenticate", sessionUUID, null);
+        } else {
+          authRedirect("authenticate", sessionUUID, null);
+        }
+      });
   }
 
   // add event listener to .pick-button elements
@@ -201,17 +208,19 @@ export async function showVerificationOptions(identityProviders) {
   });
 
   // Event listener for authentice popup
-  window.addEventListener("message", async (event) => {
-    if (event.origin !== env.authenticatorURL) return;
-    const data = event.data;
-    if (data.mode === "authenticate") {
-      const response = await fetch(
-        `${env.apiUrl}/finish-verification/passkey/${sessionUUID}?key=${OPALE_WEBSITE_ID}&passkey=${data.outcome}`
-      );
-      const responseData = await response.json();
-      window.location.href = responseData.redirectUrl;
-    }
-  });
+  if (OPALE_FORMAT == "modal") {
+    window.addEventListener("message", async (event) => {
+      if (event.origin !== env.authenticatorURL) return;
+      const data = event.data;
+      if (data.mode === "authenticate") {
+        const response = await fetch(
+          `${env.apiUrl}/finish-verification/passkey/${sessionUUID}?key=${OPALE_WEBSITE_ID}&passkey=${data.outcome}`
+        );
+        const responseData = await response.json();
+        window.location.href = responseData.redirectUrl;
+      }
+    });
+  }
 
   // Event listener for messages from verification iframe
   window.addEventListener("message", async (event) => {

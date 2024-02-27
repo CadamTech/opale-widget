@@ -12,7 +12,7 @@ export function displayVerificationSuccessPage(
     <div>
         <img src="${OPALE_LOGO}" id="opale-logo">
         <p>${i18n(15)}</p>
-        <div class="progress-buttons-container">
+        <div class="progress-buttons-container" style="grid-template-columns: 1fr 1fr;">
         <button id="continue-to-site" class="button back-button">${i18n(
           16
         )}</button>
