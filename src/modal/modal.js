@@ -3,7 +3,7 @@ import {
   pickIdentityProvider,
   logIsOver18,
   authPopup,
-  authRedirect
+  authRedirect,
 } from "./api.js";
 import { displayVerificationSuccessPage } from "../continuePage/continuePage.js";
 import { modalStyles } from "../styles/modal.js";
@@ -14,10 +14,9 @@ import { getSessionUUID, generateSessionUUID } from "../session/session.js";
 import { i18n } from "../language/i18n.js";
 import { env } from "../env.js";
 import { checkIfWebAuthnISAvailable, fingerPrintIcon } from "./utils.js";
-// check if browser allows passkeys
 
+// check if browser allows passkeys
 const isWebAuthnAvailable = await checkIfWebAuthnISAvailable();
-// const isWebAuthnAvailable = false
 
 // Create a <style> element and append the CSS rules to it
 var styleElement = document.createElement("style");
@@ -182,7 +181,7 @@ export async function showVerificationOptions(identityProviders) {
     document
       .getElementById("authentication-button")
       .addEventListener("click", async function () {
-        if (OPALE_FORMAT == "modal") {
+        if (OPALE_PASSKEY_MODE == "popup") {
           authPopup("authenticate", sessionUUID, null);
         } else {
           authRedirect("authenticate", sessionUUID, null);
@@ -208,7 +207,7 @@ export async function showVerificationOptions(identityProviders) {
   });
 
   // Event listener for authentice popup
-  if (OPALE_FORMAT == "modal") {
+  if (OPALE_PASSKEY_MODE == "popup") {
     window.addEventListener("message", async (event) => {
       if (event.origin !== env.authenticatorURL) return;
       const data = event.data;
