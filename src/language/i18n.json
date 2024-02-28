@@ -78,23 +78,23 @@
     "it": "Sie stata verificata con successo"
   },
   {
-    "fr": "continuer sur le site",
-    "en": "continue to site",
-    "it": "continua sul sito"
+    "fr": "Continuer sur le site",
+    "en": "Continue to site",
+    "it": "Continua sul sito"
   },
   {
-    "fr": "passkey et continuer",
-    "en": "passkey and continue",
-    "it": "passkey e continuare"
+    "fr": "Créer un Passkey",
+    "en": "Create a passkey",
+    "it": "Crea una Passkey"
   },
   {
-    "fr": "Créez un passkey biométrique anonyme Opale.io pour cet appareil. Cela vous permettra d’éviter le processus de vérification lors de votre prochaine visite.",
-    "en": "Create an Opale.io anonymous biometric passkey for this device. This will allow you to skip the verification process on your next visit.",
-    "it": "Crea una passkey biometrica anonima Opale.io per questo dispositivo. Ciò ti consentirà di saltare il processo di verifica alla tua prossima visita."
+    "fr": "Le Passkey est une clé personnelle et anonyme enregistrée sur votre appareil, qui vous permettra de prouver votre âge de manière simple lors de vos futures connexions sur tous les sites utilisant Opale.io.",
+    "en": "The Passkey is a personal and anonymous key stored on your device, allowing you to easily prove your age during future logins across all Opale.io-enabled sites.",
+    "it": "Il Passkey è una chiave personale e anonima memorizzata sul tuo dispositivo, che ti permette di dimostrare facilmente la tua età durante i futuri accessi su tutti i siti abilitati Opale.io."
   },
   {
-    "fr": "Utilisez votre passkey que vous avez créé après une vérification réussie",
-    "en": "Use a passkey that you created after a successful verification",
-    "it": "Utilizza una passkey creata dopo una verifica riuscita"
+    "fr": "Après avoir effectué votre première vérification, créez un Passkey ! </br>\nCette clé personnelle et anonyme, enregistrée sur votre appareil, vous permettra de prouver facilement votre âge lors de vos futures connexions sur tous les sites utilisant Opale.io.",
+    "en": "After your initial verification, create a Passkey! </br>\nThis personal and anonymous key, stored on your device, will allow you to easily prove your age during future logins on all Opale.io-enabled sites.",
+    "it": "Dopo aver effettuato la tua prima verifica, crea un Passkey! </br>\nQuesta chiave personale e anonima, registrata sul tuo dispositivo, ti permetterà di dimostrare facilmente la tua età durante i futuri accessi su tutti i siti che utilizzano Opale.io."
   }
 ]

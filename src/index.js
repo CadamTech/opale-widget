@@ -12,8 +12,8 @@ import { isOver18, setIsOver18, checkSignature } from "./session/session.js";
     if (typeof window.OPALE_LANGUAGE === "undefined") {
       window.OPALE_LANGUAGE = "fr"; // default language set to French
     }
-    if (typeof window.OPALE_PASSKEY_MODE !== "undefined") {
-      window.OPALE_PASSKEY_MODE = "redirect"; // default passkeys mode
+    if (typeof window.OPALE_PASSKEY_FORMAT === "undefined") {
+      window.OPALE_PASSKEY_FORMAT = "redirect"; // default passkeys mode
     }
     // If param has ?over18=true, set the cookie
     var over18CheckPassed = false;

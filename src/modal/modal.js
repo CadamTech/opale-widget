@@ -181,7 +181,7 @@ export async function showVerificationOptions(identityProviders) {
     document
       .getElementById("authentication-button")
       .addEventListener("click", async function () {
-        if (OPALE_PASSKEY_MODE == "popup") {
+        if (OPALE_PASSKEY_FORMAT == "popup") {
           authPopup("authenticate", sessionUUID, null);
         } else {
           authRedirect("authenticate", sessionUUID, null);
@@ -207,7 +207,7 @@ export async function showVerificationOptions(identityProviders) {
   });
 
   // Event listener for authentice popup
-  if (OPALE_PASSKEY_MODE == "popup") {
+  if (OPALE_PASSKEY_FORMAT == "popup") {
     window.addEventListener("message", async (event) => {
       if (event.origin !== env.authenticatorURL) return;
       const data = event.data;
