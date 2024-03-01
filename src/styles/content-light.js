@@ -1,19 +1,9 @@
 import { darkenColor } from "./css";
 
 export const modalContentLightStyles = `
-
-  #opale-modal-container .back-button { 
-    background-color: #ffffff !important;
-    color: ${darkenColor(OPALE_PRIMARY_COLOR, 70)} !important;
-    border-color: ${darkenColor(OPALE_PRIMARY_COLOR, 70)} !important;
-  }
-
-  #opale-modal-container .back-button:hover { 
-    color: ${OPALE_PRIMARY_COLOR} !important;
-    border-color: ${OPALE_PRIMARY_COLOR} !important;
-  }
   
   #opale-modal-container .button-verification {
+    width: 100%;
     background-color: ${OPALE_PRIMARY_COLOR} !important;
     border-color: ${OPALE_PRIMARY_COLOR}  !important;
   }
@@ -22,14 +12,16 @@ export const modalContentLightStyles = `
     background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 10)} !important;
   }
 
-  .progress-button {
-    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 40)} !important;
-    border-color: ${darkenColor(OPALE_PRIMARY_COLOR, 40)} !important;
+  #opale-modal-container .progress-button {
+    background-color: white !important;
+    border-color: black !important;
+    color: black !important;
   }
 
-  .progress-button:hover {
-    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 30)} !important;
-    border-color: ${darkenColor(OPALE_PRIMARY_COLOR, 30)} !important;
+  #opale-modal-container .progress-button:hover {
+    background-color: ${OPALE_PRIMARY_COLOR} !important;
+    border-color: ${OPALE_PRIMARY_COLOR} !important;
+    color: white !important;
   }
 
   #opale-modal-content {
