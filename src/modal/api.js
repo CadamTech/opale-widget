@@ -88,8 +88,18 @@ export async function authPopup(mode, sessionUUID, identityProviderId) {
   const top = screenY / 2 - height / 2;
 
   window.open(
-    `${env.authenticatorURL}/?mode=${mode}&sessionUUID=${sessionUUID}&origin=${encodeURIComponent(origin)}&identityProviderId=${identityProviderId}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}&OPALE_LANGUAGE=${OPALE_LANGUAGE}`,
+    `${env.authenticatorURL}/?mode=${mode}&sessionUUID=${sessionUUID}&origin=${encodeURIComponent(origin)}&identityProviderId=${identityProviderId}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}&popup=${true}&OPALE_LANGUAGE=${OPALE_LANGUAGE}`,
     "popup",
     `width=${width},height=${height},popup=true,left=${left},top=${top},menubar=no,toolbar=no,location=no,status=no`
   );
+}
+
+export async function authRedirect(mode, sessionUUID, identityProviderId) {
+  const origin = window.location.origin;
+  window.location.href = `${
+    env.authenticatorURL
+  }/?mode=${mode}&sessionUUID=${sessionUUID}&origin=${encodeURIComponent(
+    origin
+  )}&identityProviderId=${identityProviderId}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}&popup=${false}&OPALE_LANGUAGE=${OPALE_LANGUAGE}`;
+
 }
