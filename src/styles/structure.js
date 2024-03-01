@@ -93,7 +93,7 @@ export const modalContentStructure = `
       flex-direction: column;
       align-items: center;
       width: 20rem;
-      margin: 0 1rem 0 1rem;
+      margin: 0 1.5rem 1.5rem;
   }
 
   #opale-modal-container .verification-option img {
@@ -106,7 +106,7 @@ export const modalContentStructure = `
     width: 75%;
   }
 
-    #opale-modal-content button {
+  #opale-modal-content button {
     border-radius: 50px !important;
   }
   
@@ -119,13 +119,6 @@ export const modalContentStructure = `
     overflow: hidden;
   }
 
-  #opale-modal-container .back-button { 
-    width: 15rem !important;
-    overflow: hidden;
-    padding: 0;
-    font-size: .85rem;
-  }
-
   .progress-buttons-container {
     margin-top: 1rem;
     display: grid;
@@ -134,7 +127,7 @@ export const modalContentStructure = `
     min-width: 35rem;
   }
 
-  .progress-button {
+  #opale-modal-container .progress-button {
     width: 15rem;
     position: relative;
     padding: 0;
@@ -158,13 +151,23 @@ export const modalContentStructure = `
   #opale-modal-container .button { 
     border-radius: 50px !important;
     overflow: hidden;
-    width: 100%;
   }
 
   #opale-modal-container iframe {
     width: 100%;
     min-height: 500px;
     border: none;
+  }
+
+  #register-passkey#register-passkey {
+    background-color: ${OPALE_PRIMARY_COLOR} !important;
+    border-color: ${OPALE_PRIMARY_COLOR} !important;
+    color: white !important;
+  }
+  #register-passkey#register-passkey:hover  {
+    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 10)} !important;
+    border-color: ${darkenColor(OPALE_PRIMARY_COLOR, 10)} !important;
+    color: white !important;
   }
 
   .progress-button .tooltip {
@@ -182,7 +185,7 @@ export const modalContentStructure = `
     white-space: normal;
     transition: opacity 0.3s;
     line-height: 1rem;
-    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 50)} !important; 
+    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 10)} !important; 
     color: #fffff;
     text-transform: none;
     font-weight: 100;
@@ -198,7 +201,7 @@ export const modalContentStructure = `
     border-style: solid;
     border-color: ${darkenColor(
       OPALE_PRIMARY_COLOR,
-      50
+      10
     )} transparent transparent transparent;
   }
 

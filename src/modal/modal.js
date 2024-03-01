@@ -66,7 +66,7 @@ export async function createModal() {
             <button id="over-18-button" class="button button-verification">${i18n(
               3 /* I am 18 years old or older */
             )}</button>
-            <a href="https://google.com" id="not-over-18-button" class="button back-button">${i18n(
+            <a href="https://google.com" id="not-over-18-button" class="button progress-button">${i18n(
               4 /* Exit */
             )}</a>
           </div>`;
@@ -138,7 +138,7 @@ export async function showVerificationOptions(identityProviders) {
           };">
           ${
             OPALE_FORMAT == "modal"
-              ? `<button id="back-button-openmodal" class="button back-button">
+              ? `<button id="back-button-openmodal" class="progress-button">
             ${i18n(10 /* Back */)}</button>`
               : `<div></div>`
           }
@@ -168,7 +168,7 @@ export async function showVerificationOptions(identityProviders) {
             <span class="loader"></span>
           </div>
           <iframe id="verification-iframe" allow="camera" width="100%" height="300px" style="max-width: 600px"></iframe>
-          <button id="back-button" class="button back-button" style="margin-top: 1rem;">${i18n(
+          <button id="back-button" class="progress-button" style="margin-top: 1rem;">${i18n(
             10 /* Back */
           )}</button>
         </div>
