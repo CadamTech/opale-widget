@@ -16,9 +16,9 @@ export async function authRedirect(sessionUUID) {
   const origin = window.location.origin;
   window.location.href = `${
     env.authenticatorURL
-  }/?&sessionUUID=${sessionUUID}&origin=${encodeURIComponent(
+  }/?sessionUUID=${sessionUUID}&origin=${encodeURIComponent(
     origin
-  )}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}&popup=${false}&OPALE_LANGUAGE=${OPALE_LANGUAGE}&OPALE_THEME=${OPALE_THEME}&OPALE_PRIMARY_COLOR=${encodeURIComponent(
+  )}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}&OPALE_LANGUAGE=${OPALE_LANGUAGE}&OPALE_THEME=${OPALE_THEME}&OPALE_PRIMARY_COLOR=${encodeURIComponent(
     OPALE_PRIMARY_COLOR
   )}&OPALE_LOGO=${encodeURIComponent(OPALE_LOGO)}`;
 }
