@@ -21,7 +21,7 @@ import { isOver18, setIsOver18, checkSignature } from "./session/session.js";
       // get value of opaleverif param
       const urlParams = new URLSearchParams(window.location.search);
       const over18Param = urlParams.get("opaleverif");
-      if (await checkSignature(over18Param)) {
+      if (await nature(over18Param)) {
         setIsOver18(over18Param);
         over18CheckPassed = true;
         // Remove opaleverif param from url
