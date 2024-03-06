@@ -39,7 +39,7 @@ export async function createModal() {
 
     modalContent.innerHTML = `
           <img src="${OPALE_LOGO}" id="opale-logo">
-          <h4 style="margin:10%">${
+          <h4 style="margin:10%; font-size: 1.7rem; max-width: 35rem;">${
             i18n(
               2
             ) /* This site is accessible only to persons aged 18 and over */
