@@ -1,6 +1,6 @@
 [
   {
-    "sheetName": "widget"
+    "sheetName": "authenticator"
   },
   {
     "fr": "fr",
@@ -18,83 +18,8 @@
     "it": "Ho 18 anni o più"
   },
   {
-    "fr": "Sortir",
-    "en": "Exit",
-    "it": "Uscire"
-  },
-  {
-    "fr": "La vérification a échoué, merci de réessayer.",
-    "en": "Verification failed, please try again.",
-    "it": "Verifica fallita. Per favore provate di nuovo."
-  },
-  {
-    "fr": "Choisissez l'une des options suivantes pour vérifier votre âge.",
-    "en": "Choose one of the following options to verify your age.",
-    "it": "Scegli una delle seguenti opzioni per verificare la tua età."
-  },
-  {
-    "fr": "Les vérifications sont sécurisées et anonymisées par ",
-    "en": "Verifications are secure and anonymized by",
-    "it": "Le verifiche sono sicure e rese anonime da"
-  },
-  {
-    "fr": "En utilisant ce service, vous acceptez notre ",
-    "en": "By using this service, you agree to our",
-    "it": "Utilizzando questo servizio, accetti il ​​nostro "
-  },
-  {
-    "fr": "Politique de Confidentialité",
-    "en": "Privacy Policy",
-    "it": "Solitica Sulla Riservatezza"
-  },
-  {
-    "fr": "Retour",
-    "en": "Back",
-    "it": "Indietro"
-  },
-  {
-    "fr": "Carte bancaire 0€",
-    "en": "Bank card €0",
-    "it": "Carta bancaria 0€"
-  },
-  {
-    "fr": "Identité numérique",
-    "en": "Digital Identity",
-    "it": "Identità digitale"
-  },
-  {
-    "fr": "pièce d'identité",
-    "en": "ID",
-    "it": "ID"
-  },
-  {
-    "fr": "Selfie",
-    "en": "Selfie",
-    "it": "Selfie"
-  },
-  {
-    "fr": "Vous avez été vérifié avec succès",
-    "en": "You have been successfully verified",
-    "it": "Sie stata verificata con successo"
-  },
-  {
-    "fr": "Continuer sur le site",
-    "en": "Continue to site",
-    "it": "Continua sul sito"
-  },
-  {
-    "fr": "Créer un Passkey",
-    "en": "Create a passkey",
-    "it": "Crea una Passkey"
-  },
-  {
-    "fr": "Le Passkey est une clé personnelle et anonyme enregistrée sur votre appareil, qui vous permettra de prouver votre âge de manière simple lors de vos futures connexions sur tous les sites utilisant Opale.io.",
-    "en": "The Passkey is a personal and anonymous key stored on your device, allowing you to easily prove your age during future logins across all Opale.io-enabled sites.",
-    "it": "Il Passkey è una chiave personale e anonima memorizzata sul tuo dispositivo, che ti permette di dimostrare facilmente la tua età durante i futuri accessi su tutti i siti abilitati Opale.io."
-  },
-  {
-    "fr": "Après avoir effectué votre première vérification, créez un Passkey ! </br>\nCette clé personnelle et anonyme, enregistrée sur votre appareil, vous permettra de prouver facilement votre âge lors de vos futures connexions sur tous les sites utilisant Opale.io.",
-    "en": "After your initial verification, create a Passkey! </br>\nThis personal and anonymous key, stored on your device, will allow you to easily prove your age during future logins on all Opale.io-enabled sites.",
-    "it": "Dopo aver effettuato la tua prima verifica, crea un Passkey! </br>\nQuesta chiave personale e anonima, registrata sul tuo dispositivo, ti permetterà di dimostrare facilmente la tua età durante i futuri accessi su tutti i siti che utilizzano Opale.io."
+    "fr": "SORTIR",
+    "en": "EXIT",
+    "it": "USCIRE"
   }
 ]

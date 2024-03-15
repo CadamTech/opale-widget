@@ -1,7 +1,7 @@
 import { createModal, openModal, closeModal } from "./modal/modal.js";
 import { loadCSS } from "./styles/css.js";
 import { env } from "./env.js";
-import { isOver18, setIsOver18, checkSignature } from "./session/session.js";
+import { isOver18, setIsOver18, checkSignature, getSessionUUID } from "./session/session.js";
 
 // Check if the cookie exists, if not, create and display the initial modal
 (function () {
@@ -15,8 +15,11 @@ import { isOver18, setIsOver18, checkSignature } from "./session/session.js";
     if (typeof window.OPALE_PASSKEY_FORMAT === "undefined") {
       window.OPALE_PASSKEY_FORMAT = "redirect"; // default passkeys mode
     }
-    // If param has ?over18=true, set the cookie
-    var over18CheckPassed = false;
+    if (typeof window.OPALE_USER_ID === "undefined"){
+      window.OPALE_USER_ID = getSessionUUID()
+    }
+      // If param has ?over18=true, set the cookie
+      var over18CheckPassed = false;
     if (window.location.search.includes("opaleverif=")) {
       // get value of opaleverif param
       const urlParams = new URLSearchParams(window.location.search);
