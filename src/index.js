@@ -1,7 +1,7 @@
 import { createModal, openModal, closeModal } from "./modal/modal.js";
 import { loadCSS } from "./styles/css.js";
 import { env } from "./env.js";
-import { isOver18, setIsOver18, checkSignature, getSessionUUID } from "./session/session.js";
+import { isOver18, setIsOver18, getSessionUUID } from "./session/session.js";
 
 // Check if the cookie exists, if not, create and display the initial modal
 (function () {
@@ -11,9 +11,6 @@ import { isOver18, setIsOver18, checkSignature, getSessionUUID } from "./session
     }
     if (typeof window.OPALE_LANGUAGE === "undefined") {
       window.OPALE_LANGUAGE = "fr"; // default language set to French
-    }
-    if (typeof window.OPALE_PASSKEY_FORMAT === "undefined") {
-      window.OPALE_PASSKEY_FORMAT = "redirect"; // default passkeys mode
     }
     if (typeof window.OPALE_USER_ID === "undefined"){
       window.OPALE_USER_ID = getSessionUUID()
