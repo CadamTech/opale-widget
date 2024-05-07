@@ -1,4 +1,4 @@
-const TerserPlugin = require('terser-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 
 module.exports = {
@@ -15,6 +15,9 @@ module.exports = {
       path: `./.env.dev`,
     }),
   ],
+  resolve: {
+    extensions: [".js", ".jsx", ".json"],
+  },
   watch: true,
   mode: "development",
 };

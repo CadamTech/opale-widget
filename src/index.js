@@ -1,22 +1,26 @@
-import { createModal, openModal, closeModal } from "./modal/modal.js";
-import { loadCSS } from "./styles/css.js";
-import { env } from "./env.js";
+import { loadCSS, applyDynamicStyles } from "./styles/css.js";
 import { isOver18, setIsOver18, getSessionUUID } from "./session/session.js";
+import { createModal, openModal, closeModal } from "./modal/modal.js";
+import { getSDKServiceProvider } from "./modal/api.js";
 
 // Check if the cookie exists, if not, create and display the initial modal
 (function () {
   async function launchOpale() {
-    if (typeof window.OPALE_THEME !== "undefined") {
-      if (window.OPALE_THEME != "none") loadCSS(env.cssFrameWorkUrl);
-    }
-    if (typeof window.OPALE_LANGUAGE === "undefined") {
-      window.OPALE_LANGUAGE = "fr"; // default language set to French
-    }
-    if (typeof window.OPALE_USER_ID === "undefined"){
-      window.OPALE_USER_ID = getSessionUUID()
-    }
-      // If param has ?over18=true, set the cookie
-      var over18CheckPassed = false;
+    window.OPALE_USER_ID = window.OPALE_USER_ID || (await getSessionUUID());
+
+    const sdk = await getSDKServiceProvider(OPALE_USER_ID);
+
+    // Set default SDK configurations
+    window.OPALE_PRIMARY_COLOR = sdk.primaryColor || "#D1016E";
+    window.OPALE_THEME = sdk.theme || "light";
+    window.OPALE_FORMAT = sdk.format || "modal";
+    window.OPALE_LANGUAGE = sdk.language || "fr";
+    window.OPALE_LOGO =
+      sdk.splash ||
+      "https://opale.io/wp-content/uploads/2023/10/Logo-Opale-fond-blanc-petit-format-retina-site.png";
+
+    // If param has ?over18=true, set the cookie
+    var over18CheckPassed = false;
     if (window.location.search.includes("opaleverif=")) {
       // get value of opaleverif param
       const urlParams = new URLSearchParams(window.location.search);

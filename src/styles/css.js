@@ -16,9 +16,9 @@ export function darkenColor(color, percent) {
   var num = parseInt(color, 16);
 
   // Calculate the darkened color components
-  var R = (num >> 16) * (100 - percent) / 100;
-  var G = ((num >> 8) & 0x00FF) * (100 - percent) / 100;
-  var B = (num & 0x0000FF) * (100 - percent) / 100;
+  var R = ((num >> 16) * (100 - percent)) / 100;
+  var G = (((num >> 8) & 0x00ff) * (100 - percent)) / 100;
+  var B = ((num & 0x0000ff) * (100 - percent)) / 100;
 
   // Ensure the values are within the 0-255 range
   R = Math.min(255, Math.max(0, R));
@@ -26,7 +26,8 @@ export function darkenColor(color, percent) {
   B = Math.min(255, Math.max(0, B));
 
   // Convert the components back to a hexadecimal string
-  var darkerColor = "#" + (1 << 24 | R << 16 | G << 8 | B).toString(16).slice(1);
+  var darkerColor =
+    "#" + ((1 << 24) | (R << 16) | (G << 8) | B).toString(16).slice(1);
 
   // console.log('darker', darkerColor);
   return darkerColor;

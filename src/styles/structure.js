@@ -1,6 +1,6 @@
-import {darkenColor} from "./css"
+import { darkenColor } from "./css";
 
-export const modalContentStructure = `
+export const styleStructue = `
 
   #opale-logo { 
     max-height: 100px;
@@ -235,4 +235,5 @@ export const modalContentStructure = `
         left: 0%;
       }
     }
+    
 `;

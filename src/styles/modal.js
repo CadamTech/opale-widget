@@ -1,4 +1,4 @@
-export const modalStyles = `
+export const modalStyle = `
 
   #opale-modal-container, #opale-modal-content { 
     padding: 1%;
@@ -16,6 +16,13 @@ export const modalStyles = `
     align-items: center;
     display: flex;
     width: 100%;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.8);
+    backdrop-filter:blur(5px);
   }
   #opale-modal-content {
     width: 100%;
