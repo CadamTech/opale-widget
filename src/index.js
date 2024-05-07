@@ -1,4 +1,3 @@
-import { loadCSS, applyDynamicStyles } from "./styles/css.js";
 import { isOver18, setIsOver18, getSessionUUID } from "./session/session.js";
 import { createModal, openModal, closeModal } from "./modal/modal.js";
 import { getSDKServiceProvider } from "./modal/api.js";
