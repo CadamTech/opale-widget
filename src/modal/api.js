@@ -6,7 +6,7 @@ export async function getSDKServiceProvider(sessionUUID) {
       env.apiUrl +
         "/sdk-service-provider/" +
         sessionUUID +
-        "?key=" +
+        "/?key=" +
         OPALE_WEBSITE_ID
     );
     const data = await response.json();

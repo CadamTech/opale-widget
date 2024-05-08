@@ -41,6 +41,9 @@ import { getSDKServiceProvider } from "./modal/api.js";
     }
 
     if (!isOver18() && !over18CheckPassed) {
+      var modalContainer = document.createElement("div");
+      modalContainer.id = "opale-modal-container";
+      document.body.appendChild(modalContainer);
       createModal();
       openModal();
     } else {
