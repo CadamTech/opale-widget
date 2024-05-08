@@ -2,11 +2,18 @@ import { isOver18, setIsOver18, getSessionUUID } from "./session/session.js";
 import { createModal, openModal, closeModal } from "./modal/modal.js";
 import { getSDKServiceProvider } from "./modal/api.js";
 
-// Check if the cookie exists, if not, create and display the initial modal
 (function () {
   async function launchOpale() {
-    window.OPALE_USER_ID = window.OPALE_USER_ID || (await getSessionUUID());
+    // Check session storage for api key
+    const sessionAPI = sessionStorage.getItem("OPALE_WEBSITE_ID");
+    if (sessionAPI) {
+      window.OPALE_WEBSITE_ID = sessionAPI;
+    } else {
+      sessionStorage.setItem("OPALE_WEBSITE_ID", window.OPALE_WEBSITE_ID);
+    }
 
+    // Find or create UUID
+    window.OPALE_USER_ID = window.OPALE_USER_ID || (await getSessionUUID());
     const sdk = await getSDKServiceProvider(OPALE_USER_ID);
 
     // Set default SDK configurations
@@ -17,7 +24,7 @@ import { getSDKServiceProvider } from "./modal/api.js";
     window.OPALE_LOGO =
       sdk.splash ||
       "https://opale.io/wp-content/uploads/2023/10/Logo-Opale-fond-blanc-petit-format-retina-site.png";
-    window.OPALE_PASSKEY_PAGE = sdk.passkeyPage || true;
+    window.OPALE_PASSKEY_PAGE = sdk.passkeyPage ?? true;
 
     // If param has ?over18=true, set the cookie
     var over18CheckPassed = false;
