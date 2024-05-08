@@ -39,5 +39,7 @@ export async function authRedirect(sessionUUID) {
     origin
   )}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}&OPALE_LANGUAGE=${OPALE_LANGUAGE}&OPALE_THEME=${OPALE_THEME}&OPALE_PRIMARY_COLOR=${encodeURIComponent(
     OPALE_PRIMARY_COLOR
-  )}&OPALE_LOGO=${encodeURIComponent(OPALE_LOGO)}`;
+  )}&OPALE_LOGO=${encodeURIComponent(
+    OPALE_LOGO
+  )}&OPALE_PASSKEY_PAGE=${OPALE_PASSKEY_PAGE}`;
 }

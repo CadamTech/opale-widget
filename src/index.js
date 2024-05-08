@@ -17,6 +17,7 @@ import { getSDKServiceProvider } from "./modal/api.js";
     window.OPALE_LOGO =
       sdk.splash ||
       "https://opale.io/wp-content/uploads/2023/10/Logo-Opale-fond-blanc-petit-format-retina-site.png";
+    window.OPALE_PASSKEY_PAGE = sdk.passkey_page || true;
 
     // If param has ?over18=true, set the cookie
     var over18CheckPassed = false;
