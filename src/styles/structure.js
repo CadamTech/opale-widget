@@ -1,6 +1,6 @@
 import { darkenColor } from "./css";
 
-export const styleStructue = `
+export const style = `
 
   #opale-logo { 
     max-height: 100px;

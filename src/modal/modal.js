@@ -11,21 +11,32 @@ export async function createModal() {
 
   // Create a <style> element and append the CSS rules to it
   var styleElement = document.createElement("style");
+  let accumulatedStyles = "";
+  const applyStyles = (module) => {
+    accumulatedStyles += module;
+    styleElement.textContent = accumulatedStyles;
+  };
+
+  // Load general CSS
   loadCSS(env.cssFrameWorkUrl);
 
-  if (OPALE_THEME == "dark") {
-    import("../styles/content-dark.js").then((module) => {
-      styleElement.textContent = module.darkStyle;
-    });
+  // Conditional style loading
+  if (window.OPALE_THEME == "dark") {
+    import("../styles/content-dark.js")
+      .then((module) => applyStyles(module.style))
+      .catch((error) =>
+        console.error("Failed to load dark theme styles", error)
+      );
   } else {
-    import("../styles/content-light.js").then((module) => {
-      styleElement.textContent = module.lightStyle;
-    });
+    import("../styles/content-light.js")
+      .then((module) => applyStyles(module.style))
+      .catch((error) =>
+        console.error("Failed to load light theme styles", error)
+      );
   }
-
-  import("../styles/structure.js").then((module) => {
-    styleElement.textContent += module.styleStructue;
-  });
+  import("../styles/structure.js")
+    .then((module) => applyStyles(module.style))
+    .catch((error) => console.error("Failed to load structure styles", error));
 
   document.head.appendChild(styleElement);
 
@@ -34,9 +45,11 @@ export async function createModal() {
   modalContent.id = "opale-modal-content";
 
   if (OPALE_FORMAT == "modal") {
-    import("../styles/modal.js").then((module) => {
-      styleElement.textContent += module.modalStyle;
-    });
+    import("../styles/modal.js")
+      .then((module) => {
+        styleElement.textContent += module.modalStyle;
+      })
+      .catch((error) => console.error("Failed to load modal styles", error));
   }
 
   modalContent.innerHTML = `

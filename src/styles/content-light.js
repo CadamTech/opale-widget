@@ -1,6 +1,6 @@
 import { darkenColor } from "./css";
 
-export const lightStyle = `
+export const style = `
 
     #opale-modal-container .button-verification {
       background-color: ${OPALE_PRIMARY_COLOR} !important;
