@@ -22,7 +22,7 @@ export const styleStructue = `
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    display: block;
+    display: none;
     margin:15px auto;
     position: relative;
     color: #FFF;
@@ -30,6 +30,8 @@ export const styleStructue = `
     box-sizing: border-box;
     animation: shadowRolling 2s linear infinite;
   }
+
+
 
   @keyframes shadowRolling {
     0% {

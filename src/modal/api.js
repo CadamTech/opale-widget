@@ -16,23 +16,25 @@ export async function getSDKServiceProvider(sessionUUID) {
   }
 }
 
-export function logIsOver18(sessionUUID, OPALE_WEBSITE_ID) {
+export async function logIsOver18(sessionUUID, OPALE_WEBSITE_ID) {
   try {
-    fetch(env.apiUrl + "/log/" + sessionUUID + "?key=" + OPALE_WEBSITE_ID, {
-      method: "POST",
-      body: JSON.stringify({
-        log_type: "is_over_18",
-        value: "",
-      }),
-      redirect: "follow",
-    });
+    await fetch(
+      env.apiUrl + "/log/" + sessionUUID + "?key=" + OPALE_WEBSITE_ID,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          log_type: "is_over_18",
+          value: "",
+        }),
+        redirect: "follow",
+      }
+    );
   } catch (error) {
     console.log("error", error);
   }
 }
 
-export async function authRedirect(sessionUUID) {
-  const origin = window.location.origin;
+export function authRedirect(sessionUUID) {
   window.location.href = `${
     env.authenticatorURL
   }/?OPALE_SESSION_UUID=${sessionUUID}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}&OPALE_LANGUAGE=${OPALE_LANGUAGE}&OPALE_THEME=${OPALE_THEME}&OPALE_PRIMARY_COLOR=${encodeURIComponent(

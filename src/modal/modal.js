@@ -1,7 +1,7 @@
 import { logIsOver18, authRedirect } from "./api.js";
 import { loadCSS } from "../styles/css.js";
 import { env } from "../env.js";
-import { getSessionUUID, generateSessionUUID } from "../session/session.js";
+import { getSessionUUID } from "../session/session.js";
 import { i18n } from "../language/i18n.js";
 
 // Fonction pour créer et afficher le modal
@@ -47,31 +47,34 @@ export async function createModal() {
             ) /* This site is accessible only to persons aged 18 and over */
           }</h4>
           <div>
-            <button id="over-18-button" class="button button-verification">${i18n(
+            <button id="over-18-button" class="button button-verification">
+            <span id="over-18-text">${i18n(
               3 /* I am 18 years old or older */
-            )}</button>
-            <a href="https://google.com" id="not-over-18-button" class="button progress-button">${i18n(
-              4 /* Exit */
-            )}</a>
+            )}</span>
+            <span id="loader" class="loader"></span>
+            </button>
+            <a href="${OPALE_CANCEL_URL}" id="not-over-18-button" class="button progress-button">${i18n(
+    4 /* Exit */
+  )}</a>
           </div>`;
 
   modalContainer.appendChild(modalContent);
 
-  // Add "I'm Over 18" button
-  var over18Button = document.getElementById("over-18-button");
+  // "I'm Over 18" button
+  const over18Button = document.getElementById("over-18-button");
+  const over18text = document.getElementById("over-18-text");
+  const loader = document.getElementById("loader");
 
   // EVENT LISTENER FOR CLICK ON OVER 18 BUTTON
   over18Button.addEventListener("click", function () {
     // Replace button content by a loader
-    over18Button.innerHTML = '<span class="loader"></span>';
-    logIsOver18(sessionUUID, OPALE_WEBSITE_ID);
+    over18text.style.display = "none";
+    loader.style.display = "block";
+    logIsOver18(sessionUUID, OPALE_WEBSITE_ID).then(() => {
+      over18text.style.display = "block";
+      loader.style.display = "none";
+    });
     authRedirect(sessionUUID);
-  });
-
-  // BEFORE UNLOAD : MONITOR DROP
-  window.addEventListener("beforeunload", function () {
-    // Generate and store a new sessionUID before the tab is closed
-    localStorage.setItem("sessionUID", generateSessionUUID());
   });
 }
 

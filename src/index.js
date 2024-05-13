@@ -5,12 +5,14 @@ import { getSDKServiceProvider } from "./modal/api.js";
 (function () {
   async function launchOpale() {
     // Check session storage for api key
-    const sessionAPI = sessionStorage.getItem("OPALE_WEBSITE_ID");
-    if (sessionAPI) {
-      window.OPALE_WEBSITE_ID = sessionAPI;
-    } else {
-      sessionStorage.setItem("OPALE_WEBSITE_ID", window.OPALE_WEBSITE_ID);
-    }
+    // const sessionAPI = sessionStorage.getItem("opale_api_key");
+    // console.log("session_opale_api_key", sessionAPI);
+    // if (sessionAPI) {
+    //   window.OPALE_WEBSITE_ID = sessionAPI;
+    // } else {
+    //   sessionStorage.setItem("opale_api_key", window.OPALE_WEBSITE_ID);
+    // }
+    // console.log("opale_api_key", OPALE_WEBSITE_ID);
 
     // Find or create UUID
     window.OPALE_USER_ID = window.OPALE_USER_ID || (await getSessionUUID());
@@ -25,6 +27,7 @@ import { getSDKServiceProvider } from "./modal/api.js";
       sdk.splash ||
       "https://opale.io/wp-content/uploads/2023/10/Logo-Opale-fond-blanc-petit-format-retina-site.png";
     window.OPALE_PASSKEY_PAGE = sdk.passkeyPage ?? true;
+    window.OPALE_CANCEL_URL = sdk.cancelUrl || "https://google.com";
 
     // If param has ?over18=true, set the cookie
     var over18CheckPassed = false;
