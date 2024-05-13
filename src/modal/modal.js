@@ -38,19 +38,17 @@ export async function createModal() {
     .then((module) => applyStyles(module.style))
     .catch((error) => console.error("Failed to load structure styles", error));
 
-  document.head.appendChild(styleElement);
-
   var modalContainer = document.getElementById("opale-modal-container");
   var modalContent = document.createElement("div");
   modalContent.id = "opale-modal-content";
 
-  if (OPALE_FORMAT == "modal") {
+  if (window.OPALE_FORMAT == "modal") {
     import("../styles/modal.js")
-      .then((module) => {
-        styleElement.textContent += module.modalStyle;
-      })
+      .then((module) => applyStyles(module.style))
       .catch((error) => console.error("Failed to load modal styles", error));
   }
+
+  document.head.appendChild(styleElement);
 
   modalContent.innerHTML = `
           <img src="${OPALE_LOGO}" id="opale-logo">

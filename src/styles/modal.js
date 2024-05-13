@@ -1,4 +1,4 @@
-export const modalStyle = `
+export const style = `
 
   #opale-modal-container, #opale-modal-content { 
     padding: 1%;
