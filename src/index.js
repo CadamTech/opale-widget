@@ -6,11 +6,11 @@ import { getSDKServiceProvider } from "./modal/api.js";
   async function launchOpale() {
     // Check session storage for api key
 
-    console.log("session_opale_api_key from window", window.OPALE_WEBSITE_ID);
+    console.log("opale_api_key from window", window.OPALE_WEBSITE_ID);
     if (!OPALE_WEBSITE_ID) {
       window.OPALE_WEBSITE_ID = sessionStorage.getItem("opale_api_key");
       console.log(
-        "session_opale_api_key from session storage",
+        "opale_api_key from session storage",
         window.OPALE_WEBSITE_ID
       );
       if (!window.OPALE_WEBSITE_ID) {
