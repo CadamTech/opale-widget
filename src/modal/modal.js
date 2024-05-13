@@ -1,14 +1,10 @@
 import { logIsOver18, authRedirect } from "./api.js";
 import { loadCSS } from "../styles/css.js";
 import { env } from "../env.js";
-import { getSessionUUID } from "../session/session.js";
 import { i18n } from "../language/i18n.js";
 
 // Fonction pour créer et afficher le modal
 export async function createModal() {
-  // Warm session uuid
-  const sessionUUID = await getSessionUUID();
-
   // Create a <style> element and append the CSS rules to it
   var styleElement = document.createElement("style");
   let accumulatedStyles = "";
@@ -81,11 +77,11 @@ export async function createModal() {
     // Replace button content by a loader
     over18text.style.display = "none";
     loader.style.display = "block";
-    logIsOver18(sessionUUID, OPALE_WEBSITE_ID).then(() => {
+    logIsOver18(OPALE_USER_ID, OPALE_WEBSITE_ID).then(() => {
       over18text.style.display = "block";
       loader.style.display = "none";
     });
-    authRedirect(sessionUUID);
+    authRedirect(OPALE_USER_ID);
   });
 }
 
