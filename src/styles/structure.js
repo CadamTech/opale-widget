@@ -1,6 +1,6 @@
-import {darkenColor} from "./css"
+import { darkenColor } from "./css";
 
-export const modalContentStructure = `
+export const style = `
 
   #opale-logo { 
     max-height: 100px;
@@ -22,7 +22,7 @@ export const modalContentStructure = `
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    display: block;
+    display: none;
     margin:15px auto;
     position: relative;
     color: #FFF;
@@ -30,6 +30,8 @@ export const modalContentStructure = `
     box-sizing: border-box;
     animation: shadowRolling 2s linear infinite;
   }
+
+
 
   @keyframes shadowRolling {
     0% {
@@ -235,4 +237,5 @@ export const modalContentStructure = `
         left: 0%;
       }
     }
+    
 `;

@@ -15,6 +15,9 @@ module.exports = {
       path: `./.env.prod`,
     }),
   ],
+  resolve: {
+    extensions: [".js", ".jsx", ".json"],
+  },
   watch: true,
   mode: "production",
 };
