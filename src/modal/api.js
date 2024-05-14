@@ -1,11 +1,11 @@
 import { env } from "../env.js";
 
-export async function getSDKServiceProvider(sessionUUID) {
+export async function getSDKServiceProvider() {
   try {
     const response = await fetch(
       env.apiUrl +
         "/sdk-service-provider/" +
-        sessionUUID +
+        OPALE_USER_ID +
         "/?key=" +
         OPALE_WEBSITE_ID
     );
@@ -16,10 +16,10 @@ export async function getSDKServiceProvider(sessionUUID) {
   }
 }
 
-export async function logIsOver18(sessionUUID, OPALE_WEBSITE_ID) {
+export async function logIsOver18() {
   try {
     await fetch(
-      env.apiUrl + "/log/" + sessionUUID + "?key=" + OPALE_WEBSITE_ID,
+      env.apiUrl + "/log/" + OPALE_USER_ID + "?key=" + OPALE_WEBSITE_ID,
       {
         method: "POST",
         body: JSON.stringify({
@@ -34,12 +34,10 @@ export async function logIsOver18(sessionUUID, OPALE_WEBSITE_ID) {
   }
 }
 
-export function authRedirect(sessionUUID) {
-  window.location.href = `${
-    env.authenticatorURL
-  }/?OPALE_SESSION_UUID=${sessionUUID}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}&OPALE_LANGUAGE=${OPALE_LANGUAGE}&OPALE_THEME=${OPALE_THEME}&OPALE_PRIMARY_COLOR=${encodeURIComponent(
-    OPALE_PRIMARY_COLOR
-  )}&OPALE_LOGO=${encodeURIComponent(
-    OPALE_LOGO
-  )}&OPALE_PASSKEY_PAGE=${OPALE_PASSKEY_PAGE}`;
+export function authRedirect() {
+  try {
+    window.location.href = `${env.authenticatorURL}/?OPALE_SESSION_UUID=${OPALE_USER_ID}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}`;
+  } catch (error) {
+    console.log("Error occurred redirecting user", error);
+  }
 }

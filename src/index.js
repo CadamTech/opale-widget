@@ -18,7 +18,7 @@ import { getSDKServiceProvider } from "./modal/api.js";
 
     // Find or create UUID
     window.OPALE_USER_ID = window.OPALE_USER_ID || generateSessionUUID();
-    const sdk = await getSDKServiceProvider(OPALE_USER_ID);
+    const sdk = await getSDKServiceProvider();
 
     // Set default SDK configurations
     window.OPALE_PRIMARY_COLOR = sdk.primaryColor || "#D1016E";

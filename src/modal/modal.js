@@ -77,11 +77,11 @@ export async function createModal() {
     // Replace button content by a loader
     over18text.style.display = "none";
     loader.style.display = "block";
-    logIsOver18(OPALE_USER_ID, OPALE_WEBSITE_ID).then(() => {
+    logIsOver18().then(() => {
       over18text.style.display = "block";
       loader.style.display = "none";
     });
-    authRedirect(OPALE_USER_ID);
+    authRedirect();
   });
 }
 
