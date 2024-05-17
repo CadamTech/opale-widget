@@ -7,7 +7,8 @@ export async function getSDKServiceProvider() {
         "/sdk-service-provider/" +
         OPALE_USER_ID +
         "/?key=" +
-        OPALE_WEBSITE_ID
+        OPALE_WEBSITE_ID +
+        "&origin=widget"
     );
     const data = await response.json();
     return data;

@@ -13,9 +13,6 @@ export async function createModal() {
     styleElement.textContent = accumulatedStyles;
   };
 
-  // Load general CSS
-  loadCSS(env.cssFrameWorkUrl);
-
   // Conditional style loading
   if (window.OPALE_THEME == "dark") {
     import("../styles/content-dark.js")
@@ -37,6 +34,7 @@ export async function createModal() {
   var modalContainer = document.getElementById("opale-modal-container");
   var modalContent = document.createElement("div");
   modalContent.id = "opale-modal-content";
+  modalContent.style.transform = "scale(0)";
 
   if (window.OPALE_FORMAT == "modal") {
     import("../styles/modal.js")
@@ -45,6 +43,9 @@ export async function createModal() {
   }
 
   document.head.appendChild(styleElement);
+
+  // Load general CSS
+  loadCSS(env.cssFrameWorkUrl);
 
   modalContent.innerHTML = `
           <img src="${OPALE_LOGO}" id="opale-logo">
@@ -83,6 +84,10 @@ export async function createModal() {
     });
     authRedirect();
   });
+
+  setTimeout(() => {
+    modalContent.style.transform = "scale(1)";
+  }, 60);
 }
 
 // Function to open modal

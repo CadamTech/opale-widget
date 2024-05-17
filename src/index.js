@@ -31,9 +31,12 @@ import { getSDKServiceProvider } from "./modal/api.js";
     window.OPALE_PASSKEY_PAGE = sdk.passkeyPage ?? true;
     window.OPALE_CANCEL_URL = sdk.cancelUrl || "https://google.com";
 
-    var modalContainer = document.createElement("div");
-    modalContainer.id = "opale-modal-container";
-    document.body.appendChild(modalContainer);
+    if (window.OPALE_FORMAT == "modal") {
+      var modalContainer = document.createElement("div");
+      modalContainer.id = "opale-modal-container";
+      document.body.appendChild(modalContainer);
+    }
+
     createModal();
     openModal();
   }

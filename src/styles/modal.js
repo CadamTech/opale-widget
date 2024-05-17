@@ -25,11 +25,10 @@ export const style = `
     backdrop-filter:blur(5px);
   }
   #opale-modal-content {
-    width: 100%;
     max-width: 600px;
+    min-height: 600px;
     padding: 2%; /* Default padding for small screens */
     border-radius: 5px;
-    min-height: 600px;
     box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
     text-align: center;
     font-family: sans-serif; /* Use sans-serif font */
@@ -37,6 +36,6 @@ export const style = `
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    transition: all .5s ease;
   }
 `;
