@@ -87,7 +87,7 @@ export async function createModal() {
 
   setTimeout(() => {
     modalContent.style.transform = "scale(1)";
-  }, 60);
+  }, 120);
 }
 
 // Function to open modal
