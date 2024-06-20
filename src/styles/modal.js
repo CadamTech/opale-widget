@@ -36,6 +36,6 @@ export const style = `
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: all .5s ease;
+    transition: all .2s ease;
   }
 `;
