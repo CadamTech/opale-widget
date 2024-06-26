@@ -1,10 +1,10 @@
 import { env } from "../env.js";
 
-export async function getSDKServiceProvider() {
+export async function getServiceProviderConfig() {
   try {
     const response = await fetch(
       env.apiUrl +
-        "/sdk-service-provider/" +
+        "/service-provider-config/" +
         OPALE_USER_ID +
         "/?key=" +
         OPALE_WEBSITE_ID +

@@ -1,6 +1,6 @@
 import { generateSessionUUID } from "./session/session.js";
 import { createModal, openModal } from "./modal/modal.js";
-import { getSDKServiceProvider } from "./modal/api.js";
+import { getServiceProviderConfig } from "./modal/api.js";
 
 (function () {
   async function launchOpale() {
@@ -18,18 +18,18 @@ import { getSDKServiceProvider } from "./modal/api.js";
 
     // Find or create UUID
     window.OPALE_USER_ID = window.OPALE_USER_ID || generateSessionUUID();
-    const sdk = await getSDKServiceProvider();
+    const config = await getServiceProviderConfig();
 
-    // Set default SDK configurations
-    window.OPALE_PRIMARY_COLOR = sdk.primaryColor || "#D1016E";
-    window.OPALE_THEME = sdk.theme || "light";
-    window.OPALE_FORMAT = sdk.format || "modal";
-    window.OPALE_LANGUAGE = sdk.language || "fr";
+    // Set default config configurations
+    window.OPALE_PRIMARY_COLOR = config.primaryColor || "#D1016E";
+    window.OPALE_THEME = config.theme || "light";
+    window.OPALE_FORMAT = config.format || "modal";
+    window.OPALE_LANGUAGE = config.language || "fr";
     window.OPALE_LOGO =
-      sdk.splash ||
+      config.splash ||
       "https://opale.io/wp-content/uploads/2023/10/Logo-Opale-fond-blanc-petit-format-retina-site.png";
-    window.OPALE_PASSKEY_PAGE = sdk.passkeyPage ?? true;
-    window.OPALE_CANCEL_URL = sdk.cancelUrl || "https://google.com";
+    window.OPALE_PASSKEY_PAGE = config.passkeyPage ?? true;
+    window.OPALE_CANCEL_URL = config.cancelUrl || "https://google.com";
 
     if (window.OPALE_FORMAT == "modal") {
       var modalContainer = document.createElement("div");
