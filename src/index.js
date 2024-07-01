@@ -1,16 +1,19 @@
-import { generateSessionUUID } from "./session/session.js";
+import { abTestProfiles, generateSessionUUID } from "./session/session.js";
 import { createModal, openModal } from "./modal/modal.js";
 import { getServiceProviderConfig } from "./modal/api.js";
 
 (function () {
   async function launchOpale() {
+    const sessionStorageApiKey = sessionStorage.getItem("opale_api_key");
+    if (!sessionStorageApiKey) {
+      abTestProfiles();
+    } else {
+      window.OPALE_WEBSITE_ID = sessionStorageApiKey;
+    }
     // Check session storage for api key
-    if (!OPALE_WEBSITE_ID) {
-      window.OPALE_WEBSITE_ID = sessionStorage.getItem("opale_api_key");
-      if (!window.OPALE_WEBSITE_ID) {
-        console.log("Missing API key");
-        return;
-      }
+    if (!window.OPALE_WEBSITE_ID) {
+      console.log("Missing API key");
+      return;
     } else {
       // Set session storage if the key is found in window.OPALE_WEBSITE_ID and not already in session storage
       sessionStorage.setItem("opale_api_key", window.OPALE_WEBSITE_ID);
@@ -32,7 +35,7 @@ import { getServiceProviderConfig } from "./modal/api.js";
     window.OPALE_CANCEL_URL = config.cancelUrl || "https://google.com";
 
     if (window.OPALE_FORMAT == "modal") {
-      var modalContainer = document.createElement("div");
+      const modalContainer = document.createElement("div");
       modalContainer.id = "opale-modal-container";
       document.body.appendChild(modalContainer);
     }
