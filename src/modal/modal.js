@@ -64,6 +64,7 @@ export async function createModal() {
             <a href="${OPALE_CANCEL_URL}" id="not-over-18-button" class="button progress-button">${i18n(
     4 /* Exit */
   )}</a>
+          <div id="poweredByOpale">Powered by <img id="opaleGem" src="https://opale.io/wp-content/uploads/2023/10/cropped-Logo-opale-carre-1.png" alt="Opale.io"/>pale.io</div>
           </div>`;
 
   modalContainer.appendChild(modalContent);
@@ -72,6 +73,7 @@ export async function createModal() {
   const over18Button = document.getElementById("over-18-button");
   const over18text = document.getElementById("over-18-text");
   const loader = document.getElementById("loader");
+  const poweredByOpale = document.getElementById("poweredByOpale");
 
   // EVENT LISTENER FOR CLICK ON OVER 18 BUTTON
   over18Button.addEventListener("click", function () {
@@ -88,6 +90,10 @@ export async function createModal() {
   setTimeout(() => {
     modalContent.style.transform = "scale(1)";
   }, 100);
+
+  poweredByOpale.addEventListener("click", function () {
+    window.open("https://opale.io/", "_blank");
+  });
 }
 
 // Function to open modal

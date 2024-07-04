@@ -172,45 +172,6 @@ export const style = `
     color: white !important;
   }
 
-  .progress-button .tooltip {
-    visibility: hidden;
-    text-align: left;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 120%;
-    left: -10%;
-    margin-left: -60px;
-    opacity: 0;
-    width: 20rem;
-    white-space: normal;
-    transition: opacity 0.3s;
-    line-height: 1rem;
-    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 10)} !important; 
-    color: #fffff;
-    text-transform: none;
-    font-weight: 100;
-    }
-
-  .progress-button .tooltip::after {
-    content: " ";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: ${darkenColor(
-      OPALE_PRIMARY_COLOR,
-      10
-    )} transparent transparent transparent;
-  }
-
-  .progress-button:hover .tooltip {
-    visibility: visible;
-    opacity: .9;
-  }
   
   /* Styles for mobile devices (screen width less than 768px) */
   @media screen and (max-width: 767px) {
@@ -238,4 +199,15 @@ export const style = `
       }
     }
     
+    #poweredByOpale {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-weight: 300;
+    cursor: pointer;
+    }
+
+    #opaleGem {
+    height: 1.8rem;
+    }
 `;

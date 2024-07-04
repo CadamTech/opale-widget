@@ -7,7 +7,7 @@ export async function getServiceProviderConfig() {
         "/service-provider-config/" +
         OPALE_USER_ID +
         "/?key=" +
-        OPALE_WEBSITE_ID +
+        window.OPALE_WEBSITE_ID +
         "&origin=widget"
     );
     const data = await response.json();

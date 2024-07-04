@@ -5,18 +5,16 @@ import { getServiceProviderConfig } from "./modal/api.js";
 (function () {
   async function launchOpale() {
     const sessionStorageApiKey = sessionStorage.getItem("opale_api_key");
-    if (!sessionStorageApiKey) {
-      abTestProfiles();
-    } else {
+    if (sessionStorageApiKey) {
       window.OPALE_WEBSITE_ID = sessionStorageApiKey;
+    } else {
+      // abTestProfiles();
+      sessionStorage.setItem("opale_api_key", window.OPALE_WEBSITE_ID);
     }
     // Check session storage for api key
     if (!window.OPALE_WEBSITE_ID) {
       console.log("Missing API key");
       return;
-    } else {
-      // Set session storage if the key is found in window.OPALE_WEBSITE_ID and not already in session storage
-      sessionStorage.setItem("opale_api_key", window.OPALE_WEBSITE_ID);
     }
 
     // Find or create UUID
