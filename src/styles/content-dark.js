@@ -22,7 +22,7 @@ export const style = `
     }
 
     #opale-modal-content {
-      background-color: #000000;
+      background-color: #111111;
       color: #dddddd;
       font-family: sans-serif;
     }

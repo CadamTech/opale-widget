@@ -24,7 +24,7 @@ export const style = `
     }
   
     #opale-modal-content {
-      background-color: #fff;
+      background-color: #f8fcff;
       color: #222222;
       text-align: center;
       font-family: sans-serif; /* Use sans-serif font */
