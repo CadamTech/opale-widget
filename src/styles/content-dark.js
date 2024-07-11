@@ -2,23 +2,13 @@ import { darkenColor } from "./css";
 
 export const style = `
 
-    #opale-modal-container .button-verification {
+    #opale-modal-container .verification-button {
       background-color: ${OPALE_PRIMARY_COLOR} !important;
       border-color: ${OPALE_PRIMARY_COLOR} !important;
     }
 
-    #opale-modal-container .button-verification:hover {
+    #opale-modal-container .verification-button:hover {
       background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 10)} !important;
-    }
-
-    #opale-modal-container .progress-button {
-      background-color: black !important;
-      border-color: white !important;
-      color: white !important;
-    }
-
-    #opale-modal-container iframe {
-      border-radius: 15px;
     }
 
     #opale-modal-content {
@@ -27,8 +17,13 @@ export const style = `
       font-family: sans-serif;
     }
 
-    #opale-modal-container small a {
-      color: #b558ed!important;
+    #opale-modal-container .back-button {
+      color: white;
     }
+
+    #opale-modal-container .back-button:visited {
+      text-decoration: none; color: white;
+    }
+  
 
   `;

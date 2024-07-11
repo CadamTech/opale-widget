@@ -49,22 +49,23 @@ export async function createModal() {
 
   modalContent.innerHTML = `
           <img src="${OPALE_LOGO}" id="opale-logo">
-          <h4 style="margin: 5rem 10% 5rem 10%; font-size: 1.7rem; max-width: 35rem;">${
+          <h2 id="over-18-title">${
             i18n(
               2
             ) /* This site is accessible only to persons aged 18 and over */
-          }</h4>
-          <div>
-            <button id="over-18-button" class="button button-verification">
+          }</h2>
+          <div class="buttons-container">
+         
+            <button id="over-18-button" class="verification-button">
             <span id="over-18-text">${i18n(
               3 /* I am 18 years old or older */
             )}</span>
             <span id="loader" class="loader"></span>
             </button>
-            <a href="${OPALE_CANCEL_URL}" id="not-over-18-button" class="button progress-button">${i18n(
+            <a href="${OPALE_CANCEL_URL}" id="not-over-18-button" class="back-button">${i18n(
     4 /* Exit */
   )}</a>
-          <div id="poweredByOpale">Powered by <img id="opaleGem" src="https://opale.io/wp-content/uploads/2023/10/cropped-Logo-opale-carre-1.png" alt="Opale.io"/>pale.io</div>
+          <div id="poweredByOpale">Powered by Opale.io</div>
           </div>`;
 
   modalContainer.appendChild(modalContent);

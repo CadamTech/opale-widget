@@ -2,20 +2,18 @@ import { darkenColor } from "./css";
 
 export const style = `
 
-  #opale-logo { 
-    max-height: 100px;
+  *, *:after, *:before {
+    box-sizing: inherit;
   }
 
-  #opale-modal-container, #opale-modal-content { 
-    width: 100%;
-  } 
+  #opale-logo { 
+    max-height: 80px;
+  }
 
-  #opale-modal-content {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  #over-18-title {
+    font-size: 1rem;
+    margin: 1rem 6rem 1rem 6rem;
+    font-weight: normal;
   }
 
   #opale-modal-container .loader {
@@ -30,8 +28,6 @@ export const style = `
     box-sizing: border-box;
     animation: shadowRolling 2s linear infinite;
   }
-
-
 
   @keyframes shadowRolling {
     0% {
@@ -62,144 +58,8 @@ export const style = `
       box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0);
     }
   }
-
-  /* Default styles for larger screens (e.g., computers) */
-  #opale-modal-content .verification-options {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      justify-items: center;
-      align-items: center;
-  }
-
-  #opale-modal-content .verification-option {
-    margin-top: 10%;
-    margin-bottom: 10%;
-    cursor: pointer;
-  }
-
-  #opale-modal-content .verification-options-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    overflow: auto;
-  }
-
-  #opale-modal-content .verification-options-content {
-    height: 100%;
-  }
-
-  #opale-modal-container .verification-option {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 20rem;
-      margin: 0 1.5rem 1.5rem;
-  }
-
-  #opale-modal-container .verification-option img {
-      max-width: 250px; /* Adjust the image size as needed */
-      height: 60px; /* Adjust the image size as needed */
-      margin-bottom: 10px;
-  }
-
-  #verification-options button {
-    width: 75%;
-  }
-
-  #opale-modal-content button {
-    border-radius: 50px !important;
-  }
-  
-  #opale-modal-container .button-verification {
-    width: 100% !important;
-  }
-
-  #opale-modal-container .button { 
-    border-radius: 50px  !important;
-    overflow: hidden;
-  }
-
-  .progress-buttons-container {
-    margin-top: 1rem;
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    min-width: 35rem;
-  }
-
-  #opale-modal-container .progress-button {
-    width: 15rem;
-    position: relative;
-    padding: 0;
-    border-radius: 50px;
-    font-size: .85rem;
-  }
-
-  #opale-modal-container #verification-iframe {
-    display: none;
-  }
-
-  #opale-modal-container .verification-iframe-lg { 
-    height: 80vh;
-  }
-
-  #opale-modal-container #verification-iframe-container {
-    width: 100%;
-    height: 100%;
-  }
-
-  #opale-modal-container .button { 
-    border-radius: 50px !important;
-    overflow: hidden;
-  }
-
-  #opale-modal-container iframe {
-    width: 100%;
-    min-height: 500px;
-    border: none;
-  }
-
-  #register-passkey#register-passkey {
-    background-color: ${OPALE_PRIMARY_COLOR} !important;
-    border-color: ${OPALE_PRIMARY_COLOR} !important;
-    color: white !important;
-  }
-  #register-passkey#register-passkey:hover  {
-    background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 10)} !important;
-    border-color: ${darkenColor(OPALE_PRIMARY_COLOR, 10)} !important;
-    color: white !important;
-  }
-
-  
-  /* Styles for mobile devices (screen width less than 768px) */
-  @media screen and (max-width: 767px) {
-      #opale-modal-content .verification-option {
-        margin-top: 5%;
-        margin-bottom: 5%;
-      }
-      #opale-modal-content {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: around;
-      }
-      #opale-modal-container .verification-option {
-        width: 15rem;
-      }
-      #opale-modal-container .button-verification {
-        padding: 0;
-        font-size: 1rem;
-      }
-      .progress-button .tooltip {
-        left: 0%;
-      }
-    }
     
-    #poweredByOpale {
+  #poweredByOpale {
     position: absolute;
     bottom: 1rem;
     right: 1rem;
@@ -209,5 +69,33 @@ export const style = `
 
     #opaleGem {
     height: 1.8rem;
+    }
+
+    #opale-modal-container .verification-button {
+      min-width: 10rem;
+      border-radius: 3px !important;
+      color: white;
+      height: 2rem;
+      border: none;
+      cursor: pointer;
+      margin: .5rem;
+      padding: 0 1rem 0 1rem;
+      box-shadow: 2px 2px 2px rgba(0,0,0,0.16), 2px 2px 2px rgba(0,0,0,0.23);
+    }
+
+    #opale-modal-container .back-button {
+      height: 1.5rem;
+      cursor: pointer;
+      margin: .5rem;
+      font-size: .8rem;
+      text-decoration: none;
+      text-decoration: underline;
+    }
+
+
+    #opale-modal-container .buttons-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 `;
