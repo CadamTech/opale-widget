@@ -1,5 +1,3 @@
-import { darkenColor } from "./css";
-
 export const style = `
 
   *, *:after, *:before {
@@ -65,33 +63,39 @@ export const style = `
     right: 1rem;
     font-weight: 300;
     cursor: pointer;
+    display: flex;
+    align-items: center;
     }
 
-    #opaleGem {
+    #opaleLogo {
     height: 1.8rem;
     }
 
     #opale-modal-container .verification-button {
-      min-width: 10rem;
-      border-radius: 3px !important;
+      min-width: 12rem;
+      border-radius: .5rem !important;
       color: white;
-      height: 2rem;
+      font-size: 1rem;
+      height: 2.5rem;
       border: none;
       cursor: pointer;
       margin: .5rem;
       padding: 0 1rem 0 1rem;
-      box-shadow: 2px 2px 2px rgba(0,0,0,0.16), 2px 2px 2px rgba(0,0,0,0.23);
     }
 
     #opale-modal-container .back-button {
-      height: 1.5rem;
+      min-width: 12rem;
+      border-radius: .5rem !important;
+      font-size: 1rem;
+      height: 2.5rem;
       cursor: pointer;
       margin: .5rem;
-      font-size: .8rem;
+      padding: 0 1rem 0 1rem;
       text-decoration: none;
-      text-decoration: underline;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-
 
     #opale-modal-container .buttons-container {
       display: flex;

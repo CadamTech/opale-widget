@@ -15,11 +15,17 @@ export const style = `
       background-color: #f8fcff;
       color: #222222;
       text-align: center;
-      font-family: sans-serif; /* Use sans-serif font */
     }
 
     #opale-modal-container .back-button {
       color: black;
+      border: 1px solid black;
+    }
+    
+    #opale-modal-container .back-button:hover {
+      color: white;
+      border: 1px solid ${OPALE_PRIMARY_COLOR};
+      background-color: ${OPALE_PRIMARY_COLOR};
     }
 
     #opale-modal-container .back-button:visited {

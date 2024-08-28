@@ -14,11 +14,16 @@ export const style = `
     #opale-modal-content {
       background-color: #111111;
       color: #dddddd;
-      font-family: sans-serif;
     }
 
     #opale-modal-container .back-button {
       color: white;
+      border: 1px solid white;
+    }
+
+    #opale-modal-container .back-button:hover {
+      border: 1px solid ${OPALE_PRIMARY_COLOR};
+      background-color: ${OPALE_PRIMARY_COLOR};
     }
 
     #opale-modal-container .back-button:visited {

@@ -1,6 +1,6 @@
 [
   {
-    "sheetName": "authenticator"
+    "sheetName": "widget"
   },
   {
     "fr": "fr",
@@ -18,8 +18,8 @@
     "it": "Ho 18 anni o più"
   },
   {
-    "fr": "SORTIR",
-    "en": "EXIT",
-    "it": "USCIRE"
+    "fr": "Sortir",
+    "en": "Exit",
+    "it": "Uscire"
   }
 ]

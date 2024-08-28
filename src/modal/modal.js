@@ -65,7 +65,10 @@ export async function createModal() {
             <a href="${OPALE_CANCEL_URL}" id="not-over-18-button" class="back-button">${i18n(
     4 /* Exit */
   )}</a>
-          <div id="poweredByOpale">Powered by Opale.io</div>
+            <div id="poweredByOpale">
+              <span>Powered by</span>
+              <img id="opaleLogo" src="https://opale-public-assets.s3.eu-west-3.amazonaws.com/logo/opale-logo-no-bg.png" alt="Opale.io">
+            </div>
           </div>`;
 
   modalContainer.appendChild(modalContent);

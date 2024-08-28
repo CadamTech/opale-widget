@@ -9,7 +9,7 @@ export const style = `
     width: 100dvw;
     height: 100dvh;
     z-index: 1000;
-    font-family: Helvetica;
+    font-family: "Kumbh Sans", sans-serif;
     justify-content: center;
     align-items: center;
     display: flex;
