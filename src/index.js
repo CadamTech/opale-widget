@@ -1,4 +1,4 @@
-import { abTestProfiles, generateSessionUUID } from "./session/session.js";
+import { generateSessionUUID } from "./session/session.js";
 import { createModal, openModal } from "./modal/modal.js";
 import { getServiceProviderConfig } from "./modal/api.js";
 

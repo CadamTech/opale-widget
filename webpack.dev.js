@@ -1,5 +1,6 @@
 const TerserPlugin = require("terser-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
+const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/index.js",
@@ -13,6 +14,9 @@ module.exports = {
   plugins: [
     new Dotenv({
       path: `./.env.dev`,
+    }),
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1,
     }),
   ],
   resolve: {
