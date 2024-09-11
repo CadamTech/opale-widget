@@ -67,7 +67,7 @@ export async function createModal() {
   )}</a>
             <div id="poweredByOpale">
               <span>Powered by</span>
-              <img id="opaleLogo" src="https://opale-public-assets.s3.eu-west-3.amazonaws.com/logo/opale-logo-no-bg.png" alt="Opale.io">
+              <img id="opaleLogo" src="https://d39fhua4pjj742.cloudfront.net/logo/opale-logo-no-bg.png" alt="Opale.io">
             </div>
           </div>`;
 
