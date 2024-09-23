@@ -1,10 +1,3 @@
-export function loadCSS(url) {
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.href = url;
-  document.head.appendChild(link);
-}
-
 export function darkenColor(color, percent) {
   // Ensure the percent is between 0 and 100
   percent = Math.min(100, Math.max(0, percent));

@@ -5,7 +5,7 @@ export const style = `
   }
 
   #opale-logo { 
-    max-height: 80px;
+    max-width: 16rem;
   }
 
   #over-18-title {

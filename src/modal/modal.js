@@ -1,6 +1,4 @@
 import { logIsOver18, authRedirect } from "./api.js";
-import { loadCSS } from "../styles/css.js";
-import { env } from "../env.js";
 import { i18n } from "../language/i18n.js";
 
 // Fonction pour créer et afficher le modal
@@ -43,9 +41,6 @@ export async function createModal() {
   }
 
   document.head.appendChild(styleElement);
-
-  // Load general CSS
-  loadCSS(env.cssFrameWorkUrl);
 
   modalContent.innerHTML = `
           <img src="${OPALE_LOGO}" id="opale-logo">
