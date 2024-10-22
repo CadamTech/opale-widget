@@ -1,23 +1,22 @@
 {
-  "name": "modal",
-  "version": "1.0.0",
-  "description": "",
-  "main": "webpack.config.js",
-  "scripts": {
-    "dev": "webpack --config webpack.dev.js",
-    "prod": "webpack --config webpack.prod.js",
-    "sync": "aws s3 sync ./dist s3://widget.opale.io/dist --profile hamzamacbook",
-    "inv": "aws cloudfront create-invalidation --distribution-id EFQVPOOHKWVXH --paths '/dist/*' --profile hamzamacbook"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "dotenv-webpack": "^8.0.1",
-    "mini-css-extract-plugin": "^2.7.6",
-    "webpack-cli": "^5.1.4",
-    "webpack-obfuscator": "^3.5.1"
-  },
-  "dependencies": {
-    "crypto-js": "^4.1.1"
-  }
+    "name": "modal",
+    "version": "1.0.0",
+    "description": "",
+    "main": "webpack.config.js",
+    "scripts": {
+        "dev": "webpack --config webpack.dev.js",
+        "prod": "webpack --config webpack.prod.js",
+        "sync": "aws s3 sync ./dist s3://widget.opale.io/dist --profile hamzamacbook",
+        "inv": "aws cloudfront create-invalidation --distribution-id EFQVPOOHKWVXH --paths '/dist/*' --profile hamzamacbook"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "dotenv-webpack": "^8.1.0",
+        "webpack-cli": "^5.1.4",
+        "webpack-obfuscator": "^3.5.1"
+    },
+    "dependencies": {
+        "crypto-js": "^4.1.1"
+    }
 }
