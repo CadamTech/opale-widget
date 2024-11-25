@@ -71,35 +71,60 @@ export const style = `
     height: 1.8rem;
     }
 
-    #opale-modal-container .verification-button {
-      min-width: 12rem;
-      border-radius: .5rem !important;
-      color: white;
-      font-size: 1rem;
-      height: 2.5rem;
-      border: none;
-      cursor: pointer;
-      margin: .5rem;
-      padding: 0 1rem 0 1rem;
-    }
+  #agekey-button {
+    min-width: 12rem;
+    border-radius: .5rem !important;
+    font-size: 1rem;
+    height: 2.5rem;
+    cursor: pointer;
+    margin: .5rem;
+    padding: 0 1rem 0 1rem;
+    position: relative;
+    text-align: center;
+    color: white;
+  }
 
-    #opale-modal-container .back-button {
-      min-width: 12rem;
-      border-radius: .5rem !important;
-      font-size: 1rem;
-      height: 2.5rem;
-      cursor: pointer;
-      margin: .5rem;
-      padding: 0 1rem 0 1rem;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  #agekey-icon svg,path {
+    fill: white;
+  }
+  
+  #agekey-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
 
-    #opale-modal-container .buttons-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  #opale-modal-container .verification-button {
+    min-width: 12rem;
+    border-radius: .5rem !important;
+    color: white;
+    font-size: 1rem;
+    height: 2.5rem;
+    border: none;
+    cursor: pointer;
+    margin: .5rem;
+    padding: 0 1rem 0 1rem;
+  }
+
+  #opale-modal-container .back-button {
+    min-width: 12rem;
+    border-radius: .5rem !important;
+    font-size: 1rem;
+    height: 2.5rem;
+    cursor: pointer;
+    margin: .5rem;
+    padding: 0 1rem 0 1rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #opale-modal-container .buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;

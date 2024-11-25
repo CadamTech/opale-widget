@@ -31,6 +31,14 @@ export const style = `
     #opale-modal-container .back-button:visited {
       text-decoration: none; color: black;
     }
-  
 
+    #agekey-button {
+        background-color: ${OPALE_PRIMARY_COLOR};
+        border: 1px solid ${OPALE_PRIMARY_COLOR};
+    } 
+
+    #agekey-button:hover {
+      background-color: ${darkenColor(OPALE_PRIMARY_COLOR, 10)};
+      border: 1px solid ${darkenColor(OPALE_PRIMARY_COLOR, 10)};
+    } 
   `;
