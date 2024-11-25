@@ -33,9 +33,10 @@ export async function logIsOver18() {
 }
 
 export function authRedirect(autoAgekey = false) {
-    console.log(autoAgekey);
     try {
-        window.location.href = `${env.authenticatorURL}/?OPALE_SESSION_UUID=${OPALE_USER_ID}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}`;
+        window.location.href = `${
+            env.authenticatorURL
+        }/?OPALE_SESSION_UUID=${OPALE_USER_ID}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}${autoAgekey && "&AGEKEY=true"}`;
     } catch (error) {
         console.log("Error occurred redirecting user", error);
     }

@@ -52,6 +52,7 @@ export async function createModal() {
                     fill="white"/>
                 </svg>
                 <span id="agekey-text">AgeKey</span>
+                <span id="loader-agekey" class="loader"></span>
             </button>
 
             <button id="over-18-button" class="verification-button">
@@ -80,6 +81,8 @@ export async function createModal() {
     const ageKeyButton = document.getElementById("agekey-button");
     const ageKeyIcon = document.getElementById("agekey-icon");
     const ageKeyText = document.getElementById("agekey-text");
+    const loaderAgekey = document.getElementById("loader-agekey");
+
     const over18Button = document.getElementById("over-18-button");
     const over18text = document.getElementById("over-18-text");
     const loader = document.getElementById("loader");
@@ -98,14 +101,16 @@ export async function createModal() {
     });
 
     ageKeyButton.addEventListener("click", function () {
+        ageKeyText.style.display = "none";
         ageKeyIcon.style.display = "none";
-        ageKeyText.textContent = "";
-        ageKeyText.classList.add("loader");
-        ageKeyText.style.display = "block";
+        loaderAgekey.style.display = "block";
 
         logIsOver18().then(() => {
-            authRedirect(true);
+            ageKeyText.style.display = "block";
+            ageKeyIcon.style.display = "block";
+            loaderAgekey.style.display = "none";
         });
+        authRedirect(true);
     });
 
     setTimeout(() => {
