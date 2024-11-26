@@ -36,7 +36,7 @@ export function authRedirect(autoAgekey = false) {
     try {
         window.location.href = `${
             env.authenticatorURL
-        }/?OPALE_SESSION_UUID=${OPALE_USER_ID}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}${autoAgekey && "&AGEKEY=true"}`;
+        }/?OPALE_SESSION_UUID=${OPALE_USER_ID}&OPALE_WEBSITE_ID=${OPALE_WEBSITE_ID}${autoAgekey ? "&AGEKEY=true" : ""}`;
     } catch (error) {
         console.log("Error occurred redirecting user", error);
     }

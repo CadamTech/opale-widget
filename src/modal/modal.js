@@ -60,7 +60,9 @@ export async function createModal() {
             <span id="loader" class="loader"></span>
             </button>
 
-            <a href="${OPALE_CANCEL_URL}" id="not-over-18-button" class="back-button">${i18n(4 /* Exit */)}</a>
+            <a href="#" id="not-over-18-button" class="back-button" onclick="window.history.back(); return false;">${i18n(
+                4 /* Exit */,
+            )}</a>
 
       
           </div>
